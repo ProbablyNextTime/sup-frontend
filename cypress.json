@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:3000/",
+  "supportFile": "cypress/support/index.js",
+  "env": {
+    "serverUrl": "http://localhost:5000/",
+    "testEmail": "test@test.com",
+    "testPassword": "testo"
+  },
+  "ignoreTestFiles": "*e2e*",
+  "video": false
+}
