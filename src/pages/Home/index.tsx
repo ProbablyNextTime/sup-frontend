@@ -1,6 +1,7 @@
 import * as React from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
+import SignIn from "./signIn"
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
@@ -14,7 +15,11 @@ interface IHomeProps {}
 const HomePage = (props: IHomeProps) => {
   const classes = useStyles()
 
-  return <div className={classes.hero}>Welcome to your sweet new project.</div>
+  return (
+    <div>
+      <SignIn></SignIn>
+    </div>
+  )
 }
 
 export default HomePage
