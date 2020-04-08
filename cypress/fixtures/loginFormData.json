@@ -1,5 +1,8 @@
 {
   "email": "test@test.test",
-  "password": "testo123"
+  "password": "testo123",
+  "incorrectEmail": "asdasd.asdasd@ sdfas",
+  "toShortPassword": "short",
+  "toLongPassword": "testPasswordThatIsTooLong"
 }
 

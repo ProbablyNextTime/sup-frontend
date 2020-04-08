@@ -6,6 +6,7 @@ import { TextField } from "formik-material-ui"
 import * as Yup from "yup"
 import useStyles from "./Styles/signInStyles"
 import history from "../../History"
+import { useAPICallback } from "../../hooks/useApiCallback"
 
 interface ICredentials {
   email: string
@@ -21,11 +22,14 @@ const SignInSchema = Yup.object().shape({
 })
 
 export default function SignIn() {
-  const handleSubmit = React.useCallback((values: ICredentials, { setSubmitting }) => {
-    console.log(values.email, values.password)
-    setSubmitting(false)
-    history.push("/dashboard")
-  }, [])
+  const handleSubmit = useAPICallback(
+    () => {
+      console.log("here")
+      history.push("./dashboard")
+    },
+    [],
+    { rethrowError: true, debounceDelay: 500, onError: (error: Error) => console.log(error) }
+  )
 
   const classes = useStyles()
   return (
@@ -38,7 +42,7 @@ export default function SignIn() {
         validationSchema={SignInSchema}
         onSubmit={handleSubmit}
       >
-        {({ submitForm, isSubmitting }) => (
+        {({ submitForm, isSubmitting, errors, touched }) => (
           <Form className={classes.signInForm}>
             <Field component={TextField} label="email" name="email" data-cy-email-input variant="outlined" />
             <Field component={TextField} label="password" name="password" data-cy-password-input variant="outlined" />
