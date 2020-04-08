@@ -1,44 +1,16 @@
-import { makeStyles } from "@material-ui/styles"
-import { Theme } from "@material-ui/core/styles/createMuiTheme"
 import Box from "@material-ui/core/Box"
 import * as React from "react"
 import { Formik, Form, Field } from "formik"
 import { Button, LinearProgress } from "@material-ui/core"
 import { TextField } from "formik-material-ui"
 import * as Yup from "yup"
+import useStyles from "./Styles/signInStyles"
+import history from "../../History"
 
-interface Values {
+interface ICredentials {
   email: string
   password: string
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  hero: {
-    fontSize: "2.0rem",
-    color: theme.palette.primary.main,
-  },
-
-  wrapper: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "400px",
-  },
-  signInForm: {
-    width: "40%",
-    height: "200px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-  },
-  submitButton: {
-    height: "22%",
-    width: "5%",
-  },
-}))
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -49,6 +21,12 @@ const SignInSchema = Yup.object().shape({
 })
 
 export default function SignIn() {
+  const handleSubmit = React.useCallback((values: ICredentials, { setSubmitting }) => {
+    console.log(values.email, values.password)
+    setSubmitting(false)
+    history.push("/dashboard")
+  }, [])
+
   const classes = useStyles()
   return (
     <Box className={classes.wrapper}>
@@ -58,22 +36,18 @@ export default function SignIn() {
           password: "",
         }}
         validationSchema={SignInSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            setSubmitting(false)
-            alert(JSON.stringify(values, null, 2))
-          }, 500)
-        }}
+        onSubmit={handleSubmit}
       >
         {({ submitForm, isSubmitting }) => (
           <Form className={classes.signInForm}>
-            <Field component={TextField} label="email" name="email" variant="outlined" />
-            <Field component={TextField} label="password" name="password" variant="outlined" />
+            <Field component={TextField} label="email" name="email" data-cy-email-input variant="outlined" />
+            <Field component={TextField} label="password" name="password" data-cy-password-input variant="outlined" />
             {isSubmitting && <LinearProgress />}
             <Button
               className={classes.submitButton}
               variant="contained"
               color="primary"
+              data-cy-login-button
               disabled={isSubmitting}
               onClick={submitForm}
             >

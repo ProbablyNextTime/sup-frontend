@@ -1,9 +1,10 @@
 import * as React from "react"
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core"
 import { theme } from "./theme"
-import { BrowserRouter } from "react-router-dom"
+import { Router } from "react-router-dom"
 import Routes from "./route"
 import useGlobalCSS from "./theme/GlobalCSS"
+import history from "./History"
 
 const App: React.FC = () => {
   useGlobalCSS()
@@ -11,9 +12,9 @@ const App: React.FC = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
+      <Router history={history}>
         <Routes />
-      </BrowserRouter>
+      </Router>
     </MuiThemeProvider>
   )
 }
