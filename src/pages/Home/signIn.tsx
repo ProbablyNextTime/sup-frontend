@@ -5,8 +5,9 @@ import { Button, LinearProgress } from "@material-ui/core"
 import { TextField } from "formik-material-ui"
 import * as Yup from "yup"
 import useStyles from "./Styles/signInStyles"
-import history from "../../History"
+import { useHistory } from "react-router-dom"
 import { useAPICallback } from "../../hooks/useApiCallback"
+import axios from "axios"
 
 interface ICredentials {
   email: string
@@ -22,14 +23,17 @@ const SignInSchema = Yup.object().shape({
 })
 
 export default function SignIn() {
-  const handleSubmit = useAPICallback(
-    () => {
-      console.log("here")
-      history.push("./dashboard")
-    },
-    [],
-    { rethrowError: true, debounceDelay: 500, onError: (error: Error) => console.log(error) }
-  )
+  const history = useHistory()
+
+  const handleSubmit = useAPICallback(async () => {
+    try {
+      const response = await axios.post("/auth/login")
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+    history.push("./dashboard")
+  }, [history])
 
   const classes = useStyles()
   return (
@@ -44,14 +48,20 @@ export default function SignIn() {
       >
         {({ submitForm, isSubmitting, errors, touched }) => (
           <Form className={classes.signInForm}>
-            <Field component={TextField} label="email" name="email" data-cy-email-input variant="outlined" />
-            <Field component={TextField} label="password" name="password" data-cy-password-input variant="outlined" />
+            <Field component={TextField} label="email" name="email" data-cy={"email-input"} variant="outlined" />
+            <Field
+              component={TextField}
+              label="password"
+              name="password"
+              data-cy={"password-input"}
+              variant="outlined"
+            />
             {isSubmitting && <LinearProgress />}
             <Button
               className={classes.submitButton}
               variant="contained"
               color="primary"
-              data-cy-login-button
+              data-cy={"login-button"}
               disabled={isSubmitting}
               onClick={submitForm}
             >

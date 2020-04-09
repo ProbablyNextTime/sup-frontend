@@ -3,6 +3,10 @@
   "password": "testo123",
   "incorrectEmail": "asdasd.asdasd@ sdfas",
   "toShortPassword": "short",
-  "toLongPassword": "testPasswordThatIsTooLong"
+  "toLongPassword": "testPasswordThatIsTooLong",
+  "userObj": {
+    "email" : "test@test.test",
+    "password": "testoo"
+  }
 }
 
