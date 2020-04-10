@@ -11,15 +11,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxShadow: "0px 1px #ddd;",
   },
   navList: {
+    display: "flex",
+    flexDirection: "row",
     listStyleType: "none",
-    margin: 0,
-    padding: 0,
     overflow: "hidden",
     backgroundColor: "#fff",
     maxWidth: "400px",
   },
 
   navItem: {
+    color: "black",
     float: "left",
     minWidth: "100px",
   },
@@ -36,8 +37,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 
   sup: {
+    position: "absolute",
+    left: "50%",
+    marginLeft: "-50px",
     marginBottom: "42px",
-    marginLeft: "26%",
     width: "66px",
     height: "39px",
     fontSize: "36px",
@@ -65,30 +68,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignSelf: "center",
     color: "#ddd",
   },
+
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }))
 
 export default useStyles
-
-// .SUP {
-//
-//   width: 66px;
-//
-//   height: 39px;
-//
-//   font-family: FuturaBT-ExtraCond;
-//
-//   font-size: 36px;
-//
-//   font-weight: 900;
-//
-//   font-stretch: normal;
-//
-//   font-style: italic;
-//
-//   line-height: normal;
-//
-//   letter-spacing: normal;
-//
-//   color: #78f464;
-//
-// }

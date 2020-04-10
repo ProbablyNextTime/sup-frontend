@@ -13,8 +13,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "1px",
   },
   boardWrapper: {
-    padding: 0,
-    margin: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -22,10 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100%",
   },
   mapWrapper: {
-    padding: 0,
-    margin: 0,
     width: "50%",
-    height: "",
   },
 }))
 

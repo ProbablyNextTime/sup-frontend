@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundImage: "none",
     backgroundColor: "transparent",
     boxShadow: "none",
-    // '&:after': {
-    //   borderBottom: "2px #000",
-    // },
   },
 }))
 
