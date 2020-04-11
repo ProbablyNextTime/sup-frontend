@@ -55,20 +55,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   profileCard: {
     display: "flex",
     flexDirection: "row",
-    width: "20%",
+    alignItems: "center",
     height: "55px",
     position: "absolute",
     top: "25px",
-    right: "40px",
-    backgroundColor: "#777",
+    right: "50px",
   },
-  tempFill: {
-    marginLeft: "40%",
-    padding: 0,
-    alignSelf: "center",
-    color: "#ddd",
-  },
-
   root: {
     flexGrow: 1,
   },
@@ -77,6 +69,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  userName: {
+    marginRight: "20px",
+    fontFamily: "FuturaBT",
+    fontSize: "12px",
+    fontWeight: 500,
+    fontStretch: "normal",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    letterSpacing: "normal",
+    color: "#000000",
+    borderBottom: "1px solid black",
   },
 }))
 

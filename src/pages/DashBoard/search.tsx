@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Box, Typography } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import useStyles from "./Styles/searchStyles"
 
 interface IDashBoardProps {}
@@ -15,7 +15,7 @@ const Search = (props: IDashBoardProps) => {
         <input className={classes.inputFieldFrom} type={"text"} placeholder={"to:"} />
         <Box className={classes.vLine}> </Box>
       </Box>
-      <Box className={classes.contentDivider}></Box>
+      <Box className={classes.contentDivider} />
     </Box>
   )
 }
