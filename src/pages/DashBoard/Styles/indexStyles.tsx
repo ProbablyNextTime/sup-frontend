@@ -19,18 +19,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   boardWrapper: {
     display: "flex",
     flexDirection: "column",
-    width: "50%",
+    width: "45%",
     borderRight: "1px solid #eee",
   },
   mapWrapper: {
     margin: 0,
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    width: "50%",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "55%",
+    height: "auto",
   },
   map: {
-    alignSelf: "baseline",
     width: "90%",
   },
 }))

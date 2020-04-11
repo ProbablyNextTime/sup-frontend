@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Box, Typography } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
-import { useState } from "react"
 import BoardNotice from "./BoardNotice"
 
 interface IBoardProps {
@@ -19,8 +18,17 @@ const Board = (props: IBoardProps) => {
         </Typography>
       </Box>
       {props.notices.map((x: any) => {
-        return <BoardNotice data={x}></BoardNotice>
+        return <BoardNotice data={x} />
       })}
+      <Box className={classes.infoMessageWrapper}>
+        <Typography className={classes.infoMessage}>
+          Haven`t found what you`ve been looking for? Try{" "}
+          <a className={classes.altQueryMessage} href="#toto">
+            altering your search query
+          </a>
+          !{" "}
+        </Typography>
+      </Box>
     </Box>
   )
 }
