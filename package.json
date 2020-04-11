@@ -15,6 +15,7 @@
     "@types/yup": "^0.26.34",
     "axios": "^0.19.2",
     "classnames": "latest",
+    "clsx": "^1.1.0",
     "date-fns": "^2.11.1",
     "formik": "^2.1.4",
     "formik-material-ui": "^2.0.0-beta.1",
