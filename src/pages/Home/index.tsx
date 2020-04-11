@@ -1,20 +1,14 @@
 import * as React from "react"
-import { makeStyles } from "@material-ui/styles"
-import { Theme } from "@material-ui/core/styles/createMuiTheme"
-
-const useStyles = makeStyles((theme: Theme) => ({
-  hero: {
-    fontSize: "2.0rem",
-    color: theme.palette.primary.main,
-  },
-}))
+import SignIn from "./signIn"
 
 interface IHomeProps {}
 
 const HomePage = (props: IHomeProps) => {
-  const classes = useStyles()
-
-  return <div className={classes.hero}>Welcome to your sweet new project.</div>
+  return (
+    <div>
+      <SignIn />
+    </div>
+  )
 }
 
 export default HomePage
