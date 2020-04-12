@@ -4,8 +4,9 @@ import useStyles from "./Styles/indexStyles"
 import NavigationBar from "./navbar"
 import Search from "./search"
 import Board from "./board"
+import { IBoardNotice } from "../../model/notice"
 
-const noticeSample = {
+const noticeSample: IBoardNotice = {
   picUrl:
     "https://images.unsplash.com/photo-1526648611824-1e1ee4a4de99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1380&q=80",
   peopleTransfer: true,
@@ -23,7 +24,7 @@ const noticeSample = {
 
 interface IDashBoardProps {}
 
-const noticesEx = [noticeSample, noticeSample, noticeSample]
+const noticesEx: Array<IBoardNotice> = [noticeSample, noticeSample, noticeSample]
 
 const DashBoard = (props: IDashBoardProps) => {
   const [notices, setNotices] = React.useState([noticeSample])

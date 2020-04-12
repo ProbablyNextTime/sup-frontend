@@ -9,9 +9,12 @@ import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
 import { ArrowRightIcon } from "@material-ui/pickers/_shared/icons/ArrowRightIcon"
+import { IBoardNotice } from "../../model/notice"
+import { useSpring } from "react-spring"
 
 interface IBoardNoticeProps {
-  data: any
+  notice: IBoardNotice
+  index: number
 }
 
 function getTags(tags: Array<string>) {
@@ -24,40 +27,48 @@ function getTags(tags: Array<string>) {
 }
 
 const BoardNotice = (props: IBoardNoticeProps) => {
-  console.log(props)
+  const [isSelected, setSelected] = React.useState(false)
   const classes = useStyles()
-  const isTransfer = props.data.peopleTransfer ? classes.isTransferPeople : classes.isNotTransferPeople
-  const isTransferText = props.data.peopleTransfer ? "PEOPLE TRANSFER" : "DEAD WEIGHT"
-  const estimatedPrice = props.data.peopleTransfer
-    ? `${props.data.estimatedPrice}$ per one `
-    : `${props.data.estimatedPrice} / 1kg`
+  const isTransfer = props.notice.peopleTransfer ? classes.isTransferPeople : classes.isNotTransferPeople
+  const isTransferText = props.notice.peopleTransfer ? "PEOPLE TRANSFER" : "DEAD WEIGHT"
+  const estimatedPrice = props.notice.peopleTransfer
+    ? `${props.notice.estimatedPrice}$ per one `
+    : `${props.notice.estimatedPrice} / 1kg`
+
+  function selectCard() {
+    setSelected(true)
+  }
+
+  const animateSelect = {
+    backgroundColor: isSelected ? "Black" : "",
+  }
 
   return (
-    <Card className={classes.noticeCard}>
-      <CardMedia className={classes.noticeMedia} image={props.data.picUrl} title="..." />
+    <Card className={classes.noticeCard} data-index={props.index}>
+      <CardMedia className={classes.noticeMedia} image={props.notice.picUrl} title="..." />
       <CardContent className={classes.cardBody}>
         <Box className={classes.generalData}>
-          <Typography className={classes.vehicleType}> {props.data.vehicleType} </Typography>
+          <Typography className={classes.vehicleType}> {props.notice.vehicleType} </Typography>
           <Typography className={classes.vehicleInfo}>
             {" "}
-            {props.data.from} — {props.data.to}{" "}
+            {props.notice.from} — {props.notice.to}{" "}
           </Typography>
         </Box>
-        <Typography className={classes.noticeProvider}>{`by: ${props.data.noticeProvider}`}</Typography>
+        <Typography className={classes.noticeProvider}>{`by: ${props.notice.noticeProvider}`}</Typography>
         <hr className={classes.highlightMaxWeight} />
-        <Box className={classes.noticeProvider}> {getTags(props.data.tags)} </Box>
+        <Box className={classes.noticeProvider}> {getTags(props.notice.tags)} </Box>
         <Typography className={isTransfer}>{isTransferText}</Typography>
         <Box className={classes.rating}>
           <Box className={classes.starRate}>
             <Star className={classes.starIcon} />
-            <Typography className={classes.starRating}>{`${props.data.rating} / 5`}</Typography>
+            <Typography className={classes.starRating}>{`${props.notice.rating} / 5`}</Typography>
           </Box>
-          <Typography className={classes.reviews}>{`${props.data.numberOfReviews} reviews`}</Typography>
+          <Typography className={classes.reviews}>{`${props.notice.numberOfReviews} reviews`}</Typography>
         </Box>
         <Typography className={classes.estimatedPrice}>{estimatedPrice}</Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={selectCard}>
           <ArrowRightIcon />
         </IconButton>
       </CardActions>
