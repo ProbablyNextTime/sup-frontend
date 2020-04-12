@@ -2,9 +2,10 @@ import * as React from "react"
 import { Box, Typography } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
+import { IBoardNotice } from "../../model/notice"
 
 interface IBoardProps {
-  notices: any
+  notices: Array<IBoardNotice>
 }
 
 const Board = (props: IBoardProps) => {
@@ -17,8 +18,8 @@ const Board = (props: IBoardProps) => {
           Suggested Routes :
         </Typography>
       </Box>
-      {props.notices.map((x: any) => {
-        return <BoardNotice data={x} />
+      {props.notices.map((x: IBoardNotice, key) => {
+        return <BoardNotice notice={x} index={key} />
       })}
       <Box className={classes.infoMessageWrapper}>
         <Typography className={classes.infoMessage}>
