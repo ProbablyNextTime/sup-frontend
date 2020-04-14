@@ -47,6 +47,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: "normal",
     color: "#2cdc00",
   },
+  noticesWrapper: {
+    width: "100%",
+    height: "300px",
+    overflowY: "scroll",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+  },
   noticeCard: {
     minHeight: "190px",
     width: "100%",

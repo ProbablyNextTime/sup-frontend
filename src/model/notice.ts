@@ -4,7 +4,6 @@ export interface IBoardNotice {
   rating: number
   from: string
   to: string
-  desc: string
   vehicleType: string
   noticeProvider: string
   maxAmount: number
