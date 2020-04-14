@@ -10,11 +10,10 @@ import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
 import { ArrowRightIcon } from "@material-ui/pickers/_shared/icons/ArrowRightIcon"
 import { IBoardNotice } from "../../model/notice"
-import { useSpring } from "react-spring"
 
 interface IBoardNoticeProps {
   notice: IBoardNotice
-  index: number
+  key: number
 }
 
 function getTags(tags: Array<string>) {
@@ -39,12 +38,8 @@ const BoardNotice = (props: IBoardNoticeProps) => {
     setSelected(true)
   }
 
-  const animateSelect = {
-    backgroundColor: isSelected ? "Black" : "",
-  }
-
   return (
-    <Card className={classes.noticeCard} data-index={props.index}>
+    <Card className={classes.noticeCard} data-index={props.key}>
       <CardMedia className={classes.noticeMedia} image={props.notice.picUrl} title="..." />
       <CardContent className={classes.cardBody}>
         <Box className={classes.generalData}>
