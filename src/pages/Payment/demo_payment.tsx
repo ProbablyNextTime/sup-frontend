@@ -1,5 +1,5 @@
 import * as React from "react"
-import TransportationOffer, { TransportationOfferStatus, PaymentStatus } from "model/transportation_offer"
+import TransportationOffer from "model/transportation_offer"
 import ButtonWithLoading from "pages/common/button"
 import { useAPICallback } from "hooks/useApiCallback"
 import useStyles from "./style"
@@ -70,12 +70,12 @@ const OfferPayment = ({ transportation_offer_id }: IOfferPaymentProps) => {
 
   /* Checkout the customer with Stripe if the offer has a positive depositValue.
    *
-   * Redirect to the thank-you screen right away otherwise
+   * Redirect to the thank-you right away otherwise
    */
 
   const submitAndMoveToPayment = React.useCallback(
     async (values: any, actions: any) => {
-      // TODO: Add typeguard and possible other interactions with the API
+      // TODO: Possible API calls here
       if (transportationOffer && transportationOffer.depositValueInUsd > 0) {
         handlePay()
       } else {
@@ -87,7 +87,7 @@ const OfferPayment = ({ transportation_offer_id }: IOfferPaymentProps) => {
 
   const handleSubmit = useAPICallback(
     (values: IOfferPaymentValues, actions: any) => {
-      // TODO: Add logic for updating the offer here
+      // TODO: Update the offer
 
       submitAndMoveToPayment(values, actions)
     },
