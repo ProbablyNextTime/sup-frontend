@@ -5,7 +5,7 @@ import { useAPICallback } from "hooks/useApiCallback"
 import useStyles from "./style"
 import StripeIcon from "pages/common/stripeIcon"
 import { useHistory } from "react-router"
-import { usePayment, BillType } from "."
+import { usePayment, BillType } from "pages/Payment"
 import { Formik, Form, Field } from "formik"
 import { InputAdornment } from "@material-ui/core"
 import { isNegativeNumber } from "utils/formatField"
@@ -93,7 +93,7 @@ const OfferPayment = ({ transportation_offer_id }: IOfferPaymentProps) => {
     },
     [submitAndMoveToPayment]
   )
-
+  //
   return (
     <Formik
       initialValues={{ depositValueInUsd: transportationOffer ? transportationOffer.depositValueInUsd : 1 }}
