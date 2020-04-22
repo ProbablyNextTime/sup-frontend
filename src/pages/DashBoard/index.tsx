@@ -12,13 +12,13 @@ const DashBoard = (props: IDashBoardProps) => {
   return (
     <Box>
       <NavigationBar />
-      <div className={classes.wrapper}>
+      <Box className={classes.wrapper}>
         <Search />
         <Box className={classes.content}>
-          <div className={classes.boardWrapper}>
+          <Box className={classes.boardWrapper}>
             <Board />
-          </div>
-          <div className={classes.mapWrapper}>
+          </Box>
+          <Box className={classes.mapWrapper}>
             <img
               className={classes.map}
               src={"https://imagevars.gulfnews.com/2015/8/2/1_16a0819534c.1560245_2074896705_16a0819534c_large.jpg"}
@@ -27,9 +27,9 @@ const DashBoard = (props: IDashBoardProps) => {
             <hr />
             <hr />
             <hr />
-          </div>
+          </Box>
         </Box>
-      </div>
+      </Box>
     </Box>
   )
 }
