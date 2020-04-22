@@ -1,5 +1,5 @@
 import * as React from "react"
-import { AppBar, List, ListItem, ListItemText } from "@material-ui/core"
+import { AppBar, List, ListItem } from "@material-ui/core"
 import useStyles from "./Styles/navStyles"
 import Typography from "@material-ui/core/Typography"
 import Avatar from "@material-ui/core/Avatar"
