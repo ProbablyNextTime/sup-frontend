@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Box, Typography } from "@material-ui/core"
+import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
 import { IBoardNotice } from "../../model/notice"
@@ -9,15 +9,14 @@ import { useAPICallback } from "../../hooks/useApiCallback"
 interface IBoardProps {}
 
 const Board = (props: IBoardProps) => {
-  const limit = 3
-  const page = 1
-  const [notices, setNotices] = React.useState(Array<IBoardNotice>())
+  const [page, setPage] = React.useState(1)
+  const [notices, setNotices] = React.useState([] as IBoardNotice[])
   const [scrolledBottom, setScrolledBottom] = React.useState(true)
 
-  const getNotices = useAPICallback(async (limit, page) => {
+  const getNotices = useAPICallback(async (page) => {
     try {
-      const response = await axios.get("/api/notices/")
-      const newNotices = response.data.notices as Array<IBoardNotice>
+      const response = await axios.get("http://localhost:5000/api/transportation_offer?page=1&page_size=10")
+      const newNotices = response.data as Array<IBoardNotice>
       setNotices((notices) => [...notices, ...newNotices])
     } catch (err) {
       console.log(err)
@@ -26,39 +25,24 @@ const Board = (props: IBoardProps) => {
 
   React.useEffect(() => {
     if (scrolledBottom) {
-      getNotices(limit, page)
+      getNotices(page)
       setScrolledBottom(false)
     }
-  }, [getNotices, scrolledBottom])
+  }, [getNotices, scrolledBottom, page])
 
   function onScrollHandler() {
     const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
     if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1)
       setScrolledBottom(true)
   }
+  console.log(notices)
 
   const classes = useStyles()
   return (
-    <Box className={classes.wrapper}>
-      <Box className={classes.sugBoardsBox}>
-        <Typography variant="h4" component="p">
-          Suggested Routes :
-        </Typography>
-      </Box>
-      <Box id={"notices-container"} data-cy={"notices"} onScroll={onScrollHandler} className={classes.noticesWrapper}>
-        {notices.map((x: IBoardNotice, index) => {
-          return <BoardNotice notice={x} key={index} />
-        })}
-      </Box>
-      <Box className={classes.infoMessageWrapper}>
-        <Typography className={classes.infoMessage}>
-          Haven`t found what you`ve been looking for? Try{" "}
-          <a className={classes.altQueryMessage} href="#toto">
-            altering your search query
-          </a>
-          !{" "}
-        </Typography>
-      </Box>
+    <Box id={"notices-container"} data-cy={"notices"} onScroll={onScrollHandler} className={classes.dashboard}>
+      {notices.map((x: IBoardNotice, index) => {
+        return <BoardNotice notice={x} key={index} />
+      })}
     </Box>
   )
 }
