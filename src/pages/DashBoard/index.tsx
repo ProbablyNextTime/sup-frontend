@@ -10,7 +10,7 @@ interface IDashBoardProps {}
 const DashBoard = (props: IDashBoardProps) => {
   const classes = useStyles()
   return (
-    <Box>
+    <Box className={classes.globalWrapper}>
       <NavigationBar />
       <Box className={classes.wrapper}>
         <Search />
@@ -18,15 +18,13 @@ const DashBoard = (props: IDashBoardProps) => {
           <Box className={classes.boardWrapper}>
             <Board />
           </Box>
+          <Box className={classes.boardNoticeInfo}></Box>
           <Box className={classes.mapWrapper}>
             <img
               className={classes.map}
               src={"https://imagevars.gulfnews.com/2015/8/2/1_16a0819534c.1560245_2074896705_16a0819534c_large.jpg"}
               alt={"map"}
             />
-            <hr />
-            <hr />
-            <hr />
           </Box>
         </Box>
       </Box>

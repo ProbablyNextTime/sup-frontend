@@ -4,7 +4,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme"
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     position: "relative",
-    minHeight: "100px",
+    height: "80px",
     width: "100%",
     marginTop: "30px",
     alignSelf: "center",

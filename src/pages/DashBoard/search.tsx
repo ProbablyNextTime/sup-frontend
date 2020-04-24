@@ -19,7 +19,7 @@ const Search = (props: IDashBoardProps) => {
         <SearchIcon className={classes.searchIcon} />
         <TextField className={classes.inputSearch} type="text" color="primary" placeholder={"from:"} />
         <Box className={classes.vLine}> </Box>
-        <TextField className={classes.inputSearch} type="text" color="primary" placeholder={"to:"}></TextField>
+        <TextField className={classes.inputSearch} type="text" color="primary" placeholder={"to:"} />
         <Box className={classes.vLine}> </Box>
         <MuiPickersUtilsProvider utils={DateMomentUtils}>
           <DatePicker className={classes.inputSearch} value={arrivalDate} onChange={setArrivalDate} />

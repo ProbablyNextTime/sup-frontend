@@ -3,7 +3,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme"
 
 const useStyles = makeStyles((theme: Theme) => ({
   navigationBar: {
-    height: "105px",
+    height: "90px",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   logo: {
     position: "absolute",
     left: "50%",
-    top: "18px",
+    top: "10px",
     marginLeft: "-50px",
     marginBottom: "42px",
   },
