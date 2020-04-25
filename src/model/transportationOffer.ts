@@ -21,9 +21,10 @@ export default interface ITransportationOffer {
   transportationProvider: string
   paymentStatus: PaymentStatus
   depositValueInUsd: number
+  pricePerUnitInUsd: number
 }
 
 export type NewTransportationOffer = Pick<
-ITransportationOffer,
-"transportationProvider" | "title" | "depositValueInUsd"
+  ITransportationOffer,
+  "transportationProvider" | "title" | "depositValueInUsd"
 >
