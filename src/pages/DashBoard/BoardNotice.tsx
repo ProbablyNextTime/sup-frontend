@@ -8,6 +8,7 @@ import { IBoardNotice } from "../../model/notice"
 import Check from "@material-ui/icons/Check"
 
 interface IBoardNoticeProps {
+  setSelected: React.Dispatch<React.SetStateAction<IBoardNotice>>
   notice: IBoardNotice
   key: number
 }
@@ -28,20 +29,26 @@ function getRandomColor() {
 const premiumFont = { color: "#fed133" }
 const premiumBackground = { backgroundColor: "#fffff2", border: "solid 1px #fcff6c" }
 
-const tags = ["truck", "suck"]
+const tags = ["truck", "mom"]
 
 const BoardNotice = (props: IBoardNoticeProps) => {
-  const premium = true
+  const premium = false
   const peopleTransfer = true
   const isTrusted = true
   const carrier = "California inc."
   const classes = useStyles()
+
+  function selectThisNotice() {
+    props.setSelected(props.notice)
+  }
+
   return (
     <Card
       elevation={0}
       data-index={props.key}
       className={classes.boardNoticeWrapper}
       style={premium ? premiumBackground : {}}
+      onClick={selectThisNotice}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.leftSideContent}>

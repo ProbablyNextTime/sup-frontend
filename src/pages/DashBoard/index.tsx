@@ -4,10 +4,13 @@ import useStyles from "./Styles/indexStyles"
 import NavigationBar from "./navbar"
 import Search from "./search"
 import Board from "./board"
+import Index from "./DashboardNoticeInfo"
+import { IBoardNotice } from "../../model/notice"
 
 interface IDashBoardProps {}
 
 const DashBoard = (props: IDashBoardProps) => {
+  const [selectedNotice, setSelectedNotice] = React.useState({ id: "1asdasda" } as IBoardNotice)
   const classes = useStyles()
   return (
     <Box className={classes.globalWrapper}>
@@ -16,9 +19,9 @@ const DashBoard = (props: IDashBoardProps) => {
         <Search />
         <Box className={classes.content}>
           <Box className={classes.boardWrapper}>
-            <Board />
+            <Board setSelectedNotice={setSelectedNotice} />
           </Box>
-          <Box className={classes.boardNoticeInfo}></Box>
+          <Index notice={selectedNotice} />
           <Box className={classes.mapWrapper}>
             <img
               className={classes.map}
