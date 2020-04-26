@@ -1,5 +1,5 @@
 import * as Yup from "yup"
-import { NewTransportationOffer } from "model/transportation_offer"
+import { NewTransportationOffer } from "model/transportationOffer"
 
 Yup.setLocale({
   mixed: {
