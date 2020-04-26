@@ -1,5 +1,4 @@
 import { transportation_provider } from "./transportation_provider"
-import ITransportationOffer from "./transportation_offer"
 
 export interface IBoardNotice {
   additionalInfo: string

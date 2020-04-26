@@ -53,6 +53,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     opacity: "0.4",
     fontSize: "20px",
   },
+  searchForm: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+  },
 }))
 
 export default useStyles

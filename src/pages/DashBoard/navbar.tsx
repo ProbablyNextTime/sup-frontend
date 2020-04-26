@@ -18,7 +18,6 @@ const userEx = {
 interface INavigationBar {}
 
 const NavigationBar = (props: INavigationBar) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currency, setCurrency] = React.useState("USD")
   const classes = useStyles()
   return (
