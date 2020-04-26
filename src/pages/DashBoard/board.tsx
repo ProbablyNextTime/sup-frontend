@@ -8,6 +8,7 @@ import { useAPICallback } from "../../hooks/useApiCallback"
 
 interface IBoardProps {
   setSelectedNotice: React.Dispatch<React.SetStateAction<IBoardNotice>>
+  selectedNotice: IBoardNotice
 }
 
 const Board = (props: IBoardProps) => {
@@ -19,6 +20,7 @@ const Board = (props: IBoardProps) => {
       const response = await axios.get("http://localhost:5000/api/transportation_offer?page=1&page_size=10")
       const newNotices = response.data as Array<IBoardNotice>
       setNotices((notices) => [...notices, ...newNotices])
+      return newNotices
     } catch (err) {
       console.log(err)
     }
@@ -27,14 +29,22 @@ const Board = (props: IBoardProps) => {
   React.useEffect(() => {
     if (scrolledBottom) {
       getNotices(page)
-      setScrolledBottom(false)
+        .then((notices) => {
+          if (notices[0] !== undefined && props.selectedNotice.id === "null") props.setSelectedNotice(notices[0])
+          setScrolledBottom(false)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
-  }, [getNotices, scrolledBottom, page])
+  }, [getNotices, scrolledBottom, page, props])
 
   function onScrollHandler() {
     const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
-    if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1)
+    if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
+      setPage(page + 1)
       setScrolledBottom(true)
+    }
   }
 
   const classes = useStyles()

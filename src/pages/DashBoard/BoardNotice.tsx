@@ -10,7 +10,6 @@ import Check from "@material-ui/icons/Check"
 interface IBoardNoticeProps {
   setSelected: React.Dispatch<React.SetStateAction<IBoardNotice>>
   notice: IBoardNotice
-  key: number
 }
 
 function makePoint(point: string): string {
@@ -32,10 +31,8 @@ const premiumBackground = { backgroundColor: "#fffff2", border: "solid 1px #fcff
 const tags = ["truck", "mom"]
 
 const BoardNotice = (props: IBoardNoticeProps) => {
-  const premium = false
   const peopleTransfer = true
   const isTrusted = true
-  const carrier = "California inc."
   const classes = useStyles()
 
   function selectThisNotice() {
@@ -45,17 +42,16 @@ const BoardNotice = (props: IBoardNoticeProps) => {
   return (
     <Card
       elevation={0}
-      data-index={props.key}
       className={classes.boardNoticeWrapper}
-      style={premium ? premiumBackground : {}}
+      style={props.notice.isPremium ? premiumBackground : {}}
       onClick={selectThisNotice}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.leftSideContent}>
           <Box className={classes.mainInfo}>
             <Box className={classes.route}>
-              {premium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
-              <Typography className={classes.routeText} style={premium ? premiumFont : {}}>{`${makePoint(
+              {props.notice.isPremium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
+              <Typography className={classes.routeText} style={props.notice.isPremium ? premiumFont : {}}>{`${makePoint(
                 props.notice.departurePoint
               )} - ${makePoint(props.notice.destinationPoint)}`}</Typography>
             </Box>
@@ -72,20 +68,22 @@ const BoardNotice = (props: IBoardNoticeProps) => {
             })}
           </Box>
         </Box>
-        <Typography className={classes.reviews}>54 reviews</Typography>
+        <Typography
+          className={classes.reviews}
+        >{`${props.notice.transportationProvider.reviewsReceived.length} reviews`}</Typography>
       </Box>
-      <Box className={classes.contentDivider}></Box>
+      <Box className={classes.contentDivider} />
       <Box className={classes.cardContent}>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
-          <Typography className={classes.cardBottomContent} style={premium ? premiumFont : {}}>
+          <Typography className={classes.cardBottomContent} style={props.notice.isPremium ? premiumFont : {}}>
             {props.notice.pickupPlace}
           </Typography>
           <Typography className={classes.cardBottomDate}>{props.notice.departureDate}</Typography>
         </Box>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
-          <Typography className={classes.cardBottomContent} style={premium ? premiumFont : {}}>
+          <Typography className={classes.cardBottomContent} style={props.notice.isPremium ? premiumFont : {}}>
             {props.notice.deliveryPlace}
           </Typography>
           <Typography className={classes.cardBottomDate}>{props.notice.arrivalDate}</Typography>
@@ -93,13 +91,13 @@ const BoardNotice = (props: IBoardNoticeProps) => {
         <Box className={classes.carrier}>
           <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
           <Box className={classes.carrierInfo}>
-            <Typography className={classes.cardBottomContent} style={premium ? premiumFont : {}}>
-              {carrier}
+            <Typography className={classes.cardBottomContent} style={props.notice.isPremium ? premiumFont : {}}>
+              {makePoint(props.notice.transportationProvider.name)}
             </Typography>
             {isTrusted ? (
               <Check
                 className={classes.isTrusted}
-                style={premium ? { color: "#fed133", border: "solid 1px #fcff6c" } : {}}
+                style={props.notice.isPremium ? { color: "#fed133", border: "solid 1px #fcff6c" } : {}}
               />
             ) : (
               <div />

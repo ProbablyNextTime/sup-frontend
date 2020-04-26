@@ -6,15 +6,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     display: "flex",
     flexDirection: "column",
-    padding: "10px 0",
+    paddingTop: "10px",
   },
   transferNumber: {
     display: "flex",
     flexDirection: "row",
   },
   contentHeader: {
-    fontFamily: "Roboto",
-    fontSize: "10px",
+    fontFamily: "Lato",
+    fontSize: "11px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#f5f92a",
   },
   transferNumberText: {
-    marginTop: "3px",
+    marginTop: "4px",
     fontFamily: "Lato",
     fontSize: "12px",
     fontWeight: 500,
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "space-between",
     backgroundColor: "#fafafa",
     padding: "15px 10px",
+    borderBottom: "1px solid #eeeeee",
   },
   departureInfo: {
     overflow: "hidden",

@@ -4,9 +4,10 @@ import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
 import { IBoardNotice } from "../../../../model/notice"
+import { MainNoticeInfo } from "../../../../model/notice"
 
 interface IMainInfoProps {
-  notice: IBoardNotice
+  notice: MainNoticeInfo
 }
 
 const premiumFont = { color: "#fed133" }
@@ -17,7 +18,6 @@ function makePoint(point: string): string {
 }
 
 const MainInfo = (props: IMainInfoProps) => {
-  const premium = true
   const classes = useStyles()
   console.log(props.notice)
   return (
@@ -25,8 +25,8 @@ const MainInfo = (props: IMainInfoProps) => {
       <Box className={classes.title}>
         <Typography className={classes.contentHeader}>TRANSFER NUMBER</Typography>
         <Box className={classes.transferNumber}>
-          {premium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
-          <Typography className={classes.transferNumberText} style={premium ? premiumFont : {}}>
+          {props.notice.isPremium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
+          <Typography className={classes.transferNumberText} style={props.notice.isPremium ? premiumFont : {}}>
             {props.notice.transferNumber}
           </Typography>
         </Box>
