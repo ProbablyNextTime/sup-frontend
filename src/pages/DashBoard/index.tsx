@@ -6,7 +6,6 @@ import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
 import { IBoardNotice } from "../../model/notice"
-import { FormatUnderlined } from "@material-ui/icons"
 import { transportation_provider } from "../../model/transportation_provider"
 import ISearchQuery from "../../model/search_query"
 
@@ -46,7 +45,7 @@ const DashBoard = (props: IDashBoardProps) => {
     <Box className={classes.globalWrapper}>
       <NavigationBar />
       <Box className={classes.wrapper}>
-        <Search setSearchQuery={setSearchQuery} />
+        <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Box className={classes.content}>
           <Box className={classes.boardWrapper}>
             <Board selectedNotice={selectedNotice} setSelectedNotice={setSelectedNotice} />
