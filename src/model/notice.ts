@@ -1,7 +1,10 @@
+import { transportation_provider } from "./transportation_provider"
+import ITransportationOffer from "./transportation_offer"
+
 export interface IBoardNotice {
   additionalInfo: string
-  departureDate: Date
-  arrivalDate: Date
+  departureDate: string
+  arrivalDate: string
   cargo: object
   deliveryPlace: string
   departurePoint: string
@@ -14,5 +17,21 @@ export interface IBoardNotice {
   status: string
   title: string
   transferNumber: string
+  isPremium: boolean
+  transportationProvider: transportation_provider
   transportationTags: Array<object>
 }
+
+export type MainNoticeInfo = Pick<
+IBoardNotice,
+| "departureDate"
+| "arrivalDate"
+| "pickupPlace"
+| "isPremium"
+| "transferNumber"
+| "departurePoint"
+| "destinationPoint"
+| "deliveryPlace"
+>
+
+export type AdditionalNoticeInfo = Pick<IBoardNotice, "transportationProvider" | "transportationTags">

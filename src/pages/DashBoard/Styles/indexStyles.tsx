@@ -3,7 +3,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme"
 
 const useStyles = makeStyles((theme: Theme) => ({
   globalWrapper: {
-    height: "75vh",
+    height: "80vh",
   },
   wrapper: {
     width: "100%",

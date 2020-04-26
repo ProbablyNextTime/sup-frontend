@@ -6,10 +6,14 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date"
 import SearchIcon from "@material-ui/icons/Search"
 import TextField from "@material-ui/core/TextField"
+import { CalendarToday } from "@material-ui/icons"
+import ISearchQuery from "../../model/search_query"
 
-interface IDashBoardProps {}
+interface ISearchProps {
+  setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>
+}
 
-const Search = (props: IDashBoardProps) => {
+const Search = (props: ISearchProps) => {
   const classes = useStyles()
   const [arrivalDate, setArrivalDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
   const [departureDate, setDepartureDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
@@ -17,14 +21,26 @@ const Search = (props: IDashBoardProps) => {
     <Box className={classes.wrapper}>
       <Box className={classes.container}>
         <SearchIcon className={classes.searchIcon} />
-        <TextField className={classes.inputSearch} type="text" color="primary" placeholder={"from:"} />
+        <TextField className={classes.inputSearchText} type="text" color="primary" placeholder={"from:"} />
         <Box className={classes.vLine}> </Box>
-        <TextField className={classes.inputSearch} type="text" color="primary" placeholder={"to:"} />
+        <TextField className={classes.inputSearchText} type="text" color="primary" placeholder={"to:"} />
         <Box className={classes.vLine}> </Box>
         <MuiPickersUtilsProvider utils={DateMomentUtils}>
-          <DatePicker className={classes.inputSearch} value={arrivalDate} onChange={setArrivalDate} />
+          <CalendarToday className={classes.calendarIcon} />
+          <DatePicker
+            disablePast={true}
+            className={classes.inputSearchDate}
+            value={arrivalDate}
+            onChange={setArrivalDate}
+          />
           <Box className={classes.vLine}> </Box>
-          <DatePicker className={classes.inputSearch} value={departureDate} onChange={setDepartureDate} />
+          <CalendarToday className={classes.calendarIcon} />
+          <DatePicker
+            disablePast={true}
+            className={classes.inputSearchDate}
+            value={departureDate}
+            onChange={setDepartureDate}
+          />
         </MuiPickersUtilsProvider>
       </Box>
     </Box>

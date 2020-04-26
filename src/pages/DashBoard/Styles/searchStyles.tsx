@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "relative",
     height: "80px",
     width: "100%",
-    marginTop: "30px",
+    marginTop: "20px",
     alignSelf: "center",
   },
   container: {
@@ -29,9 +29,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: "16px",
     opacity: "0.3",
   },
-  inputSearch: {
+  inputSearchText: {
     width: "25%",
     marginLeft: "1%",
+    alignSelf: "center",
+  },
+  inputSearchDate: {
+    width: "24%",
+    marginLeft: "8px",
     alignSelf: "center",
   },
   vLine: {
@@ -40,6 +45,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: "12px",
     borderRight: "1px solid #bbb",
     opacity: "0.5",
+  },
+  calendarIcon: {
+    marginTop: "2px",
+    alignSelf: "center",
+    marginLeft: "4px",
+    opacity: "0.4",
+    fontSize: "20px",
   },
 }))
 
