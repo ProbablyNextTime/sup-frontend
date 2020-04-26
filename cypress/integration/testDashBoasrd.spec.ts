@@ -9,7 +9,7 @@ describe("test dashboard", () => {
     cy.visit("/dashboard")
   })
 
-  it("test infinity scroll", () => {
+  it.skip("test infinity scroll", () => {
     cy.wait("@getNotices")
     let numberOfChildren = 3
 
