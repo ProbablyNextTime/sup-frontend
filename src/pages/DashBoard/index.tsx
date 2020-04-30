@@ -40,6 +40,7 @@ const defaultNotice: IBoardNotice = {
 const DashBoard = (props: IDashBoardProps) => {
   const [selectedNotice, setSelectedNotice] = React.useState<IBoardNotice>(defaultNotice)
   const [searchQuery, setSearchQuery] = React.useState({ to: "", from: "", dateTo: "", dateFrom: "" } as ISearchQuery)
+
   const classes = useStyles()
   return (
     <Box className={classes.globalWrapper}>

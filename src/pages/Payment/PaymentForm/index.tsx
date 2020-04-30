@@ -5,7 +5,7 @@ import useStyles from "./styles"
 import StripeIcon from "pages/common/stripeIcon"
 import { useHistory } from "react-router"
 import { Formik, Form, Field } from "formik"
-import { isNegativeNumber } from "utils/formatField"
+import { isPositiveInteger } from "utils/formatField"
 import { TextField } from "formik-material-ui"
 import ITransportationOffer from "model/transportationOffer"
 import { updateTransportationOfferDepositValue } from "service/api/transportationOffer"
@@ -122,7 +122,9 @@ const PaymentForm = () => {
             label="KG"
             data-cy={"orderedUnits-input"}
             type="number"
-            onKeyDown={(e: KeyboardEvent) => isNegativeNumber(e)}
+            min={"1"}
+            max={"1000"}
+            onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
             component={TextField}
           />
           <SubmitButton isLoading={isSubmitting} />
