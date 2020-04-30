@@ -9,7 +9,6 @@ import TextField from "@material-ui/core/TextField"
 import { CalendarToday } from "@material-ui/icons"
 import ISearchQuery from "../../model/search_query"
 import { useAPICallback } from "../../hooks/useApiCallback"
-import FormControl from "@material-ui/core/FormControl"
 
 interface ISearchProps {
   setSearchQuery: React.Dispatch<React.SetStateAction<ISearchQuery>>
@@ -20,10 +19,6 @@ const Search = (props: ISearchProps) => {
   const classes = useStyles()
   const [arrivalDate, setArrivalDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
   const [departureDate, setDepartureDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
-
-  const updateQuery = useAPICallback((e) => {
-    console.log(e)
-  }, [])
 
   return (
     <Box className={classes.wrapper}>

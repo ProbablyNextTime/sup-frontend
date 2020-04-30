@@ -6,6 +6,7 @@ import { IBoardNotice } from "../../../model/notice"
 import AdditionalInfo from "./AdditionalInfo/Index"
 import Details from "./Details"
 import AdditionalDetails from "./AdditionalDetails"
+import OrderSummary from "./OrderSummary"
 
 interface IDashBoardProps {
   notice: IBoardNotice
@@ -19,6 +20,7 @@ const DashboardNoticeInfo = (props: IDashBoardProps) => {
       <AdditionalInfo notice={{ ...props.notice }} />
       <Details notice={props.notice} />
       <AdditionalDetails additionalDetails={props.notice.transportationProvider.additional_details} />
+      <OrderSummary notice={props.notice} />
     </Box>
   )
 }
