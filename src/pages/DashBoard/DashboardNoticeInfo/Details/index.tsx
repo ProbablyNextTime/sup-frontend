@@ -1,13 +1,10 @@
 import * as React from "react"
 import Box from "@material-ui/core/Box"
 import useStyles from "./indexStyles"
-import { IBoardNotice } from "../../../../model/notice"
 import Typography from "@material-ui/core/Typography"
 import { Check } from "@material-ui/icons"
 
-interface IDashBoardProps {
-  notice: IBoardNotice
-}
+interface IDashBoardProps {}
 
 const Details = (props: IDashBoardProps) => {
   const chosenPercentage = 72

@@ -1,19 +1,18 @@
 import * as React from "react"
 import Box from "@material-ui/core/Box"
 import useStyles from "./indexStyles"
-import { IBoardNotice } from "../../../../model/notice"
 import { Typography } from "@material-ui/core"
+import { DashboardContext } from "../../../../service/context/dashboardContext"
 
-interface IDashBoardProps {
-  additionalDetails: Array<string>
-}
+interface IDashBoardProps {}
 
 const AdditionalDetails = (props: IDashBoardProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
   return (
     <Box className={classes.container}>
       <Typography className={classes.contentHeader}>ADDITIONAL DETAILS</Typography>
-      {props.additionalDetails.map((detail) => {
+      {dashboardContext.transportationOffer.transportationProvider.additional_details.map((detail) => {
         return <Typography className={classes.detail}>- {detail}</Typography>
       })}
     </Box>
