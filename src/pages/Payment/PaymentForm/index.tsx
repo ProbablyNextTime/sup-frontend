@@ -106,9 +106,15 @@ const PaymentForm = () => {
     [submitAndMoveToPayment, dashboardContext.handleSettingOffer]
   )
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAmount(parseInt(e.target.value))
+  }
+
   const orderedUnitsSchema = Yup.object().shape({
     orderedUnits: Yup.number().min(1, "Please, provide positive value").max(1000, "Out of range").required("Required"),
   })
+
+  console.log(amount)
 
   return (
     <Formik
@@ -127,13 +133,17 @@ const PaymentForm = () => {
               placeholder="0"
               data-cy={"orderedUnits-input"}
               type="text"
-              onChange={setAmount}
+              value={amount}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
               component={TextField}
             />
           </Box>
           <Typography className={classes.summary}>
-            Summary: <span style={{ fontWeight: "bold" }}>500$</span>
+            Summary:{" "}
+            <span style={{ fontWeight: "bold" }}>{`${
+              dashboardContext.transportationOffer.pricePerUnitInUsd * amount
+            }$`}</span>
           </Typography>
           <Field name="voucherCode" placeholder="0000-0000-0000-0000" type="text" component={TextField} />
           <SubmitButton isLoading={isSubmitting} />
