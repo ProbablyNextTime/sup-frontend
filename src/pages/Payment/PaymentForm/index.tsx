@@ -13,6 +13,8 @@ import snakeCaseKeys from "snakecase-keys"
 import { DashboardContext, IDashboardContext } from "service/context/dashboardContext"
 import { useStripe } from "@stripe/react-stripe-js"
 import { initiateTransportationOfferCheckout } from "service/billing"
+import { Box, Typography } from "@material-ui/core"
+import * as Yup from "yup"
 
 interface SubmitButtonProps {
   isLoading: boolean
@@ -27,23 +29,16 @@ function SubmitButton({ isLoading }: SubmitButtonProps) {
   const classes = useStyles()
   if (dashboardContext.transportationOffer.depositValueInUsd > 0) {
     return (
-      <React.Fragment>
-        <div className={classes.stripeBadgeContainer}>
-          <ButtonWithLoading
-            data-cy={"payment-submit"}
-            type="submit"
-            isLoading={isLoading}
-            className={classes.payButton}
-          >
-            Proceed
-          </ButtonWithLoading>
-          <StripeIcon width={109} height={30} />
-        </div>
-      </React.Fragment>
+      <div>
+        <ButtonWithLoading data-cy={"payment-submit"} type="submit" isLoading={isLoading}>
+          Proceed
+        </ButtonWithLoading>
+        <StripeIcon width={109} height={30} />
+      </div>
     )
   } else {
     return (
-      <ButtonWithLoading data-cy={"submit"} type="submit" isLoading={isLoading} className={classes.payButton}>
+      <ButtonWithLoading data-cy={"submit"} type="submit" isLoading={isLoading}>
         Proceed
       </ButtonWithLoading>
     )
@@ -52,8 +47,10 @@ function SubmitButton({ isLoading }: SubmitButtonProps) {
 
 const PaymentForm = () => {
   const dashboardContext: IDashboardContext = React.useContext(DashboardContext)
+  const [amount, setAmount] = React.useState(0)
   const history = useHistory()
   const stripe = useStripe()
+  const classes = useStyles()
 
   /* Stripe utilites.
    * Can't utilize the usePayment hook here since we have to initiate the checkout session only after the user's clicked Proceed(we don't know how much to bill otherwise)
@@ -109,24 +106,36 @@ const PaymentForm = () => {
     [submitAndMoveToPayment, dashboardContext.handleSettingOffer]
   )
 
+  const orderedUnitsSchema = Yup.object().shape({
+    orderedUnits: Yup.number().min(1, "Please, provide positive value").max(1000, "Out of range").required("Required"),
+  })
+
   return (
     <Formik
       initialValues={{ depositValueInUsd: dashboardContext.transportationOffer.depositValueInUsd }}
       onSubmit={handleSubmit}
+      validationSchema={orderedUnitsSchema}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <Field
-            name="orderedUnits"
-            placeholder="0"
-            label="KG"
-            data-cy={"orderedUnits-input"}
-            type="number"
-            min={"1"}
-            max={"1000"}
-            onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
-            component={TextField}
-          />
+        <Form className={classes.paymentForm}>
+          <Box className={classes.kgInputContainer}>
+            <Typography className={classes.inputHeader}>KG: </Typography>
+            <Field
+              className={classes.inputAmount}
+              name="orderedUnits"
+              InputProps={{ classes: { input: classes.inputAmount } }}
+              placeholder="0"
+              data-cy={"orderedUnits-input"}
+              type="text"
+              onChange={setAmount}
+              onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
+              component={TextField}
+            />
+          </Box>
+          <Typography className={classes.summary}>
+            Summary: <span style={{ fontWeight: "bold" }}>500$</span>
+          </Typography>
+          <Field name="voucherCode" placeholder="0000-0000-0000-0000" type="text" component={TextField} />
           <SubmitButton isLoading={isSubmitting} />
         </Form>
       )}
