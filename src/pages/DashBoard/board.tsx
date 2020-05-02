@@ -3,25 +3,23 @@ import * as React from "react"
 import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
-import { IBoardNotice } from "../../model/notice"
+import ITransportationOffer from "../../model/transportationOffer"
 import axios from "axios"
 import { useAPICallback } from "../../hooks/useApiCallback"
 import { DashboardContext } from "../../service/context/dashboardContext"
+import transportationOffer from "../../model/transportationOffer"
 
-interface IBoardProps {
-  setSelectedNotice: React.Dispatch<React.SetStateAction<IBoardNotice>>
-  selectedNotice: IBoardNotice
-}
+interface IBoardProps {}
 
 const Board = (props: IBoardProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const [page, setPage] = React.useState(1)
-  const [notices, setNotices] = React.useState([] as IBoardNotice[])
+  const [notices, setNotices] = React.useState([] as ITransportationOffer[])
   const [scrolledBottom, setScrolledBottom] = React.useState(true)
   const getNotices = useAPICallback(async (page) => {
     try {
       const response = await axios.get("http://localhost:5000/api/transportation_offer?page=1&page_size=10")
-      const newNotices = response.data as Array<IBoardNotice>
+      const newNotices = response.data as Array<ITransportationOffer>
       setNotices((notices) => [...notices, ...newNotices])
       return newNotices
     } catch (err) {
@@ -33,9 +31,8 @@ const Board = (props: IBoardProps) => {
     if (scrolledBottom) {
       getNotices(page)
         .then((notices) => {
-          if (notices[0] !== undefined && props.selectedNotice.id === "null") {
-            props.setSelectedNotice(notices[0])
-            dashboardContext.handleSettingOffer(notices[0])
+          if (notices[0] !== undefined) {
+            dashboardContext.handleSettingOffer({ transportationOffer: notices[0] })
           }
           setScrolledBottom(false)
         })
@@ -56,8 +53,8 @@ const Board = (props: IBoardProps) => {
   const classes = useStyles()
   return (
     <Box id={"notices-container"} data-cy={"notices"} onScroll={onScrollHandler} className={classes.dashboard}>
-      {notices.map((x: IBoardNotice, index) => {
-        return <BoardNotice setSelected={props.setSelectedNotice} notice={x} key={index} />
+      {notices.map((x: ITransportationOffer, index) => {
+        return <BoardNotice notice={x} key={index} />
       })}
     </Box>
   )

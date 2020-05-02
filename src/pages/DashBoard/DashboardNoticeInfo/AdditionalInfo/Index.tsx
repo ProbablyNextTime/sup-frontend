@@ -2,14 +2,12 @@ import * as React from "react"
 import Box from "@material-ui/core/Box"
 import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
-import { AdditionalNoticeInfo } from "../../../../model/notice"
 import Check from "@material-ui/icons/Check"
 import IconButton from "@material-ui/core/IconButton"
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons"
+import { DashboardContext } from "../../../../service/context/dashboardContext"
 
-interface IDashBoardProps {
-  notice: AdditionalNoticeInfo
-}
+interface IDashBoardProps {}
 
 function makePoint(point: string): string {
   if (point === undefined) return ""
@@ -32,6 +30,7 @@ const tags = [
 ]
 
 const AdditionalInfo = (props: IDashBoardProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
   const isTrusted = true
   const transferPeople = false
   const [displayAll, setDisplayAll] = React.useState(false)
@@ -53,11 +52,13 @@ const AdditionalInfo = (props: IDashBoardProps) => {
       </Typography>
       <Typography className={classes.contentHeader}>CARRIER</Typography>
       <Box className={classes.carrierInfo}>
-        <Typography className={classes.userName}>{makePoint(props.notice.transportationProvider.name)}</Typography>
+        <Typography className={classes.userName}>
+          {makePoint(dashboardContext.transportationOffer.transportationProvider.name)}
+        </Typography>
         {isTrusted ? <Check className={classes.isTrusted} /> : <div />}
         <Typography
           className={classes.reviews}
-        >{`${props.notice.transportationProvider.reviewsReceived.length} reviews`}</Typography>
+        >{`${dashboardContext.transportationOffer.transportationProvider.reviewsReceived.length} reviews`}</Typography>
       </Box>
       <Typography className={classes.contentHeader}>CARGO TYPE</Typography>
       <Box className={classes.tags}>

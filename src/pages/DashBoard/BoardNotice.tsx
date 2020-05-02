@@ -4,12 +4,12 @@ import useStyles from "./Styles/boardStyles"
 import Card from "@material-ui/core/Card"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
-import { IBoardNotice } from "../../model/notice"
+import ITransportationOffer from "../../model/transportationOffer"
 import Check from "@material-ui/icons/Check"
+import { DashboardContext } from "../../service/context/dashboardContext"
 
 interface IBoardNoticeProps {
-  setSelected: React.Dispatch<React.SetStateAction<IBoardNotice>>
-  notice: IBoardNotice
+  notice: ITransportationOffer
 }
 
 function makePoint(point: string): string {
@@ -31,12 +31,13 @@ const premiumBackground = { backgroundColor: "#fffff2", border: "solid 1px #fcff
 const tags = ["truck", "mom"]
 
 const BoardNotice = (props: IBoardNoticeProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
   const peopleTransfer = true
   const isTrusted = true
   const classes = useStyles()
 
   function selectThisNotice() {
-    props.setSelected(props.notice)
+    dashboardContext.handleSettingOffer({ transportationOffer: props.notice })
   }
 
   return (

@@ -3,12 +3,9 @@ import Box from "@material-ui/core/Box"
 import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
-import { IBoardNotice } from "../../../../model/notice"
-import { MainNoticeInfo } from "../../../../model/notice"
+import { DashboardContext } from "../../../../service/context/dashboardContext"
 
-interface IMainInfoProps {
-  notice: MainNoticeInfo
-}
+interface IMainInfoProps {}
 
 const premiumFont = { color: "#fed133" }
 
@@ -18,33 +15,46 @@ function makePoint(point: string): string {
 }
 
 const MainInfo = (props: IMainInfoProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
-  console.log(props.notice)
   return (
     <Box className={classes.container}>
       <Box className={classes.title}>
         <Typography className={classes.contentHeader}>TRANSFER NUMBER</Typography>
         <Box className={classes.transferNumber}>
-          {props.notice.isPremium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
-          <Typography className={classes.transferNumberText} style={props.notice.isPremium ? premiumFont : {}}>
-            {props.notice.transferNumber}
+          {dashboardContext.transportationOffer.isPremium ? (
+            <Star className={classes.premiumStar} fontSize={"small"} />
+          ) : (
+            <div />
+          )}
+          <Typography
+            className={classes.transferNumberText}
+            style={dashboardContext.transportationOffer.isPremium ? premiumFont : {}}
+          >
+            {dashboardContext.transportationOffer.transferNumber}
           </Typography>
         </Box>
       </Box>
       <Box className={classes.mainContent}>
         <Box className={classes.departureInfo}>
           <Typography className={classes.contentHeader}>PICK UP</Typography>
-          <Typography className={classes.contentText}>{makePoint(props.notice.departurePoint)}</Typography>
+          <Typography className={classes.contentText}>
+            {makePoint(dashboardContext.transportationOffer.departurePoint)}
+          </Typography>
           <Typography className={classes.contentHeader}>AT</Typography>
-          <Typography className={classes.placeText}>{makePoint(props.notice.pickupPlace)}</Typography>
-          <Typography className={classes.date}>{props.notice.departureDate}</Typography>
+          <Typography className={classes.placeText}>
+            {makePoint(dashboardContext.transportationOffer.pickupPlace)}
+          </Typography>
+          <Typography className={classes.date}>{dashboardContext.transportationOffer.departureDate}</Typography>
         </Box>
         <Box className={classes.deliveryInfo}>
           <Typography className={classes.contentHeader}>FINAL DELIVERY</Typography>
-          <Typography className={classes.contentText}>{props.notice.destinationPoint}</Typography>
+          <Typography className={classes.contentText}>
+            {dashboardContext.transportationOffer.destinationPoint}
+          </Typography>
           <Typography className={classes.contentHeader}>AT</Typography>
-          <Typography className={classes.placeText}>{props.notice.deliveryPlace}</Typography>
-          <Typography className={classes.date}>{props.notice.arrivalDate}</Typography>
+          <Typography className={classes.placeText}>{dashboardContext.transportationOffer.deliveryPlace}</Typography>
+          <Typography className={classes.date}>{dashboardContext.transportationOffer.arrivalDate}</Typography>
         </Box>
       </Box>
     </Box>

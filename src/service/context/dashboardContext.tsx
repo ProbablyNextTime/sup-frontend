@@ -1,5 +1,6 @@
 import React, { useReducer } from "react"
 import ITransportationOffer, { TransportationOfferStatus, PaymentStatus } from "model/transportationOffer"
+import { transportation_provider } from "../../model/transportation_provider"
 
 /* Context that stores the globally present state of the dashboard.
  *
@@ -20,14 +21,31 @@ export interface IDashboardState {
 }
 
 const initialOffer: ITransportationOffer = {
-  id: "",
-  createdAt: "",
-  status: TransportationOfferStatus.opened,
-  title: "",
-  transportationProvider: "",
-  paymentStatus: PaymentStatus.not_paid,
+  additionalInfo: "default",
+  departureDate: "default",
+  arrivalDate: "default",
+  cargo: {},
+  deliveryPlace: "default",
+  departurePoint: "default",
   depositValueInUsd: 0,
+  destinationPoint: "default",
+  id: "null",
+  paymentStatus: PaymentStatus.not_paid,
+  pickupPlace: "default",
+  pricePerValueInUsd: 0,
+  createdAt: "never",
   pricePerUnitInUsd: 0,
+  status: TransportationOfferStatus.opened,
+  title: "default",
+  transferNumber: "default",
+  isPremium: false,
+  transportationProvider: {
+    reviewsReceived: [],
+    additional_details: ["asdasdasdas", "sdasdasdasdasd", "sdadasdasdasdasd"],
+    id: "null",
+    name: "name",
+  } as transportation_provider,
+  transportationTags: [],
 }
 
 const initialDashboard: IDashboardContext = {

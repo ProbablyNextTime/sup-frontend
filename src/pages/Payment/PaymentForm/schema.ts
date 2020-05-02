@@ -11,14 +11,14 @@ Yup.setLocale({
   },
 })
 
-export const validationSchema = Yup.object().shape<NewTransportationOffer>({
-  transportationProvider: Yup.string().required(),
-  title: Yup.string().required(),
-  depositValueInUsd: Yup.number().required().integer(),
-})
-
-export const emptyVacancy: Record<keyof NewTransportationOffer, string> = {
-  transportationProvider: "",
-  title: "",
-  depositValueInUsd: "",
-}
+// export const validationSchema = Yup.object().shape<NewTransportationOffer>({
+//   transportationProvider: Yup.string().required(),
+//   title: Yup.string().required(),
+//   depositValueInUsd: Yup.number().required().integer(),
+// })
+//
+// export const emptyVacancy: Record<keyof NewTransportationOffer, string> = {
+//   transportationProvider: "",
+//   title: "",
+//   depositValueInUsd: "",
+// }
