@@ -6,6 +6,7 @@ import BoardNotice from "./BoardNotice"
 import { IBoardNotice } from "../../model/notice"
 import axios from "axios"
 import { useAPICallback } from "../../hooks/useApiCallback"
+import { DashboardContext } from "../../service/context/dashboardContext"
 
 interface IBoardProps {
   setSelectedNotice: React.Dispatch<React.SetStateAction<IBoardNotice>>
@@ -13,6 +14,7 @@ interface IBoardProps {
 }
 
 const Board = (props: IBoardProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
   const [page, setPage] = React.useState(1)
   const [notices, setNotices] = React.useState([] as IBoardNotice[])
   const [scrolledBottom, setScrolledBottom] = React.useState(true)
@@ -31,14 +33,17 @@ const Board = (props: IBoardProps) => {
     if (scrolledBottom) {
       getNotices(page)
         .then((notices) => {
-          if (notices[0] !== undefined && props.selectedNotice.id === "null") props.setSelectedNotice(notices[0])
+          if (notices[0] !== undefined && props.selectedNotice.id === "null") {
+            props.setSelectedNotice(notices[0])
+            dashboardContext.handleSettingOffer(notices[0])
+          }
           setScrolledBottom(false)
         })
         .catch((err) => {
           console.log(err)
         })
     }
-  }, [getNotices, scrolledBottom, page, props])
+  }, [getNotices, scrolledBottom, page, props, dashboardContext])
 
   function onScrollHandler() {
     const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
