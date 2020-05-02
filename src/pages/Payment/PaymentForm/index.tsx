@@ -46,8 +46,12 @@ function SubmitButton({ isLoading }: SubmitButtonProps) {
 }
 
 const PaymentForm = () => {
+  /* Form that allows users to purchase transportations offers.
+   *
+   * The non-discount price is: orderedUnits * pricePerUnit
+   * The deposit value is: price * (100 - voucher discount percent)/100
+   */
   const dashboardContext: IDashboardContext = React.useContext(DashboardContext)
-  const [amount, setAmount] = React.useState(0)
   const history = useHistory()
   const stripe = useStripe()
   const classes = useStyles()
@@ -106,23 +110,13 @@ const PaymentForm = () => {
     [submitAndMoveToPayment, dashboardContext.handleSettingOffer]
   )
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(parseInt(e.target.value))
-  }
-
   const orderedUnitsSchema = Yup.object().shape({
     orderedUnits: Yup.number().min(1, "Please, provide positive value").max(1000, "Out of range").required("Required"),
   })
 
-  console.log(amount)
-
   return (
-    <Formik
-      initialValues={{ depositValueInUsd: dashboardContext.transportationOffer.depositValueInUsd }}
-      onSubmit={handleSubmit}
-      validationSchema={orderedUnitsSchema}
-    >
-      {({ isSubmitting }) => (
+    <Formik initialValues={{ orderedUnits: "0" }} onSubmit={handleSubmit} validationSchema={orderedUnitsSchema}>
+      {({ isSubmitting, values }) => (
         <Form className={classes.paymentForm}>
           <Box className={classes.kgInputContainer}>
             <Typography className={classes.inputHeader}>KG: </Typography>
@@ -133,17 +127,17 @@ const PaymentForm = () => {
               placeholder="0"
               data-cy={"orderedUnits-input"}
               type="text"
-              value={amount}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
               onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
               component={TextField}
             />
           </Box>
           <Typography className={classes.summary}>
             Summary:{" "}
-            <span style={{ fontWeight: "bold" }}>{`${
-              dashboardContext.transportationOffer.pricePerUnitInUsd * amount
-            }$`}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {values.orderedUnits
+                ? `${dashboardContext.transportationOffer.pricePerUnitInUsd * parseInt(values.orderedUnits)}$`
+                : "0$"}
+            </span>
           </Typography>
           <Field name="voucherCode" placeholder="0000-0000-0000-0000" type="text" component={TextField} />
           <SubmitButton isLoading={isSubmitting} />
