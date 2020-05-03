@@ -6,7 +6,7 @@ import StripeIcon from "pages/common/stripeIcon"
 import { useHistory } from "react-router"
 import { Formik, Form, Field } from "formik"
 import { isPositiveInteger } from "utils/formatField"
-import { TextField } from "formik-material-ui"
+import { TextField, TextFieldProps } from "formik-material-ui"
 import ITransportationOffer from "model/transportationOffer"
 import { updateTransportationOfferDepositValue } from "service/api/transportationOffer"
 import snakeCaseKeys from "snakecase-keys"
@@ -14,6 +14,7 @@ import { DashboardContext, IDashboardContext } from "service/context/dashboardCo
 import { useStripe } from "@stripe/react-stripe-js"
 import { initiateTransportationOfferCheckout } from "service/billing"
 import { Box, Typography } from "@material-ui/core"
+import { Lock } from "@material-ui/icons"
 import * as Yup from "yup"
 
 interface SubmitButtonProps {
@@ -29,11 +30,19 @@ function SubmitButton({ isLoading }: SubmitButtonProps) {
   const classes = useStyles()
   if (dashboardContext.transportationOffer.depositValueInUsd > 0) {
     return (
-      <div>
-        <ButtonWithLoading data-cy={"payment-submit"} type="submit" isLoading={isLoading}>
-          Proceed
+      <div className={classes.paymentButtonContainer}>
+        <ButtonWithLoading
+          className={classes.processButton}
+          data-cy={"payment-submit"}
+          type="submit"
+          isLoading={isLoading}
+        >
+          <Lock className={classes.processLockIcon} />
+          <Typography className={classes.processButtonText} component={"p"}>
+            Proceed
+          </Typography>
         </ButtonWithLoading>
-        <StripeIcon width={109} height={30} />
+        <StripeIcon width={100} height={50} />
       </div>
     )
   } else {
@@ -115,31 +124,49 @@ const PaymentForm = () => {
   })
 
   return (
-    <Formik initialValues={{ orderedUnits: "0" }} onSubmit={handleSubmit} validationSchema={orderedUnitsSchema}>
-      {({ isSubmitting, values }) => (
+    <Formik initialValues={{ orderedUnits: "1" }} onSubmit={handleSubmit} validationSchema={orderedUnitsSchema}>
+      {({ isSubmitting, values, setFieldValue }) => (
         <Form className={classes.paymentForm}>
-          <Box className={classes.kgInputContainer}>
-            <Typography className={classes.inputHeader}>KG: </Typography>
+          <Box className={classes.summaryContainer}>
+            <Box className={classes.kgInputContainer}>
+              <Typography className={classes.inputHeader}>KG: </Typography>
+              <Field
+                className={classes.inputAmount}
+                name="orderedUnits"
+                InputProps={{
+                  inputProps: { min: 1, max: 100 },
+                  className: classes.inputAmount,
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                    if (parseInt(e.target.value) <= 100 || e.target.value === "")
+                      setFieldValue("orderedUnits", e.target.value)
+                  },
+                }}
+                placeholder="0"
+                type={"number"}
+                data-cy={"orderedUnits-input"}
+                onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
+                component={TextField}
+              />
+            </Box>
+            <Typography className={classes.summary}>
+              Summary:{" "}
+              <span style={{ fontWeight: "bold" }}>
+                {values.orderedUnits
+                  ? `${dashboardContext.transportationOffer.pricePerUnitInUsd * parseInt(values.orderedUnits)}$`
+                  : "0$"}
+              </span>
+            </Typography>
+          </Box>
+          <Box className={classes.voucherCodeInputContainer}>
+            <Typography className={classes.inputHeader}>Voucher Code:</Typography>
             <Field
-              className={classes.inputAmount}
-              name="orderedUnits"
-              InputProps={{ classes: { input: classes.inputAmount } }}
-              placeholder="0"
-              data-cy={"orderedUnits-input"}
+              name="voucherCode"
+              placeholder="0000-0000-0000-0000"
               type="text"
-              onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
+              InputProps={{ className: classes.voucherCodeInput }}
               component={TextField}
             />
           </Box>
-          <Typography className={classes.summary}>
-            Summary:{" "}
-            <span style={{ fontWeight: "bold" }}>
-              {values.orderedUnits
-                ? `${dashboardContext.transportationOffer.pricePerUnitInUsd * parseInt(values.orderedUnits)}$`
-                : "0$"}
-            </span>
-          </Typography>
-          <Field name="voucherCode" placeholder="0000-0000-0000-0000" type="text" component={TextField} />
           <SubmitButton isLoading={isSubmitting} />
         </Form>
       )}

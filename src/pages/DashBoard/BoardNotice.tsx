@@ -112,7 +112,7 @@ const BoardNotice = (props: IBoardNoticeProps) => {
           >
             {peopleTransfer ? "PEOPLE TRANSFER" : "DEAD WEIGHT"}
           </Typography>
-          <Typography className={classes.pricePerValue}>{`${props.notice.pricePerValueInUsd}$ / ${
+          <Typography className={classes.pricePerValue}>{`${props.notice.pricePerUnitInUsd}$ / ${
             peopleTransfer ? `person` : `1kg`
           } `}</Typography>
         </Box>
