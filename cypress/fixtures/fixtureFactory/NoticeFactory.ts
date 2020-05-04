@@ -32,16 +32,6 @@ export class NoticeFactory extends FixtureFactory {
     transportationTags,
   }: Partial<transportationOffer> = {}): transportationOffer {
     return {
-      // peopleTransfer: peopleTransfer || faker.random.boolean(),
-      // rating: rating || faker.random.number(5),
-      // from: from || faker.address.city(),
-      // to: to || faker.address.city(),
-      // vehicleType: vehicleType || vehicleTypes[faker.random.number(2)],
-      // noticeProvider: noticeProvider || faker.company.companyName(),
-      // maxAmount: maxAmount || faker.random.number(100),
-      // tags: tags || [...Array(3)].map((x) => faker.company.catchPhrase()),
-      // numberOfReviews: numberOfReviews || faker.random.number(100),
-      // estimatedPrice: estimatedPrice || faker.random.number(1000),
       additionalInfo: additionalInfo || faker.random.word(),
       departureDate: departureDate || faker.random.word(),
       arrivalDate: arrivalDate || faker.random.word(),
@@ -76,10 +66,7 @@ export class NoticeFactory extends FixtureFactory {
     return [...Array(quantity)].map(this.generateEntry)
   }
 
-  public generateGetNoticesResponse(): IGetNoticesResponse {
-    const newNotices = this.generateEntries(10)
-    return {
-      notices: newNotices,
-    }
+  public generateGetNoticesResponse(): transportationOffer[] {
+    return this.generateEntries(10)
   }
 }

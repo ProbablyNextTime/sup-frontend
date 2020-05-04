@@ -13,7 +13,6 @@ import transportationOffer from "model/transportationOffer"
 interface IBoardProps {
   notices: ITransportationOffer[]
   setNotices: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>
-  // searchQuery: string
 }
 
 const Board = ({ notices, setNotices }: IBoardProps) => {
@@ -23,19 +22,20 @@ const Board = ({ notices, setNotices }: IBoardProps) => {
 
   React.useEffect(() => {
     const processedNewOffers = async (): Promise<void> => {
+      await setScrolledBottom(false)
       const newNotices = await getTransportationOffers(page, 10, dashboardContext.query)
       if (newNotices[0] && notices.length === 0)
         dashboardContext.handleSettingOffer({ transportationOffer: newNotices[0] })
-      await setScrolledBottom(false)
       await setNotices((notices) => [...notices, ...newNotices])
     }
 
+    console.log("useEffect called")
     if (scrolledBottom) {
       processedNewOffers()
     }
-  }, [scrolledBottom, page, dashboardContext, notices.length, setNotices])
+  }, [dashboardContext, notices.length, page, scrolledBottom, setNotices])
 
-  function onScrollHandler() {
+  async function onScrollHandler() {
     const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
     if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
       setPage(page + 1)
@@ -45,7 +45,7 @@ const Board = ({ notices, setNotices }: IBoardProps) => {
 
   const classes = useStyles()
   return (
-    <Box id={"notices-container"} data-cy={"notices"} onScroll={onScrollHandler} className={classes.dashboard}>
+    <Box id={"notices-container"} data-cy={"offers"} onScroll={onScrollHandler} className={classes.dashboard}>
       {notices.map((x: ITransportationOffer, index: number) => {
         return <BoardNotice notice={x} key={index} />
       })}
