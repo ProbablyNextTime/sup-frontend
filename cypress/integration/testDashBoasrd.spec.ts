@@ -5,24 +5,24 @@ const getNoticesResponse: IGetNoticesResponse = NFactory.generateGetNoticesRespo
 describe("test dashboard", () => {
   beforeEach(() => {
     cy.server()
-    cy.route("GET", `**/api/notices`, getNoticesResponse).as("getNotices")
+    cy.route("GET", `**/api/transportation_offer`, getNoticesResponse).as("getOffers")
     cy.visit("/dashboard")
   })
 
-  it.skip("test infinity scroll", () => {
-    cy.wait("@getNotices")
-    let numberOfChildren = 3
+  it.only("test infinity scroll", () => {
+    // cy.wait("@getOffers")
+    let numberOfChildren = 10
 
-    for (let i = 0; i < 5; i++) {
-      cy.dataCy("notices")
+    for (let i = 0; i < 2; i++) {
+      cy.dataCy("offers")
         .children()
         .then((children) => {
           cy.wrap(children).its("length").should("eq", numberOfChildren)
         })
-      cy.dataCy("notices")
+      cy.dataCy("offers")
         .scrollTo("bottom", { duration: 2000 })
-        .wait("@getNotices")
-        .then(() => (numberOfChildren += 3))
+        .wait("@getOffers")
+        .then(() => (numberOfChildren += 10))
     }
   })
 })
