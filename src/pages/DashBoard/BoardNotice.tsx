@@ -60,7 +60,7 @@ const BoardNotice = (props: IBoardNoticeProps) => {
           </Box>
           <Box className={classes.tags}>
             {tags.map((x) => {
-              const themeColor = getRandomColor()
+              const themeColor = "#000000"
               return (
                 <Box className={classes.tag} style={{ border: `1px solid ${themeColor}`, color: themeColor }}>
                   {x}
