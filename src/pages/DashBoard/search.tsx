@@ -50,6 +50,7 @@ const Search = ({ setNotices }: ISearchProps) => {
           color="primary"
           placeholder={"from:"}
           onChange={handleSearchChange}
+          data-cy={"searchField"}
         />
         <Box className={classes.vLine}> </Box>
         <TextField className={classes.inputSearchText} type="text" color="primary" placeholder={"to:"} />
