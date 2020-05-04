@@ -8,11 +8,6 @@ import { DashboardContext } from "../../../../service/context/dashboardContext"
 
 interface IDashBoardProps {}
 
-function makePoint(point: string): string {
-  if (point === undefined) return ""
-  return point.slice(2)
-}
-
 const OrderSummary = (props: IDashBoardProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
@@ -24,10 +19,8 @@ const OrderSummary = (props: IDashBoardProps) => {
         </Typography>
         <ShoppingCart className={classes.cartIcon} font-size={"small"} />
       </Box>
-      <Typography className={classes.destinationInfo}>
-        {`Destination:  ${makePoint(dashboardContext.transportationOffer.departurePoint)} — ${makePoint(
-          dashboardContext.transportationOffer.destinationPoint
-        )}`}
+      <Typography className={classes.destinationInfo} data-cy={"destination"}>
+        {`Destination:  ${dashboardContext.transportationOffer.departurePoint} — ${dashboardContext.transportationOffer.destinationPoint}`}
       </Typography>
       <Box className={classes.placeSummaryInfo}>
         <Typography className={classes.contentHeader}>PICKUP:</Typography>

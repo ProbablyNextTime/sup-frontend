@@ -10,7 +10,7 @@ const AdditionalDetails = (props: IDashBoardProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
   return (
-    <Box className={classes.container}>
+    <Box className={classes.container} data-cy={"additionalDetails"}>
       <Typography className={classes.contentHeader}>ADDITIONAL DETAILS</Typography>
       {dashboardContext.transportationOffer.transportationProvider.additional_details.map((detail) => {
         return <Typography className={classes.detail}>- {detail}</Typography>

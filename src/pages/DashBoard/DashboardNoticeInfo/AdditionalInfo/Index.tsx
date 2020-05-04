@@ -9,11 +9,6 @@ import { DashboardContext } from "../../../../service/context/dashboardContext"
 
 interface IDashBoardProps {}
 
-function makePoint(point: string): string {
-  if (point === undefined) return ""
-  return point.slice(2)
-}
-
 const tags = [
   "premium",
   "truck",
@@ -52,8 +47,8 @@ const AdditionalInfo = (props: IDashBoardProps) => {
       </Typography>
       <Typography className={classes.contentHeader}>CARRIER</Typography>
       <Box className={classes.carrierInfo}>
-        <Typography className={classes.userName}>
-          {makePoint(dashboardContext.transportationOffer.transportationProvider.name)}
+        <Typography className={classes.userName} data-cy={"carrierName"}>
+          {dashboardContext.transportationOffer.transportationProvider.name}
         </Typography>
         {isTrusted ? <Check className={classes.isTrusted} /> : <div />}
         <Typography
