@@ -10,7 +10,6 @@ import ITransportationOffer from "../../model/transportationOffer"
 interface IDashBoardProps {}
 
 const DashBoard = (props: IDashBoardProps) => {
-  // const [searchQuery, setSearchQuery] = React.useState("")
   const [notices, setNotices] = React.useState([] as ITransportationOffer[])
   const classes = useStyles()
 
