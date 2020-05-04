@@ -13,7 +13,9 @@ import { transportation_provider } from "../../model/transportation_provider"
 
 export interface IDashboardContext {
   transportationOffer: ITransportationOffer
+  query: string
   handleSettingOffer: (transportationOffer: IDashboardState) => void
+  handleSettingQuery: (query: string) => void
 }
 
 export interface IDashboardState {
@@ -50,8 +52,12 @@ const initialOffer: ITransportationOffer = {
 
 const initialDashboard: IDashboardContext = {
   transportationOffer: initialOffer,
+  query: "",
   handleSettingOffer: (transportationOffer: IDashboardState) => {
     throw new Error("Method not implemented.")
+  },
+  handleSettingQuery: (query: string) => {
+    throw new Error("ff")
   },
 }
 
@@ -61,6 +67,11 @@ const reducer = (state: IDashboardContext, action: any) => {
       return {
         ...state,
         transportationOffer: action.payload.transportationOffer,
+      }
+    case "handleSettingQuery":
+      return {
+        ...state,
+        query: action.payload.query,
       }
     default:
       return state
@@ -78,6 +89,9 @@ const DashboardContextProvider = (props: any) => {
         ...state,
         handleSettingOffer: (transportationOffer: IDashboardState) => {
           dispatch({ type: "handleSettingOffer", payload: transportationOffer })
+        },
+        handleSettingQuery: (query: string) => {
+          dispatch({ type: "handleSettingQuery", payload: query })
         },
       }}
     >
