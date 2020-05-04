@@ -10,7 +10,7 @@ import ITransportationOffer from "../../model/transportationOffer"
 interface IDashBoardProps {}
 
 const DashBoard = (props: IDashBoardProps) => {
-  const [searchQuery, setSearchQuery] = React.useState("")
+  // const [searchQuery, setSearchQuery] = React.useState("")
   const [notices, setNotices] = React.useState([] as ITransportationOffer[])
   const classes = useStyles()
 
@@ -18,11 +18,12 @@ const DashBoard = (props: IDashBoardProps) => {
     <Box className={classes.globalWrapper}>
       <NavigationBar />
       <Box className={classes.wrapper}>
-        <Search setSearchQuery={setSearchQuery} searchQuery={searchQuery} setNotices={setNotices} />
+        <Search setNotices={setNotices} />
         <Box className={classes.content}>
           <Box className={classes.boardWrapper}>
-            <Board searchQuery={searchQuery} notices={notices} setNotices={setNotices} />
+            <Board notices={notices} setNotices={setNotices} />
           </Box>
+
           <DashboardNoticeInfo />
           <Box className={classes.mapWrapper}>
             <img

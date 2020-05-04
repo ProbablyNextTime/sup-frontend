@@ -7,41 +7,36 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date"
 import SearchIcon from "@material-ui/icons/Search"
 import TextField from "@material-ui/core/TextField"
 import { CalendarToday } from "@material-ui/icons"
-import ISearchQuery from "../../model/search_query"
 import { useAPICallback } from "../../hooks/useApiCallback"
 import ITransportationOffer from "../../model/transportationOffer"
 import axios from "axios"
+import { getTransportationOffers } from "../../service/api/transportationOffer"
+import { DashboardContext } from "../../service/context/dashboardContext"
 
 interface ISearchProps {
-  setNotices: React.Dispatch<React.SetStateAction<Array<ITransportationOffer>>>
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>
-  searchQuery: string
+  setNotices: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>
+  // setSearchQuery: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Search = (props: ISearchProps) => {
+const Search = ({ setNotices }: ISearchProps) => {
   const classes = useStyles()
+  const dashboardContext = React.useContext(DashboardContext)
   const [arrivalDate, setArrivalDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
   const [departureDate, setDepartureDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
 
   const getNotices = useAPICallback(
     async (query) => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/transportation_offer?query=${query}&page=1&page_size=10`
-        )
-        const newNotices = response.data as Array<ITransportationOffer>
-        props.setNotices(newNotices)
-        return newNotices
-      } catch (err) {
-        console.log(err)
-      }
+      const newNotices = await getTransportationOffers(1, 10, query)
+      if (newNotices[0] && newNotices.length === 0)
+        dashboardContext.handleSettingOffer({ transportationOffer: newNotices[0] })
+      await setNotices(newNotices)
     },
     [],
-    { debounceDelay: 600 }
+    { debounceDelay: 500 }
   )
 
   const handleSearchChange = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    props.setSearchQuery(e.target.value)
+    dashboardContext.handleSettingQuery(e.target.value)
     await getNotices(e.target.value)
   }
 
