@@ -5,22 +5,22 @@ import NavigationBar from "./navbar"
 import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
-import ITransportationOffer from "../../model/transportationOffer"
+import ITransportationOffer from "model/transportationOffer"
 
 interface IDashBoardProps {}
 
 const DashBoard = (props: IDashBoardProps) => {
-  const [notices, setNotices] = React.useState([] as ITransportationOffer[])
+  const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
   const classes = useStyles()
 
   return (
     <Box className={classes.globalWrapper}>
       <NavigationBar />
       <Box className={classes.wrapper}>
-        <Search setNotices={setNotices} />
+        <Search setTransportationOffers={setTransportationOffers} />
         <Box className={classes.content}>
           <Box className={classes.boardWrapper}>
-            <Board notices={notices} setNotices={setNotices} />
+            <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
 
           <DashboardNoticeInfo />

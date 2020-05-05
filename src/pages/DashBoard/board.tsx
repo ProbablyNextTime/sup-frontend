@@ -1,21 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react"
 import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
 import ITransportationOffer from "model/transportationOffer"
-import axios from "axios"
-import { useAPICallback } from "hooks/useApiCallback"
 import { DashboardContext } from "service/context/dashboardContext"
-import { getTransportationOffers } from "../../service/api/transportationOffer"
-import transportationOffer from "model/transportationOffer"
+import { getTransportationOffers } from "service/api/transportationOffer"
 
 interface IBoardProps {
-  notices: ITransportationOffer[]
-  setNotices: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>
+  transportationOffers: ITransportationOffer[]
+  setTransportationOffers: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>
 }
 
-const Board = ({ notices, setNotices }: IBoardProps) => {
+const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const [page, setPage] = React.useState(1)
   const [scrolledBottom, setScrolledBottom] = React.useState(true)
@@ -24,16 +20,15 @@ const Board = ({ notices, setNotices }: IBoardProps) => {
     const processedNewOffers = async (): Promise<void> => {
       await setScrolledBottom(false)
       const newNotices = await getTransportationOffers(page, 10, dashboardContext.query)
-      if (newNotices[0] && notices.length === 0)
+      if (newNotices[0] && transportationOffers.length === 0)
         dashboardContext.handleSettingOffer({ transportationOffer: newNotices[0] })
-      await setNotices((notices) => [...notices, ...newNotices])
+      await setTransportationOffers((notices) => [...notices, ...newNotices])
     }
 
-    console.log("useEffect called")
     if (scrolledBottom) {
       processedNewOffers()
     }
-  }, [dashboardContext, notices.length, page, scrolledBottom, setNotices])
+  }, [dashboardContext, transportationOffers.length, page, scrolledBottom, setTransportationOffers])
 
   async function onScrollHandler() {
     const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
@@ -46,7 +41,7 @@ const Board = ({ notices, setNotices }: IBoardProps) => {
   const classes = useStyles()
   return (
     <Box id={"notices-container"} data-cy={"offers"} onScroll={onScrollHandler} className={classes.dashboard}>
-      {notices.map((x: ITransportationOffer, index: number) => {
+      {transportationOffers.map((x: ITransportationOffer, index: number) => {
         return <BoardNotice notice={x} key={index} />
       })}
     </Box>

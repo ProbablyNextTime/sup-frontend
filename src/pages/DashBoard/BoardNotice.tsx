@@ -4,9 +4,9 @@ import useStyles from "./Styles/boardStyles"
 import Card from "@material-ui/core/Card"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
-import ITransportationOffer from "../../model/transportationOffer"
+import ITransportationOffer from "model/transportationOffer"
 import Check from "@material-ui/icons/Check"
-import { DashboardContext } from "../../service/context/dashboardContext"
+import { DashboardContext } from "service/context/dashboardContext"
 
 interface IBoardNoticeProps {
   notice: ITransportationOffer
