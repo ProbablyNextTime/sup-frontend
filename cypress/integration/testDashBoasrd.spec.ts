@@ -28,7 +28,7 @@ describe("test dashboard", () => {
     }
   })
 
-  it.only("test search", () => {
+  it("test search", () => {
     cy.wait("@getOffers")
     cy.route("GET", `**/api/transportation_offer**`, getSearchedOffers).as("getOffers")
     cy.dataCy("searchField").type("alg")
@@ -37,6 +37,23 @@ describe("test dashboard", () => {
       .children()
       .then((children) => {
         cy.wrap(children).its("length").should("eq", 4)
+      })
+  })
+
+  it("test offer selection", () => {
+    cy.wait("@getOffers")
+
+    cy.dataCy("offers")
+      .children()
+      .then((children) => {
+        for (let i = 0; i < getNoticesResponse.length; i++) {
+          cy.wrap(children[i]).click()
+          cy.dataCy("selectedOfferTransferNumber").should("contain", getNoticesResponse[i].transferNumber)
+          cy.dataCy("carrierName").should("contain", getNoticesResponse[i].transportationProvider.name)
+          for (const selectedOfferDetail of getNoticesResponse[i].transportationProvider.additional_details)
+            cy.dataCy("additionalDetails").should("contain", selectedOfferDetail)
+          cy.dataCy("destination").should("contain", getNoticesResponse[i].destinationPoint)
+        }
       })
   })
 })

@@ -41,8 +41,8 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
   const classes = useStyles()
   return (
     <Box id={"notices-container"} data-cy={"offers"} onScroll={onScrollHandler} className={classes.dashboard}>
-      {transportationOffers.map((x: ITransportationOffer, index: number) => {
-        return <BoardNotice notice={x} key={index} />
+      {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
+        return <BoardNotice transportationOffer={transportationOffer} key={index} />
       })}
     </Box>
   )
