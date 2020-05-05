@@ -39,6 +39,6 @@ export default interface ITransportationOffer {
 }
 
 export type NewTransportationOffer = Pick<
-ITransportationOffer,
-"transportationProvider" | "title" | "depositValueInUsd"
+  ITransportationOffer,
+  "transportationProvider" | "title" | "depositValueInUsd"
 >
