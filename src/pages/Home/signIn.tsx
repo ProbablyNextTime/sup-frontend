@@ -6,8 +6,10 @@ import { TextField } from "formik-material-ui"
 import * as Yup from "yup"
 import useStyles from "./Styles/signInStyles"
 import { useHistory } from "react-router-dom"
-import { useAPICallback } from "../../hooks/useApiCallback"
-import axios from "axios"
+
+import { useAPICallback } from "hooks/useApiCallback"
+import { authService, IAuthResponse } from "@jetkit/react"
+
 
 interface ICredentials {
   email: string
@@ -17,7 +19,7 @@ interface ICredentials {
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
-    .min(6, "Password should contain at least 6 characters")
+    .min(5, "Password should contain at least 5 characters")
     .max(20, "Password shouldn`t be longer than 20 characters")
     .required("Required"),
 })
@@ -25,15 +27,14 @@ const SignInSchema = Yup.object().shape({
 export default function SignIn() {
   const history = useHistory()
 
-  const handleSubmit = useAPICallback(async () => {
-    try {
-      const response = await axios.post("/auth/login")
-      console.log(response)
-    } catch (error) {
-      console.error(error)
-    }
-    history.push("./dashboard")
-  }, [history])
+  const handleSubmit = useAPICallback(
+    async (values: ICredentials, actions: any) => {
+      await authService.login<IAuthResponse>(values.email, values.password)
+      actions.setSubmitting(false)
+      history.push("/dashboard")
+    },
+    [history]
+  )
 
   const classes = useStyles()
   return (
@@ -51,10 +52,11 @@ export default function SignIn() {
             <Field component={TextField} label="email" name="email" data-cy={"email-input"} variant="outlined" />
             <Field
               component={TextField}
-              label="password"
-              name="password"
+              label={"password"}
+              name={"password"}
+              type={"password"}
               data-cy={"password-input"}
-              variant="outlined"
+              variant={"outlined"}
             />
             {isSubmitting && <LinearProgress />}
             <Button

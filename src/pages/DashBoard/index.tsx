@@ -27,7 +27,11 @@ const noticesEx = [noticeSample, noticeSample, noticeSample]
 
 const DashBoard = (props: IDashBoardProps) => {
   const [notices, setNotices] = React.useState([noticeSample])
-  setNotices(noticesEx)
+
+
+  React.useEffect(() => {
+    setNotices(noticesEx)
+  }, [])
 
   const classes = useStyles()
   return (
