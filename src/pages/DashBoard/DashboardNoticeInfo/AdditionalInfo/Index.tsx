@@ -47,7 +47,6 @@ const AdditionalInfo = (props: IDashBoardProps) => {
       </Typography>
       <Typography className={classes.contentHeader}>CARRIER</Typography>
       <Box className={classes.carrierInfo}>
-
         <Typography className={classes.userName} data-cy={"carrierName"}>
           {dashboardContext.transportationOffer.transportationProvider.name}
         </Typography>

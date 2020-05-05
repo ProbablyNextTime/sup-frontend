@@ -43,7 +43,7 @@ const Search = ({ setTransportationOffers }: ISearchProps) => {
           type="text"
           color="primary"
           placeholder={"from:"}
-          onChange={ ({target: { value}}) => handleSearchChange(value) }
+          onChange={({ target: { value } }) => handleSearchChange(value)}
           data-cy={"searchField"}
         />
         <Box className={classes.vLine}> </Box>

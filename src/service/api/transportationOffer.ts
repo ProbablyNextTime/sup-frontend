@@ -19,8 +19,5 @@ export const getTransportationOffers = async (
   query: string
 ): Promise<ITransportationOffer[]> =>
   (camelCaseKeys(
-    (
-      await apiClient.get(`/transportation_offer?query=${query}&page=${page}&page_size=${limit}`
-      )
-    ).data
+    (await apiClient.get(`/transportation_offer?query=${query}&page=${page}&page_size=${limit}`)).data
   ) as unknown) as ITransportationOffer[]

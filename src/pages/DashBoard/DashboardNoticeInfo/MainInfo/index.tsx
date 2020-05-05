@@ -29,7 +29,6 @@ const MainInfo = (props: IMainInfoProps) => {
           )}
           <Typography
             data-cy={"selectedOfferTransferNumber"}
-
             className={classes.transferNumberText}
             style={dashboardContext.transportationOffer.isPremium ? premiumFont : {}}
           >
