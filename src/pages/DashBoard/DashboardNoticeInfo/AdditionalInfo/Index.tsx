@@ -9,14 +9,6 @@ import { DashboardContext } from "../../../../service/context/dashboardContext"
 
 interface IDashBoardProps {}
 
-<<<<<<< HEAD
-function makePoint(point: string): string {
-  if (point === undefined) return ""
-  return point.slice(2)
-}
-
-=======
->>>>>>> 1fa332984a06dbe773489a34fba85f9541740a3f
 const tags = [
   "premium",
   "truck",
