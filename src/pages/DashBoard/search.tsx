@@ -43,6 +43,7 @@ const Search = ({ setTransportationOffers }: ISearchProps) => {
           type="text"
           color="primary"
           placeholder={"from:"}
+          // event decomposition due to specifics of synthetic events
           onChange={({ target: { value } }) => handleSearchChange(value)}
           data-cy={"searchField"}
         />

@@ -69,7 +69,7 @@
     "eslint": "latest",
     "eslint-plugin-react-app": "^6.2.2",
     "faker": "^4.1.0",
-    "husky": "latest",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "lint-staged": "latest",
     "prettier": "^2.0.4",
