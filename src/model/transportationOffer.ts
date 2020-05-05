@@ -1,7 +1,5 @@
 import { transportation_provider } from "./transportation_provider"
 
-export type TransportationOfferStatusTypedString = "opened" | "completed" | "canceled"
-
 export enum TransportationOfferStatus {
   opened = "opened",
   completed = "completed",
@@ -39,6 +37,6 @@ export default interface ITransportationOffer {
 }
 
 export type NewTransportationOffer = Pick<
-ITransportationOffer,
-"transportationProvider" | "title" | "depositValueInUsd"
+  ITransportationOffer,
+  "transportationProvider" | "title" | "depositValueInUsd"
 >

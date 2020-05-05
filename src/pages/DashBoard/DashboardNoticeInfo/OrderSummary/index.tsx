@@ -4,7 +4,7 @@ import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import { ShoppingCart } from "@material-ui/icons"
 import PaymentForm from "../../../Payment/PaymentForm"
-import { DashboardContext } from "../../../../service/context/dashboardContext"
+import { DashboardContext } from "service/context/dashboardContext"
 
 interface IDashBoardProps {}
 
@@ -19,6 +19,7 @@ const OrderSummary = (props: IDashBoardProps) => {
         </Typography>
         <ShoppingCart className={classes.cartIcon} font-size={"small"} />
       </Box>
+
       <Typography className={classes.destinationInfo} data-cy={"destination"}>
         {`Destination:  ${dashboardContext.transportationOffer.departurePoint} — ${dashboardContext.transportationOffer.destinationPoint}`}
       </Typography>

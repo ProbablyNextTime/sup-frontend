@@ -5,23 +5,24 @@ import NavigationBar from "./navbar"
 import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
-import ISearchQuery from "../../model/search_query"
+import ITransportationOffer from "model/transportationOffer"
 
 interface IDashBoardProps {}
 
 const DashBoard = (props: IDashBoardProps) => {
-  const [searchQuery, setSearchQuery] = React.useState({ to: "", from: "", dateTo: "", dateFrom: "" } as ISearchQuery)
-
+  const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
   const classes = useStyles()
+
   return (
     <Box className={classes.globalWrapper}>
       <NavigationBar />
       <Box className={classes.wrapper}>
-        <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Search setTransportationOffers={setTransportationOffers} />
         <Box className={classes.content}>
           <Box className={classes.boardWrapper}>
-            <Board />
+            <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
+
           <DashboardNoticeInfo />
           <Box className={classes.mapWrapper}>
             <img
