@@ -16,15 +16,6 @@ function makePoint(point: string): string {
   return point.slice(2)
 }
 
-function getRandomColor() {
-  const letters = "0123456789ABCDEF"
-  let color = "#"
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
-  }
-  return color
-}
-
 const premiumFont = { color: "#fed133" }
 const premiumBackground = { backgroundColor: "#fffff2", border: "solid 1px #fcff6c" }
 

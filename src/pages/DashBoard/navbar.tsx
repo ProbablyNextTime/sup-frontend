@@ -18,7 +18,6 @@ const userEx = {
 interface INavigationBar {}
 
 const NavigationBar = (props: INavigationBar) => {
-  const [currency, setCurrency] = React.useState("USD")
   const classes = useStyles()
   return (
     <AppBar className={classes.navigationBar} position="static">
@@ -33,7 +32,7 @@ const NavigationBar = (props: INavigationBar) => {
         <List className={classes.toolList} component="ul" aria-label="contacts">
           <ListItem className={classes.toolListItem}>
             <Link component="button" variant="body2" underline={"none"} className={classes.helpLink}>
-              {currency}
+              USD
             </Link>
             <IconButton className={classes.downArrowToolBar}>
               <KeyboardArrowDownIcon />

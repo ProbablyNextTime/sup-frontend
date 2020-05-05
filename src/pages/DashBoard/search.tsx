@@ -9,7 +9,6 @@ import TextField from "@material-ui/core/TextField"
 import { CalendarToday } from "@material-ui/icons"
 import { useAPICallback } from "hooks/useApiCallback"
 import ITransportationOffer from "model/transportationOffer"
-import axios from "axios"
 import { getTransportationOffers } from "service/api/transportationOffer"
 import { DashboardContext } from "service/context/dashboardContext"
 
