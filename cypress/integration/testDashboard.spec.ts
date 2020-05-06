@@ -1,6 +1,6 @@
-import { transportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
+import { TransportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
 import ITransportationOffer from "../../src/model/transportationOffer"
-const NFactory: transportationOfferFactory = new transportationOfferFactory()
+const NFactory: TransportationOfferFactory = new TransportationOfferFactory()
 const getNoticesResponse: ITransportationOffer[] = NFactory.generateGetNoticesResponse()
 const getSearchedOffers: ITransportationOffer[] = NFactory.generateEntries(4)
 

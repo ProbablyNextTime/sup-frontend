@@ -1,9 +1,9 @@
 import faker from "faker/locale/en_US"
 import { FixtureFactory } from "./FixtureFactory"
-import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "../../../src/model/transportationOffer"
-import { transportation_provider } from "../../../src/model/transportationProvider"
+import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "model/transportationOffer"
+import { transportationProvider } from "model/transportationProvider"
 
-export class transportationOfferFactory extends FixtureFactory {
+export class TransportationOfferFactory extends FixtureFactory {
   public generateEntry({
     id,
     createdAt,
@@ -30,7 +30,7 @@ export class transportationOfferFactory extends FixtureFactory {
       additionalInfo: additionalInfo || faker.random.word(),
       departureDate: departureDate || faker.random.word(),
       arrivalDate: arrivalDate || faker.random.word(),
-      cargo: cargo || {},
+      cargo: cargo || { id: "ExtId" },
       deliveryPlace: deliveryPlace || "default",
       departurePoint: departurePoint || faker.random.word(),
       depositValueInUsd: depositValueInUsd || faker.random.number(100),
@@ -52,7 +52,7 @@ export class transportationOfferFactory extends FixtureFactory {
           additional_details: ["asdasdasdas", "sdasdasdasdasd", "sdadasdasdasdasd"],
           id: "null",
           name: "name",
-        } as transportation_provider),
+        } as transportationProvider),
       transportationTags: transportationTags || [],
     }
   }
