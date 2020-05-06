@@ -4,9 +4,7 @@ import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import { Check } from "@material-ui/icons"
 
-interface IDashBoardProps {}
-
-const Details = (props: IDashBoardProps) => {
+const Details = () => {
   const chosenPercentage = 72
   const successfulDeliveriesPercentage = 100
   const mostPopularDeliveryGood = "People"

@@ -10,7 +10,20 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: primaryFont,
+    subtitle1: {
+      fontFamily : "Lato",
+      fontSize: 11,
+      fontWeight: 500,
+      fontStretch: "normal",
+      fontStyle: "normal",
+      lineHeight: "normal",
+      letterSpacing: "normal",
+      color: "#afafaf",
+      padding: "0 0 2px 0",
+    },
+
   },
+  spacing: [0, 2, 4, 8, 16],
 })
 
 // extend theme type

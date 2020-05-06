@@ -1,14 +1,9 @@
 import faker from "faker/locale/en_US"
 import { FixtureFactory } from "./FixtureFactory"
 import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "../../../src/model/transportationOffer"
-import { transportation_provider } from "../../../src/model/transportation_provider"
-const vehicleTypes = ["truck", "bus", "train"]
+import { transportation_provider } from "../../../src/model/transportationProvider"
 
-export interface IGetNoticesResponse {
-  notices: transportationOffer[]
-}
-
-export class NoticeFactory extends FixtureFactory {
+export class transportationOfferFactory extends FixtureFactory {
   public generateEntry({
     id,
     createdAt,

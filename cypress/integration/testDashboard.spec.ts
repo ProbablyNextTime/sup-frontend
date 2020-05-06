@@ -1,8 +1,8 @@
-import { NoticeFactory, IGetNoticesResponse } from "../fixtures/fixtureFactory/NoticeFactory"
-import transportationOffer from "../../src/model/transportationOffer"
-const NFactory: NoticeFactory = new NoticeFactory()
-const getNoticesResponse: transportationOffer[] = NFactory.generateGetNoticesResponse()
-const getSearchedOffers: transportationOffer[] = NFactory.generateEntries(4)
+import { transportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
+import ITransportationOffer from "../../src/model/transportationOffer";
+const NFactory: transportationOfferFactory = new transportationOfferFactory()
+const getNoticesResponse: ITransportationOffer[] = NFactory.generateGetNoticesResponse()
+const getSearchedOffers: ITransportationOffer[] = NFactory.generateEntries(4)
 
 describe("test dashboard", () => {
   beforeEach(() => {

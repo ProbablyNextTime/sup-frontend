@@ -7,15 +7,12 @@ import Star from "@material-ui/icons/Star"
 import ITransportationOffer from "model/transportationOffer"
 import Check from "@material-ui/icons/Check"
 import { DashboardContext } from "service/context/dashboardContext"
+import * as classNames from "classnames"
+import {transportationOfferTag} from "../../model/transportationOfferTag";
 
 interface IBoardNoticeProps {
   transportationOffer: ITransportationOffer
 }
-
-const premiumFont = { color: "#fed133" }
-const premiumBackground = { backgroundColor: "#fffff2", border: "solid 1px #fcff6c" }
-
-const tags = ["truck", "mom"]
 
 const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
   const dashboardContext = React.useContext(DashboardContext)
@@ -23,35 +20,36 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
   const isTrusted = true
   const classes = useStyles()
 
-  function selectThisNotice() {
-    dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
-  }
-
   return (
     <Card
       elevation={0}
-      className={classes.boardNoticeWrapper}
-      style={transportationOffer.isPremium ? premiumBackground : {}}
-      onClick={selectThisNotice}
+      className={
+        classNames.default(
+          classes.boardNoticeWrapper,
+          transportationOffer.isPremium && classes.premiumBackground
+        )}
+      onClick={() => dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.leftSideContent}>
           <Box className={classes.mainInfo}>
             <Box className={classes.route}>
-              {transportationOffer.isPremium ? <Star className={classes.premiumStar} fontSize={"small"} /> : <div />}
+              {transportationOffer.isPremium && <Star className={classes.premiumStar} fontSize={"small"} />}
               <Typography
-                className={classes.routeText}
-                style={transportationOffer.isPremium ? premiumFont : {}}
+                className={
+                  classNames.default(
+                    classes.routeText,
+                    transportationOffer.isPremium && classes.premiumFont
+                  )}
               >{`${transportationOffer.departurePoint} - ${transportationOffer.destinationPoint}`}</Typography>
             </Box>
             <Typography className={classes.transferNumber}>{transportationOffer.transferNumber}</Typography>
           </Box>
           <Box className={classes.tags}>
-            {tags.map((tag) => {
-              const themeColor = "#000000"
+            {transportationOffer.transportationTags.map((tag: transportationOfferTag) => {
               return (
-                <Box className={classes.tag} style={{ border: `1px solid ${themeColor}`, color: themeColor }}>
-                  {tag}
+                <Box className={classes.tag} style={{ border: `1px solid #000000`, color: "#000000" }}>
+                  {tag.name}
                 </Box>
               )
             })}
@@ -65,14 +63,24 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
       <Box className={classes.cardContent}>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
-          <Typography className={classes.cardBottomContent} style={transportationOffer.isPremium ? premiumFont : {}}>
+          <Typography className={
+            classNames.default(
+              classes.cardBottomContent,
+              transportationOffer.isPremium && classes.premiumFont
+            )}
+          >
             {transportationOffer.pickupPlace}
           </Typography>
           <Typography className={classes.cardBottomDate}>{transportationOffer.departureDate}</Typography>
         </Box>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
-          <Typography className={classes.cardBottomContent} style={transportationOffer.isPremium ? premiumFont : {}}>
+          <Typography className={
+            classNames.default(
+              classes.cardBottomContent,
+              transportationOffer.isPremium && classes.premiumFont
+            )}
+          >
             {transportationOffer.deliveryPlace}
           </Typography>
           <Typography className={classes.cardBottomDate}>{transportationOffer.arrivalDate}</Typography>
@@ -80,17 +88,23 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
         <Box className={classes.carrier}>
           <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
           <Box className={classes.carrierInfo}>
-            <Typography className={classes.cardBottomContent} style={transportationOffer.isPremium ? premiumFont : {}}>
+            <Typography className={
+              classNames.default(
+                classes.cardBottomContent,
+                transportationOffer.isPremium && classes.premiumFont
+              )}
+            >
               {transportationOffer.transportationProvider.name}
             </Typography>
-            {isTrusted ? (
+            {isTrusted &&
               <Check
-                className={classes.isTrusted}
-                style={transportationOffer.isPremium ? { color: "#fed133", border: "solid 1px #fcff6c" } : {}}
+                className={
+                  classNames.default(
+                    classes.isTrusted,
+                    transportationOffer.isPremium && classes.premiumCheckSign
+                  )}
               />
-            ) : (
-              <div />
-            )}
+            }
           </Box>
         </Box>
         <Box className={classes.cargoInfo}>

@@ -4,9 +4,7 @@ import useStyles from "./indexStyles"
 import { Typography } from "@material-ui/core"
 import { DashboardContext } from "service/context/dashboardContext"
 
-interface IDashBoardProps {}
-
-const AdditionalDetails = (props: IDashBoardProps) => {
+const AdditionalDetails = () => {
   const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
   return (

@@ -12,17 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "row",
   },
-  contentHeader: {
-    fontFamily: "Lato",
-    fontSize: "11px",
-    fontWeight: "normal",
-    fontStretch: "normal",
-    fontStyle: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    color: "#afafaf",
-    marginBottom: "3px",
-  },
   title: {
     display: "flex",
     flexDirection: "column",
