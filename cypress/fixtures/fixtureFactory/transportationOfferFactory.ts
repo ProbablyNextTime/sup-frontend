@@ -1,7 +1,7 @@
 import faker from "faker/locale/en_US"
 import { FixtureFactory } from "./FixtureFactory"
-import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "model/transportationOffer"
-import { transportationProvider } from "model/transportationProvider"
+import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "../../../src/model/transportationOffer"
+import { transportationProvider } from "../../../src/model/transportationProvider"
 
 export class TransportationOfferFactory extends FixtureFactory {
   public generateEntry({

@@ -11,7 +11,7 @@ describe("test dashboard", () => {
     cy.visit("/dashboard")
   })
 
-  it("test infinity scroll", () => {
+  it.only("test infinity scroll", () => {
     cy.wait("@getOffers")
     let numberOfChildren = 10
 
