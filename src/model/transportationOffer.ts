@@ -16,6 +16,8 @@ export enum PaymentStatus {
 }
 
 export default interface ITransportationOffer {
+  /* Transportation Providers can publish transportaion offers which can be acquired by users.
+   */
   id: ExtId
   createdAt: string
   status: TransportationOfferStatus
