@@ -1,6 +1,6 @@
 import React, { useReducer } from "react"
 import ITransportationOffer, { TransportationOfferStatus, PaymentStatus } from "model/transportationOffer"
-import { transportationProvider } from "../../model/transportationProvider"
+import { ITransportationProvider } from "../../model/transportationProvider"
 
 /* Context that stores the globally present state of the dashboard.
  *
@@ -48,7 +48,7 @@ const initialOffer: ITransportationOffer = {
     additional_details: ["asdasdasdas", "sdasdasdasdasd", "sdadasdasdasdasd"],
     id: "null",
     name: "name",
-  } as transportationProvider,
+  } as ITransportationProvider,
   transportationTags: [],
 }
 

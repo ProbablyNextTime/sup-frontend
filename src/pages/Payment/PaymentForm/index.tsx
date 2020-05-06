@@ -26,36 +26,27 @@ interface IPaymentFormValues {
 }
 
 function SubmitButton({ isLoading }: SubmitButtonProps) {
-  const dashboardContext: IDashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()
-  if (dashboardContext.transportationOffer.depositValueInUsd > 0) {
-    return (
-      <div className={classes.paymentButtonContainer}>
-        <ButtonWithLoading
-          className={classes.processButton}
-          data-cy={"payment-submit"}
-          type="submit"
-          isLoading={isLoading}
-        >
-          <Lock className={classes.processLockIcon} />
-          <Typography className={classes.processButtonText} component={"p"}>
-            Proceed
-          </Typography>
-        </ButtonWithLoading>
-        <StripeIcon width={100} height={50} />
-      </div>
-    )
-  } else {
-    return (
-      <ButtonWithLoading data-cy={"submit"} type="submit" isLoading={isLoading}>
-        Proceed
+  return (
+    <div className={classes.paymentButtonContainer}>
+      <ButtonWithLoading
+        className={classes.processButton}
+        data-cy={"payment-submit"}
+        type="submit"
+        isLoading={isLoading}
+      >
+        <Lock className={classes.processLockIcon} />
+        <Typography className={classes.processButtonText} component={"p"}>
+          Proceed
+        </Typography>
       </ButtonWithLoading>
-    )
-  }
+      <StripeIcon width={100} height={50} />
+    </div>
+  )
 }
 
 const PaymentForm = () => {
-  /* Form that allows users to purchase transportations offers.
+  /* Form that allows users to purchase transportation offers.
    *
    * The non-discount price is: orderedUnits * pricePerUnit
    * The deposit value is: price * (100 - voucher discount percent)/100

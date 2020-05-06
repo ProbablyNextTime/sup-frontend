@@ -1,3 +1,3 @@
-export type cargo = {
+export interface ICargo {
   id: ExtId
 }

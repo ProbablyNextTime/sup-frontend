@@ -1,18 +1,18 @@
 import { TransportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
 import ITransportationOffer from "../../src/model/transportationOffer"
-const NFactory: TransportationOfferFactory = new TransportationOfferFactory()
-const getNoticesResponse: ITransportationOffer[] = NFactory.generateGetNoticesResponse()
-const getSearchedOffers: ITransportationOffer[] = NFactory.generateEntries(4)
+const transportationOfferFactory: TransportationOfferFactory = new TransportationOfferFactory()
+const getTransportationNoticesResponse: ITransportationOffer[] = transportationOfferFactory.generateGetNoticesResponse()
+const getSearchedOffers: ITransportationOffer[] = transportationOfferFactory.generateEntries(4)
 
 describe("test dashboard", () => {
   beforeEach(() => {
     cy.server()
-    cy.route("GET", `**/api/transportation_offer?query=&*`, getNoticesResponse).as("getOffers")
+    cy.route("GET", `**/api/transportation_offer?query=&*`, getTransportationNoticesResponse).as("getOffers")
     cy.visit("/dashboard")
+    cy.wait("@getOffers")
   })
 
-  it.only("test infinity scroll", () => {
-    cy.wait("@getOffers")
+  it("test infinity scroll", () => {
     let numberOfChildren = 10
 
     for (let i = 0; i < 4; i++) {
@@ -29,7 +29,6 @@ describe("test dashboard", () => {
   })
 
   it("test search", () => {
-    cy.wait("@getOffers")
     cy.route("GET", `**/api/transportation_offer**`, getSearchedOffers).as("getOffers")
     cy.dataCy("searchField").type("alg")
     cy.wait("@getOffers")
@@ -41,18 +40,17 @@ describe("test dashboard", () => {
   })
 
   it("test offer selection", () => {
-    cy.wait("@getOffers")
-
     cy.dataCy("offers")
       .children()
       .then((children) => {
-        for (let i = 0; i < getNoticesResponse.length; i++) {
+        for (let i = 0; i < getTransportationNoticesResponse.length; i++) {
           cy.wrap(children[i]).click()
-          cy.dataCy("selectedOfferTransferNumber").should("contain", getNoticesResponse[i].transferNumber)
-          cy.dataCy("carrierName").should("contain", getNoticesResponse[i].transportationProvider.name)
-          for (const selectedOfferDetail of getNoticesResponse[i].transportationProvider.additional_details)
+          cy.dataCy("selectedOfferTransferNumber").should("contain", getTransportationNoticesResponse[i].transferNumber)
+          cy.dataCy("carrierName").should("contain", getTransportationNoticesResponse[i].transportationProvider.name)
+          for (const selectedOfferDetail of getTransportationNoticesResponse[i].transportationProvider
+            .additional_details)
             cy.dataCy("additionalDetails").should("contain", selectedOfferDetail)
-          cy.dataCy("destination").should("contain", getNoticesResponse[i].destinationPoint)
+          cy.dataCy("destination").should("contain", getTransportationNoticesResponse[i].destinationPoint)
         }
       })
   })

@@ -6,12 +6,13 @@ import Check from "@material-ui/icons/Check"
 import IconButton from "@material-ui/core/IconButton"
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons"
 import { DashboardContext } from "service/context/dashboardContext"
-import { transportationOfferTag } from "../../../../model/transportationOfferTag"
+import { ITransportationOfferTag } from "model/transportationOfferTag"
 
 const AdditionalInfo = () => {
   const dashboardContext = React.useContext(DashboardContext)
   const isTrusted = true
   const transferPeople = false
+  const defaultNumberOfTagsToDisplay = 5
   const [displayAll, setDisplayAll] = React.useState(false)
   const [numberOfTagsToDisplay, setNumberOfTagsToDisplay] = React.useState(5)
   const classes = useStyles()
@@ -19,7 +20,7 @@ const AdditionalInfo = () => {
   function handleDisplayMoreClick() {
     setDisplayAll(!displayAll)
     displayAll
-      ? setNumberOfTagsToDisplay(5)
+      ? setNumberOfTagsToDisplay(defaultNumberOfTagsToDisplay)
       : setNumberOfTagsToDisplay(dashboardContext.transportationOffer.transportationTags.length)
   }
 
@@ -45,11 +46,11 @@ const AdditionalInfo = () => {
       <Box className={classes.tags}>
         {dashboardContext.transportationOffer.transportationTags
           .slice(0, numberOfTagsToDisplay)
-          .map((tag: transportationOfferTag) => {
+          .map((tag: ITransportationOfferTag) => {
             return <Box className={classes.tag}>{tag.name}</Box>
           })}
       </Box>
-      {dashboardContext.transportationOffer.transportationTags.length >= 5 ? (
+      {dashboardContext.transportationOffer.transportationTags.length >= defaultNumberOfTagsToDisplay ? (
         <IconButton className={classes.displayAllWrapper} onClick={handleDisplayMoreClick}>
           {displayAll ? (
             <KeyboardArrowUp className={classes.controlArrow} />

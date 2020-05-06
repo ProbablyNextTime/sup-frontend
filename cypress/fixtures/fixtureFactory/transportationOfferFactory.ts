@@ -1,7 +1,7 @@
 import faker from "faker/locale/en_US"
 import { FixtureFactory } from "./FixtureFactory"
 import transportationOffer, { PaymentStatus, TransportationOfferStatus } from "../../../src/model/transportationOffer"
-import { transportationProvider } from "../../../src/model/transportationProvider"
+import { ITransportationProvider } from "../../../src/model/transportationProvider"
 
 export class TransportationOfferFactory extends FixtureFactory {
   public generateEntry({
@@ -52,7 +52,7 @@ export class TransportationOfferFactory extends FixtureFactory {
           additional_details: ["asdasdasdas", "sdasdasdasdasd", "sdadasdasdasdasd"],
           id: "null",
           name: "name",
-        } as transportationProvider),
+        } as ITransportationProvider),
       transportationTags: transportationTags || [],
     }
   }

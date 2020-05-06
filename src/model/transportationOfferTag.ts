@@ -1,4 +1,4 @@
-export type transportationOfferTag = {
+export interface ITransportationOfferTag {
   id: ExtId
   name: string
 }

@@ -1,6 +1,8 @@
-export type transportationProvider = {
+import { IReview } from "./IReview"
+
+export interface ITransportationProvider {
   additional_details: string[]
-  id: string
+  id: ExtId
   name: string
-  reviewsReceived: object[]
+  reviewsReceived: IReview[]
 }

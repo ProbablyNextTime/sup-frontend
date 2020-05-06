@@ -32,9 +32,11 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
 
   // Ask about type assertion
   async function onScrollHandler() {
-    const noticesContainer = document.getElementById("transportationOffers-container")
+    const noticesContainer: null | HTMLElement = document.getElementById("transportationOffers-container")
     if (noticesContainer) {
-      if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
+      const onScrollHeight: number =
+        noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight
+      if (onScrollHeight < 1) {
         setPage(page + 1)
         setScrolledBottom(true)
       }

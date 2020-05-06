@@ -1,6 +1,6 @@
-import { transportationProvider } from "./transportationProvider"
-import { transportationOfferTag } from "./transportationOfferTag"
-import { cargo } from "./cargo"
+import { ITransportationProvider } from "./transportationProvider"
+import { ITransportationOfferTag } from "./transportationOfferTag"
+import { ICargo } from "./cargo"
 
 export enum TransportationOfferStatus {
   opened = "opened",
@@ -28,7 +28,7 @@ export default interface ITransportationOffer {
   additionalInfo: string
   departureDate: string
   arrivalDate: string
-  cargo: cargo
+  cargo: ICargo
   deliveryPlace: string
   departurePoint: string
   destinationPoint: string
@@ -36,8 +36,8 @@ export default interface ITransportationOffer {
   pricePerValueInUsd: number
   transferNumber: string
   isPremium: boolean
-  transportationProvider: transportationProvider
-  transportationTags: Array<transportationOfferTag>
+  transportationProvider: ITransportationProvider
+  transportationTags: ITransportationOfferTag[]
 }
 
 export type NewTransportationOffer = Pick<

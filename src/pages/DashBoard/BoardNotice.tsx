@@ -8,7 +8,7 @@ import ITransportationOffer from "model/transportationOffer"
 import Check from "@material-ui/icons/Check"
 import { DashboardContext } from "service/context/dashboardContext"
 import * as classNames from "classnames"
-import { transportationOfferTag } from "../../model/transportationOfferTag"
+import { ITransportationOfferTag } from "model/transportationOfferTag"
 
 interface IBoardNoticeProps {
   transportationOffer: ITransportationOffer
@@ -41,7 +41,7 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
             <Typography className={classes.transferNumber}>{transportationOffer.transferNumber}</Typography>
           </Box>
           <Box className={classes.tags}>
-            {transportationOffer.transportationTags.map((tag: transportationOfferTag) => {
+            {transportationOffer.transportationTags.map((tag: ITransportationOfferTag) => {
               return (
                 <Box className={classes.tag} style={{ border: `1px solid #000000`, color: "#000000" }}>
                   {tag.name}
