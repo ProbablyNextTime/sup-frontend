@@ -6,7 +6,7 @@ import Check from "@material-ui/icons/Check"
 import IconButton from "@material-ui/core/IconButton"
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons"
 import { DashboardContext } from "service/context/dashboardContext"
-import { transportationOfferTag } from "../../../../model/transportationOfferTag";
+import { transportationOfferTag } from "../../../../model/transportationOfferTag"
 
 const AdditionalInfo = () => {
   const dashboardContext = React.useContext(DashboardContext)
@@ -18,7 +18,9 @@ const AdditionalInfo = () => {
 
   function handleDisplayMoreClick() {
     setDisplayAll(!displayAll)
-    displayAll ? setNumberOfTagsToDisplay(5) : setNumberOfTagsToDisplay(dashboardContext.transportationOffer.transportationTags.length)
+    displayAll
+      ? setNumberOfTagsToDisplay(5)
+      : setNumberOfTagsToDisplay(dashboardContext.transportationOffer.transportationTags.length)
   }
 
   return (
@@ -41,9 +43,11 @@ const AdditionalInfo = () => {
       </Box>
       <Typography className={classes.contentHeader}>CARGO TYPE</Typography>
       <Box className={classes.tags}>
-        {dashboardContext.transportationOffer.transportationTags.slice(0, numberOfTagsToDisplay).map((tag: transportationOfferTag) => {
-          return <Box className={classes.tag}>{tag.name}</Box>
-        })}
+        {dashboardContext.transportationOffer.transportationTags
+          .slice(0, numberOfTagsToDisplay)
+          .map((tag: transportationOfferTag) => {
+            return <Box className={classes.tag}>{tag.name}</Box>
+          })}
       </Box>
       {dashboardContext.transportationOffer.transportationTags.length >= 5 ? (
         <IconButton className={classes.displayAllWrapper} onClick={handleDisplayMoreClick}>

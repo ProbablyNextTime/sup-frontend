@@ -32,9 +32,9 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
 
   // Ask about type assertion
   async function onScrollHandler() {
-    const noticesContainer = document.getElementById("transportationOffers-container");
-    if(noticesContainer) {
-      if(noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
+    const noticesContainer = document.getElementById("transportationOffers-container")
+    if (noticesContainer) {
+      if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
         setPage(page + 1)
         setScrolledBottom(true)
       }
@@ -43,7 +43,12 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
 
   const classes = useStyles()
   return (
-    <Box id={"transportationOffers-container"} data-cy={"offers"} onScroll={onScrollHandler} className={classes.dashboard}>
+    <Box
+      id={"transportationOffers-container"}
+      data-cy={"offers"}
+      onScroll={onScrollHandler}
+      className={classes.dashboard}
+    >
       {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
         return <BoardNotice transportationOffer={transportationOffer} key={index} />
       })}

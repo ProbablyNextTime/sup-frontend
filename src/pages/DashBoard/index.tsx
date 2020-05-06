@@ -7,8 +7,6 @@ import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
 import ITransportationOffer from "model/transportationOffer"
 
-
-
 const DashBoard = () => {
   const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
   const classes = useStyles()

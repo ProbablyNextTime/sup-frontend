@@ -1,6 +1,6 @@
 import { transportationProvider } from "./transportationProvider"
-import { transportationOfferTag } from "./transportationOfferTag";
-import { cargo } from "./cargo";
+import { transportationOfferTag } from "./transportationOfferTag"
+import { cargo } from "./cargo"
 
 export enum TransportationOfferStatus {
   opened = "opened",

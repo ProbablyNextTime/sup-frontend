@@ -6,7 +6,6 @@ import { ShoppingCart } from "@material-ui/icons"
 import PaymentForm from "../../../Payment/PaymentForm"
 import { DashboardContext } from "service/context/dashboardContext"
 
-
 const OrderSummary = () => {
   const dashboardContext = React.useContext(DashboardContext)
   const classes = useStyles()

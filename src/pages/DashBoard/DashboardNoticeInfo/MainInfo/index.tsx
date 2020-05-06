@@ -15,9 +15,9 @@ const MainInfo = () => {
       <Box className={classes.title}>
         <Typography variant={"subtitle1"}>TRANSFER NUMBER</Typography>
         <Box className={classes.transferNumber}>
-          {dashboardContext.transportationOffer.isPremium &&
+          {dashboardContext.transportationOffer.isPremium && (
             <Star className={classes.premiumStar} fontSize={"small"} />
-          }
+          )}
           <Typography
             data-cy={"selectedOfferTransferNumber"}
             className={classes.transferNumberText}
@@ -30,13 +30,9 @@ const MainInfo = () => {
       <Box className={classes.mainContent}>
         <Box className={classes.departureInfo}>
           <Typography variant={"subtitle1"}>PICK UP</Typography>
-          <Typography className={classes.contentText}>
-            {dashboardContext.transportationOffer.departurePoint}
-          </Typography>
+          <Typography className={classes.contentText}>{dashboardContext.transportationOffer.departurePoint}</Typography>
           <Typography variant={"subtitle1"}>AT</Typography>
-          <Typography className={classes.placeText}>
-            {dashboardContext.transportationOffer.pickupPlace}
-          </Typography>
+          <Typography className={classes.placeText}>{dashboardContext.transportationOffer.pickupPlace}</Typography>
           <Typography className={classes.date}>{dashboardContext.transportationOffer.departureDate}</Typography>
         </Box>
         <Box className={classes.deliveryInfo}>

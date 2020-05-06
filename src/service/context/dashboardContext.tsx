@@ -27,7 +27,7 @@ const initialOffer: ITransportationOffer = {
   departureDate: "default",
   arrivalDate: "default",
   cargo: {
-    id: "ExtId"
+    id: "ExtId",
   },
   deliveryPlace: "default",
   departurePoint: "default",

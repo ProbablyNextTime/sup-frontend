@@ -8,7 +8,7 @@ import ITransportationOffer from "model/transportationOffer"
 import Check from "@material-ui/icons/Check"
 import { DashboardContext } from "service/context/dashboardContext"
 import * as classNames from "classnames"
-import {transportationOfferTag} from "../../model/transportationOfferTag";
+import { transportationOfferTag } from "../../model/transportationOfferTag"
 
 interface IBoardNoticeProps {
   transportationOffer: ITransportationOffer
@@ -23,11 +23,10 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
   return (
     <Card
       elevation={0}
-      className={
-        classNames.default(
-          classes.boardNoticeWrapper,
-          transportationOffer.isPremium && classes.premiumBackground
-        )}
+      className={classNames.default(
+        classes.boardNoticeWrapper,
+        transportationOffer.isPremium && classes.premiumBackground
+      )}
       onClick={() => dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })}
     >
       <Box className={classes.cardContent}>
@@ -36,11 +35,7 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
             <Box className={classes.route}>
               {transportationOffer.isPremium && <Star className={classes.premiumStar} fontSize={"small"} />}
               <Typography
-                className={
-                  classNames.default(
-                    classes.routeText,
-                    transportationOffer.isPremium && classes.premiumFont
-                  )}
+                className={classNames.default(classes.routeText, transportationOffer.isPremium && classes.premiumFont)}
               >{`${transportationOffer.departurePoint} - ${transportationOffer.destinationPoint}`}</Typography>
             </Box>
             <Typography className={classes.transferNumber}>{transportationOffer.transferNumber}</Typography>
@@ -63,8 +58,8 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
       <Box className={classes.cardContent}>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
-          <Typography className={
-            classNames.default(
+          <Typography
+            className={classNames.default(
               classes.cardBottomContent,
               transportationOffer.isPremium && classes.premiumFont
             )}
@@ -75,8 +70,8 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
         </Box>
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
-          <Typography className={
-            classNames.default(
+          <Typography
+            className={classNames.default(
               classes.cardBottomContent,
               transportationOffer.isPremium && classes.premiumFont
             )}
@@ -88,23 +83,22 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
         <Box className={classes.carrier}>
           <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
           <Box className={classes.carrierInfo}>
-            <Typography className={
-              classNames.default(
+            <Typography
+              className={classNames.default(
                 classes.cardBottomContent,
                 transportationOffer.isPremium && classes.premiumFont
               )}
             >
               {transportationOffer.transportationProvider.name}
             </Typography>
-            {isTrusted &&
+            {isTrusted && (
               <Check
-                className={
-                  classNames.default(
-                    classes.isTrusted,
-                    transportationOffer.isPremium && classes.premiumCheckSign
-                  )}
+                className={classNames.default(
+                  classes.isTrusted,
+                  transportationOffer.isPremium && classes.premiumCheckSign
+                )}
               />
-            }
+            )}
           </Box>
         </Box>
         <Box className={classes.cargoInfo}>

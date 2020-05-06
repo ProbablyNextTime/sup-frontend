@@ -1,4 +1,4 @@
 export type transportationOfferTag = {
-  id: ExtId,
-  name: string,
+  id: ExtId
+  name: string
 }
