@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
+    "@date-io/moment": "^1.3.13",
     "@jetkit/react": "^2.3.0",
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
@@ -11,11 +12,14 @@
     "@material-ui/styles": "latest",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.3.2",
+    "@types/classnames": "^2.2.10",
+    "@types/material-ui": "^0.21.7",
+    "@types/moment": "^2.13.0",
     "@types/react-dom": "^16.9.6",
-    "@types/yup": "^0.26.34",
+    "@types/yup": "^0.26.37",
     "axios": "^0.19.2",
     "camelcase-keys": "^6.2.2",
-    "classnames": "latest",
+    "classnames": "^2.2.6",
     "clsx": "^1.1.0",
     "date-fns": "^2.11.1",
     "formik": "^2.1.4",
@@ -23,14 +27,17 @@
     "formik-material-ui-pickers": "0.0.8",
     "history": "^4.10.1",
     "material-design-icons": "^3.0.1",
+    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-history": "^0.18.2",
-    "react-router-dom": "latest",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
+    "react-spring": "^8.0.27",
+    "snakecase-keys": "^3.2.0",
     "typescript": "^3.7.5",
     "update": "^0.7.4",
-    "yup": "^0.28.3"
+    "yup": "^0.28.4"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.3",
@@ -63,7 +70,7 @@
     "eslint": "latest",
     "eslint-plugin-react-app": "^6.2.2",
     "faker": "^4.1.0",
-    "husky": "latest",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "lint-staged": "latest",
     "prettier": "^2.0.4",
@@ -79,9 +86,9 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
+    "{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}": [
       "eslint --fix",
+      "prettier --write",
       "git add"
     ]
   },
@@ -93,7 +100,7 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "fix": "prettier --write src/**/*.ts src/**/*.tsx && eslint --fix src/**/*.ts src/**/*.tsx",
+    "fix": "prettier --write '{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}' && eslint --fix src/**/*.ts src/**/*.tsx",
     "cp:open": "cypress open",
     "fmt:check": "prettier --check src/**/*.{js,ts,tsx}",
     "coverage:jest": "jest --coverage",

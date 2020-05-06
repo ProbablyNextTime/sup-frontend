@@ -1,10 +1,14 @@
 import * as React from "react"
-import { AppBar, List, ListItem, ListItemText } from "@material-ui/core"
+import { AppBar, List, ListItem } from "@material-ui/core"
 import useStyles from "./Styles/navStyles"
 import Typography from "@material-ui/core/Typography"
 import Avatar from "@material-ui/core/Avatar"
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import IconButton from "@material-ui/core/IconButton"
+import Box from "@material-ui/core/Box"
+import Button from "@material-ui/core/Button"
+import Language from "@material-ui/icons/Language"
+import Link from "@material-ui/core/Link"
 
 const userEx = {
   name: "flain1",
@@ -12,30 +16,48 @@ const userEx = {
 }
 
 interface INavigationBar {}
+
 const NavigationBar = (props: INavigationBar) => {
   const classes = useStyles()
   return (
     <AppBar className={classes.navigationBar} position="static">
-      <List className={classes.navList} component="nav" aria-label="contacts">
-        <ListItem button className={classes.navItem}>
-          <ListItemText primary="Item1" />
-        </ListItem>
-        <ListItem className={classes.navItem} button>
-          <ListItemText primary="Item2" />
-        </ListItem>
-        <ListItem className={classes.navItem} button>
-          <ListItemText primary="Item3" />
-        </ListItem>
-      </List>
-
-      <p className={classes.sup}>SUP!</p>
-      <div className={classes.profileCard}>
-        <Typography className={classes.userName}>{userEx.name}</Typography>
-        <Avatar alt="user name" src={userEx.avatarSrc} />
-        <IconButton aria-label="Profile dropdown">
-          <KeyboardArrowDownIcon fontSize={"small"} />
-        </IconButton>
-      </div>
+      <Button variant="outlined" className={classes.addTransferButton}>
+        + New Transfer
+      </Button>
+      <Box className={classes.logo}>
+        <Typography className={classes.sup}>SUP!</Typography>
+        <Typography className={classes.catchPhrase}>Transfers made easy!</Typography>
+      </Box>
+      <Box className={classes.rightToolBox}>
+        <List className={classes.toolList} component="ul" aria-label="contacts">
+          <ListItem className={classes.toolListItem}>
+            <Link component="button" variant="body2" underline={"none"} className={classes.helpLink}>
+              USD
+            </Link>
+            <IconButton className={classes.downArrowToolBar}>
+              <KeyboardArrowDownIcon />
+            </IconButton>
+          </ListItem>
+          <ListItem className={classes.toolListItem}>
+            <Language></Language>
+            <IconButton className={classes.downArrowToolBar}>
+              <KeyboardArrowDownIcon />
+            </IconButton>
+          </ListItem>
+          <ListItem className={classes.toolListItem}>
+            <Link component="button" variant="body2" underline={"none"} className={classes.helpLink}>
+              Help
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Typography className={classes.userName}>{userEx.name}</Typography>
+            <Avatar alt="user name" />
+            <IconButton aria-label="Profile dropdown" className={classes.downArrowToolBar}>
+              <KeyboardArrowDownIcon />
+            </IconButton>
+          </ListItem>
+        </List>
+      </Box>
     </AppBar>
   )
 }

@@ -15,10 +15,10 @@ interface IPaymentProps {
 export const usePayment = (billType: BillType, id: ExtId) => {
   const [sessionId, setSessionId] = React.useState<string>()
   const stripe = useStripe()
-  const initiate = React.useCallback(async () => {
+  const initiate = useAPICallback(async () => {
     switch (billType) {
       case BillType.transportation_offer:
-        if (!id) throw new Error("Missing vacancy ID")
+        if (!id) throw new Error("Missing transportation offer ID")
 
         const res = await initiateTransportationOfferCheckout(id)
         setSessionId(res.session_id)

@@ -2,65 +2,117 @@ import * as React from "react"
 import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import Card from "@material-ui/core/Card"
-import CardMedia from "@material-ui/core/CardMedia"
-import CardContent from "@material-ui/core/CardContent"
-import CardActions from "@material-ui/core/CardActions"
-import IconButton from "@material-ui/core/IconButton"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
-import { ArrowRightIcon } from "@material-ui/pickers/_shared/icons/ArrowRightIcon"
+import ITransportationOffer from "model/transportationOffer"
+import Check from "@material-ui/icons/Check"
+import { DashboardContext } from "service/context/dashboardContext"
+import * as classNames from "classnames"
+import { ITransportationOfferTag } from "model/transportationOfferTag"
 
 interface IBoardNoticeProps {
-  data: any
+  transportationOffer: ITransportationOffer
 }
 
-function getTags(tags: Array<string>) {
-  let res = ""
-  let index = 0
-  for (index; index < tags.length - 1; index++) {
-    res += `${tags[index]} - `
-  }
-  return (res += tags[index])
-}
-
-const BoardNotice = (props: IBoardNoticeProps) => {
-  console.log(props)
+const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
+  const dashboardContext = React.useContext(DashboardContext)
+  const peopleTransfer = true
+  const isTrusted = true
   const classes = useStyles()
-  const isTransfer = props.data.peopleTransfer ? classes.isTransferPeople : classes.isNotTransferPeople
-  const isTransferText = props.data.peopleTransfer ? "PEOPLE TRANSFER" : "DEAD WEIGHT"
-  const estimatedPrice = props.data.peopleTransfer
-    ? `${props.data.estimatedPrice}$ per one `
-    : `${props.data.estimatedPrice} / 1kg`
 
   return (
-    <Card className={classes.noticeCard}>
-      <CardMedia className={classes.noticeMedia} image={props.data.picUrl} title="..." />
-      <CardContent className={classes.cardBody}>
-        <Box className={classes.generalData}>
-          <Typography className={classes.vehicleType}> {props.data.vehicleType} </Typography>
-          <Typography className={classes.vehicleInfo}>
-            {" "}
-            {props.data.from} — {props.data.to}{" "}
-          </Typography>
-        </Box>
-        <Typography className={classes.noticeProvider}>{`by: ${props.data.noticeProvider}`}</Typography>
-        <hr className={classes.highlightMaxWeight} />
-        <Box className={classes.noticeProvider}> {getTags(props.data.tags)} </Box>
-        <Typography className={isTransfer}>{isTransferText}</Typography>
-        <Box className={classes.rating}>
-          <Box className={classes.starRate}>
-            <Star className={classes.starIcon} />
-            <Typography className={classes.starRating}>{`${props.data.rating} / 5`}</Typography>
+    <Card
+      elevation={0}
+      className={classNames.default(
+        classes.boardNoticeWrapper,
+        transportationOffer.isPremium && classes.premiumBackground
+      )}
+      onClick={() => dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })}
+    >
+      <Box className={classes.cardContent}>
+        <Box className={classes.leftSideContent}>
+          <Box className={classes.mainInfo}>
+            <Box className={classes.route}>
+              {transportationOffer.isPremium && <Star className={classes.premiumStar} fontSize={"small"} />}
+              <Typography
+                className={classNames.default(classes.routeText, transportationOffer.isPremium && classes.premiumFont)}
+              >{`${transportationOffer.departurePoint} - ${transportationOffer.destinationPoint}`}</Typography>
+            </Box>
+            <Typography className={classes.transferNumber}>{transportationOffer.transferNumber}</Typography>
           </Box>
-          <Typography className={classes.reviews}>{`${props.data.numberOfReviews} reviews`}</Typography>
+          <Box className={classes.tags}>
+            {transportationOffer.transportationTags.map((tag: ITransportationOfferTag) => {
+              return (
+                <Box className={classes.tag} style={{ border: `1px solid #000000`, color: "#000000" }}>
+                  {tag.name}
+                </Box>
+              )
+            })}
+          </Box>
         </Box>
-        <Typography className={classes.estimatedPrice}>{estimatedPrice}</Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <ArrowRightIcon />
-        </IconButton>
-      </CardActions>
+        <Typography
+          className={classes.reviews}
+        >{`${transportationOffer.transportationProvider.reviewsReceived.length} reviews`}</Typography>
+      </Box>
+      <Box className={classes.contentDivider} />
+      <Box className={classes.cardContent}>
+        <Box className={classes.pickUpPlace}>
+          <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
+          <Typography
+            className={classNames.default(
+              classes.cardBottomContent,
+              transportationOffer.isPremium && classes.premiumFont
+            )}
+          >
+            {transportationOffer.pickupPlace}
+          </Typography>
+          <Typography className={classes.cardBottomDate}>{transportationOffer.departureDate}</Typography>
+        </Box>
+        <Box className={classes.pickUpPlace}>
+          <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
+          <Typography
+            className={classNames.default(
+              classes.cardBottomContent,
+              transportationOffer.isPremium && classes.premiumFont
+            )}
+          >
+            {transportationOffer.deliveryPlace}
+          </Typography>
+          <Typography className={classes.cardBottomDate}>{transportationOffer.arrivalDate}</Typography>
+        </Box>
+        <Box className={classes.carrier}>
+          <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
+          <Box className={classes.carrierInfo}>
+            <Typography
+              className={classNames.default(
+                classes.cardBottomContent,
+                transportationOffer.isPremium && classes.premiumFont
+              )}
+            >
+              {transportationOffer.transportationProvider.name}
+            </Typography>
+            {isTrusted && (
+              <Check
+                className={classNames.default(
+                  classes.isTrusted,
+                  transportationOffer.isPremium && classes.premiumCheckSign
+                )}
+              />
+            )}
+          </Box>
+        </Box>
+        <Box className={classes.cargoInfo}>
+          <Typography
+            className={classes.isPeopleTransfer}
+            style={peopleTransfer ? { color: "#2dd75c" } : { color: "#ff9595" }}
+          >
+            {peopleTransfer ? "PEOPLE TRANSFER" : "DEAD WEIGHT"}
+          </Typography>
+          <Typography className={classes.pricePerValue}>{`${transportationOffer.pricePerUnitInUsd}$ / ${
+            peopleTransfer ? `person` : `1kg`
+          } `}</Typography>
+        </Box>
+      </Box>
     </Card>
   )
 }
