@@ -1,60 +1,56 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react"
 import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
-import ITransportationOffer from "../../model/transportationOffer"
-import axios from "axios"
-import { useAPICallback } from "../../hooks/useApiCallback"
-import { DashboardContext } from "../../service/context/dashboardContext"
-import transportationOffer from "../../model/transportationOffer"
+import ITransportationOffer from "model/transportationOffer"
+import { DashboardContext } from "service/context/dashboardContext"
+import { getTransportationOffers } from "service/api/transportationOffer"
 
-interface IBoardProps {}
+interface IBoardProps {
+  transportationOffers: ITransportationOffer[]
+  setTransportationOffers: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>
+}
 
-const Board = (props: IBoardProps) => {
+const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const [page, setPage] = React.useState(1)
-  const [notices, setNotices] = React.useState([] as ITransportationOffer[])
   const [scrolledBottom, setScrolledBottom] = React.useState(true)
-  const getNotices = useAPICallback(async (page) => {
-    try {
-      const response = await axios.get("http://localhost:5000/api/transportation_offer?page=1&page_size=10")
-      const newNotices = response.data as Array<ITransportationOffer>
-      setNotices((notices) => [...notices, ...newNotices])
-      return newNotices
-    } catch (err) {
-      console.log(err)
-    }
-  }, [])
 
   React.useEffect(() => {
-    if (scrolledBottom) {
-      getNotices(page)
-        .then((notices) => {
-          if (notices[0] !== undefined) {
-            dashboardContext.handleSettingOffer({ transportationOffer: notices[0] })
-          }
-          setScrolledBottom(false)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    const processedNewOffers = async (): Promise<void> => {
+      await setScrolledBottom(false)
+      const newNotices = await getTransportationOffers(page, 10, dashboardContext.query)
+      if (newNotices[0] && transportationOffers.length === 0)
+        dashboardContext.handleSettingOffer({ transportationOffer: newNotices[0] })
+      await setTransportationOffers((notices) => [...notices, ...newNotices])
     }
-  }, [getNotices, scrolledBottom, page, props, dashboardContext])
 
-  function onScrollHandler() {
-    const noticesContainer = document.getElementById("notices-container") || document.createElement("div")
-    if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
-      setPage(page + 1)
-      setScrolledBottom(true)
+    if (scrolledBottom) {
+      processedNewOffers()
+    }
+  }, [dashboardContext, transportationOffers.length, page, scrolledBottom, setTransportationOffers])
+
+  // Ask about type assertion
+  async function onScrollHandler() {
+    const noticesContainer = document.getElementById("transportationOffers-container")
+    if (noticesContainer) {
+      if (noticesContainer.scrollHeight - noticesContainer.scrollTop - noticesContainer.clientHeight < 1) {
+        setPage(page + 1)
+        setScrolledBottom(true)
+      }
     }
   }
 
   const classes = useStyles()
   return (
-    <Box id={"notices-container"} data-cy={"offers"} onScroll={onScrollHandler} className={classes.dashboard}>
-      {notices.map((x: ITransportationOffer, index) => {
-        return <BoardNotice notice={x} key={index} />
+    <Box
+      id={"transportationOffers-container"}
+      data-cy={"offers"}
+      onScroll={onScrollHandler}
+      className={classes.dashboard}
+    >
+      {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
+        return <BoardNotice transportationOffer={transportationOffer} key={index} />
       })}
     </Box>
   )

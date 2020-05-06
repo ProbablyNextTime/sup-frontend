@@ -27,6 +27,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   premiumStar: {
     color: "#f5f92a",
   },
+  premiumFont: {
+    color: "#fed133",
+  },
+  premiumBackground: {
+    backgroundColor: "#fffff2",
+    border: "solid 1px #fcff6c",
+  },
+  premiumCheckSign: {
+    color: "#fed133",
+    border: "solid 1px #fcff6c",
+  },
   cardContent: {
     margin: 0,
     padding: "6px 0",

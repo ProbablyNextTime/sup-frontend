@@ -1,8 +1,8 @@
-import { NoticeFactory, IGetNoticesResponse } from "../fixtures/fixtureFactory/NoticeFactory"
-import transportationOffer from "../../src/model/transportationOffer"
-const NFactory: NoticeFactory = new NoticeFactory()
-const getNoticesResponse: transportationOffer[] = NFactory.generateGetNoticesResponse()
-const getSearchedOffers: transportationOffer[] = NFactory.generateEntries(4)
+import { transportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
+import ITransportationOffer from "../../src/model/transportationOffer"
+const NFactory: transportationOfferFactory = new transportationOfferFactory()
+const getNoticesResponse: ITransportationOffer[] = NFactory.generateGetNoticesResponse()
+const getSearchedOffers: ITransportationOffer[] = NFactory.generateEntries(4)
 
 describe("test dashboard", () => {
   beforeEach(() => {
@@ -46,12 +46,12 @@ describe("test dashboard", () => {
     cy.dataCy("offers")
       .children()
       .then((children) => {
-        for (let i = 0; i < children.length; i++) {
+        for (let i = 0; i < getNoticesResponse.length; i++) {
           cy.wrap(children[i]).click()
           cy.dataCy("selectedOfferTransferNumber").should("contain", getNoticesResponse[i].transferNumber)
           cy.dataCy("carrierName").should("contain", getNoticesResponse[i].transportationProvider.name)
-          for (const additionalDetail of getNoticesResponse[i].transportationProvider.additional_details)
-            cy.dataCy("additionalDetails").should("contain", additionalDetail)
+          for (const selectedOfferDetail of getNoticesResponse[i].transportationProvider.additional_details)
+            cy.dataCy("additionalDetails").should("contain", selectedOfferDetail)
           cy.dataCy("destination").should("contain", getNoticesResponse[i].destinationPoint)
         }
       })

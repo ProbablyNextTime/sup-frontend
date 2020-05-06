@@ -12,3 +12,12 @@ export const updateTransportationOfferDepositValue = async (
   depositValueInUsd: Pick<ITransportationOffer, "depositValueInUsd">
 ): Promise<ITransportationOffer> =>
   camelCaseKeys((await apiClient.patch(`/transportation_offer/${transportationOfferId}`, depositValueInUsd)).data)
+
+export const getTransportationOffers = async (
+  page: number,
+  limit: number,
+  query: string
+): Promise<ITransportationOffer[]> =>
+  (camelCaseKeys(
+    (await apiClient.get(`/transportation_offer?query=${query}&page=${page}&page_size=${limit}`)).data
+  ) as unknown) as ITransportationOffer[]

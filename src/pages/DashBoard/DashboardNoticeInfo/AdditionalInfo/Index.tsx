@@ -5,26 +5,10 @@ import Typography from "@material-ui/core/Typography"
 import Check from "@material-ui/icons/Check"
 import IconButton from "@material-ui/core/IconButton"
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons"
-import { DashboardContext } from "../../../../service/context/dashboardContext"
+import { DashboardContext } from "service/context/dashboardContext"
+import { transportationOfferTag } from "../../../../model/transportationOfferTag"
 
-interface IDashBoardProps {}
-
-const tags = [
-  "premium",
-  "truck",
-  "cargo",
-  "up to 200kg",
-  "glass",
-  "fast delivery",
-  "premium",
-  "Fuck you",
-  "Suck",
-  "Dyrka",
-  "ebat",
-  "fast sex",
-]
-
-const AdditionalInfo = (props: IDashBoardProps) => {
+const AdditionalInfo = () => {
   const dashboardContext = React.useContext(DashboardContext)
   const isTrusted = true
   const transferPeople = false
@@ -34,7 +18,9 @@ const AdditionalInfo = (props: IDashBoardProps) => {
 
   function handleDisplayMoreClick() {
     setDisplayAll(!displayAll)
-    displayAll ? setNumberOfTagsToDisplay(5) : setNumberOfTagsToDisplay(tags.length)
+    displayAll
+      ? setNumberOfTagsToDisplay(5)
+      : setNumberOfTagsToDisplay(dashboardContext.transportationOffer.transportationTags.length)
   }
 
   return (
@@ -57,11 +43,13 @@ const AdditionalInfo = (props: IDashBoardProps) => {
       </Box>
       <Typography className={classes.contentHeader}>CARGO TYPE</Typography>
       <Box className={classes.tags}>
-        {tags.slice(0, numberOfTagsToDisplay).map((tag) => {
-          return <Box className={classes.tag}>{tag}</Box>
-        })}
+        {dashboardContext.transportationOffer.transportationTags
+          .slice(0, numberOfTagsToDisplay)
+          .map((tag: transportationOfferTag) => {
+            return <Box className={classes.tag}>{tag.name}</Box>
+          })}
       </Box>
-      {tags.length >= 5 ? (
+      {dashboardContext.transportationOffer.transportationTags.length >= 5 ? (
         <IconButton className={classes.displayAllWrapper} onClick={handleDisplayMoreClick}>
           {displayAll ? (
             <KeyboardArrowUp className={classes.controlArrow} />

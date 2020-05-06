@@ -1,6 +1,6 @@
-import { transportation_provider } from "./transportation_provider"
-
-export type TransportationOfferStatusTypedString = "opened" | "completed" | "canceled"
+import { transportationProvider } from "./transportationProvider"
+import { transportationOfferTag } from "./transportationOfferTag"
+import { cargo } from "./cargo"
 
 export enum TransportationOfferStatus {
   opened = "opened",
@@ -26,7 +26,7 @@ export default interface ITransportationOffer {
   additionalInfo: string
   departureDate: string
   arrivalDate: string
-  cargo: object
+  cargo: cargo
   deliveryPlace: string
   departurePoint: string
   destinationPoint: string
@@ -34,11 +34,11 @@ export default interface ITransportationOffer {
   pricePerValueInUsd: number
   transferNumber: string
   isPremium: boolean
-  transportationProvider: transportation_provider
-  transportationTags: Array<object>
+  transportationProvider: transportationProvider
+  transportationTags: Array<transportationOfferTag>
 }
 
 export type NewTransportationOffer = Pick<
-ITransportationOffer,
-"transportationProvider" | "title" | "depositValueInUsd"
+  ITransportationOffer,
+  "transportationProvider" | "title" | "depositValueInUsd"
 >
