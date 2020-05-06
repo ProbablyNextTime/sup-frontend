@@ -86,7 +86,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "prettier --write",
+      "prettier --write '{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}'",
       "eslint --fix",
       "git add"
     ]
