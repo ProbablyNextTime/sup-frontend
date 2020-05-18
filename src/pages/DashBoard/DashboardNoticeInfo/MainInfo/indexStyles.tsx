@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   premiumStar: {
     color: "#f5f92a",
   },
+  premiumFont: {
+    color: "#fed133",
+  },
   transferNumberText: {
     marginTop: "4px",
     fontFamily: "Lato",
