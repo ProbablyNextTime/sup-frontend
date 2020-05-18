@@ -1,5 +1,5 @@
 import * as Yup from "yup"
-import { NewTransportationOffer } from "model/transportation_offer"
+import { NewTransportationOffer } from "model/transportationOffer"
 
 Yup.setLocale({
   mixed: {
@@ -11,14 +11,14 @@ Yup.setLocale({
   },
 })
 
-export const validationSchema = Yup.object().shape<NewTransportationOffer>({
-  transportationProvider: Yup.string().required(),
-  title: Yup.string().required(),
-  depositValueInUsd: Yup.number().required().integer(),
-})
-
-export const emptyVacancy: Record<keyof NewTransportationOffer, string> = {
-  transportationProvider: "",
-  title: "",
-  depositValueInUsd: "",
-}
+// export const validationSchema = Yup.object().shape<NewTransportationOffer>({
+//   transportationProvider: Yup.string().required(),
+//   title: Yup.string().required(),
+//   depositValueInUsd: Yup.number().required().integer(),
+// })
+//
+// export const emptyVacancy: Record<keyof NewTransportationOffer, string> = {
+//   transportationProvider: "",
+//   title: "",
+//   depositValueInUsd: "",
+// }

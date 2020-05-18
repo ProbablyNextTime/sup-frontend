@@ -1,2 +1,3 @@
-export const isNegativeNumber = (event: KeyboardEvent): boolean | void =>
-  /[+\-.,]$/.test(event.key) && event.preventDefault()
+export const isPositiveInteger = (event: KeyboardEvent): boolean | void => {
+  if (!/[0-9]/.test(event.key) && !(event.key === "Backspace")) event.preventDefault()
+}
