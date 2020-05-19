@@ -3,7 +3,7 @@ import Home from "."
 import themeDecorator from "../../theme/StorybookThemeDecorator"
 
 export default {
-  title: "Pages/Home",
+  title: "Pages/SignIn",
   component: Home,
   parameters: {
     componentSubtitle: "Screen a user first sees when they load the app.",

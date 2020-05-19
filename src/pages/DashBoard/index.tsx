@@ -1,7 +1,6 @@
 import * as React from "react"
 import Box from "@material-ui/core/Box"
 import useStyles from "./Styles/indexStyles"
-import NavigationBar from "./navbar"
 import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
@@ -13,7 +12,6 @@ const DashBoard = () => {
 
   return (
     <Box className={classes.globalWrapper}>
-      <NavigationBar />
       <Box className={classes.wrapper}>
         <Search setTransportationOffers={setTransportationOffers} />
         <Box className={classes.content}>

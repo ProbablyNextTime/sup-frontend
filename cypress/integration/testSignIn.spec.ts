@@ -45,6 +45,7 @@ describe("Test Sign In", () => {
         expect(localStorage.getItem("auth-tokens-development")).to.not.exist
       })
     cy.wait("@loginUnauthorized")
+    cy.dataCy("failed-auth").should("contain", "Invalid email or password")
     cy.url().should("eq", Cypress.config().baseUrl)
   })
 
