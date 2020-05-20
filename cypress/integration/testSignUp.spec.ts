@@ -1,5 +1,8 @@
 import { UserFactory } from "../fixtures/fixtureFactory/UserFactory"
-import { IUser } from "model/user"
+import { TransportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
+import ITransportationOffer from "../../src/model/transportationOffer"
+const transportationOfferFactory: TransportationOfferFactory = new TransportationOfferFactory()
+const getTransportationNoticesResponse: ITransportationOffer[] = transportationOfferFactory.generateGetNoticesResponse()
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 const testEmail: string = Cypress.env("testEmail")
@@ -9,6 +12,7 @@ const signUpResponse = UFactory.generateSignUpResponse(testEmail, testPassword)
 describe("Test Sign Up", () => {
   beforeEach(() => {
     cy.server()
+    cy.route("GET", `**/api/transportation_offer?query=&*`, getTransportationNoticesResponse).as("getOffers")
     cy.visit("/")
   })
 
