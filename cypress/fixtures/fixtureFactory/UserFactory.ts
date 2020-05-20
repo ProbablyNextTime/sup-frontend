@@ -8,7 +8,10 @@ interface IUserLoginResponse {
   user: IUser
 }
 
-interface IUserSignUpResponse {}
+interface IUserSignUpResponse {
+  email: string
+  password: string
+}
 
 export class UserFactory extends FixtureFactory {
   public generateEntry({ id, email, fullName }: Partial<IUser> = {}): IUser {

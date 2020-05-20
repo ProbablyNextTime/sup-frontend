@@ -7,7 +7,7 @@ import * as Yup from "yup"
 import useStyles from "./styles"
 import { useHistory } from "react-router-dom"
 import { useAPICallback } from "hooks/useApiCallback"
-import { authService } from "@jetkit/react"
+import { authService, IAuthResponse } from "@jetkit/react"
 
 interface ICredentials {
   email: string
@@ -32,15 +32,23 @@ interface ISignUpFormProps {
 export default function SignUpForm({ setIsSignIn }: ISignUpFormProps) {
   const history = useHistory()
   const [isAuthFailed, setIsAuthFailed] = React.useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = React.useState<string>("")
 
   const handleSubmit = useAPICallback(
     async (values: ICredentials, actions: any) => {
       await authService.signUp(values.email, values.password)
+      await authService.login<IAuthResponse>(values.email, values.password)
       actions.setSubmitting(false)
-      setIsSignIn(true)
+      history.push("/dashboard")
     },
     [history],
-    { onError: () => setIsAuthFailed(true) }
+    {
+      onError: (error: Error) => {
+        if (error.message === "Request failed with status code 400") setErrorMessage("Such user exists")
+        else setErrorMessage("Unknown server error")
+        setIsAuthFailed(true)
+      },
+    }
   )
 
   const classes = useStyles()
@@ -83,7 +91,7 @@ export default function SignUpForm({ setIsSignIn }: ISignUpFormProps) {
             {isSubmitting && <LinearProgress />}
             {isAuthFailed && (
               <Box data-cy={"failed-signUp"} className={classes.errorMessage}>
-                Such user exists
+                {errorMessage}
               </Box>
             )}
             <Box className={classes.formControls}>

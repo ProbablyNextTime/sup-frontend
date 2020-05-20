@@ -27,7 +27,7 @@ export function useAPICallback<T extends (...args: any[]) => any>(
       return await cb(...args)
     } catch (err) {
       handleError(err)
-      onError && onError()
+      onError && onError(err)
 
       if (rethrowError) throw err
     }

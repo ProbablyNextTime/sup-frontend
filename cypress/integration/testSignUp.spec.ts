@@ -21,15 +21,15 @@ describe("Test Sign Up", () => {
     cy.dataCy("confirm-password-signUp-field").type(testPassword)
     cy.dataCy("signUp-button").click()
     cy.wait("@signUpSuccess")
-    cy.dataCy("login-button").should("exist")
+    cy.url().should("include", "/dashboard")
   })
 
-  it("Test failed sign up", () => {
+  it("Test failed sign up, user already exists", () => {
     cy.route({
       method: "POST",
       url: `**/api/auth/sign-up`,
       response: {},
-      status: 401,
+      status: 400,
     }).as("signUpFailure")
     cy.dataCy("switch-to-signUp").click()
     cy.dataCy("email-signUp-field").type(testEmail)

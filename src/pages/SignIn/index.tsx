@@ -1,5 +1,5 @@
 import * as React from "react"
-import Index from "./SignInForm"
+import SignInForm from "./SignInForm"
 import useStyles from "./styles"
 import { Box, Typography } from "@material-ui/core"
 import SignUpForm from "./SignUpForm"
@@ -16,7 +16,7 @@ const SignIn = (props: IHomeProps) => {
           <Typography className={classes.catchPhrase}>
             Welcome! Join thousands of users shipping their goods with us.
           </Typography>
-          {isSignIn ? <Index setIsSignIn={setIsSignIn} /> : <SignUpForm setIsSignIn={setIsSignIn} />}
+          {isSignIn ? <SignInForm setIsSignIn={setIsSignIn} /> : <SignUpForm setIsSignIn={setIsSignIn} />}
         </Box>
         <Box className={classes.flainImage} />
       </Box>

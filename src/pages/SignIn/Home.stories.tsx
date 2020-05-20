@@ -1,6 +1,6 @@
 import React from "react"
 import Home from "."
-import themeDecorator from "../../theme/StorybookThemeDecorator"
+import themeDecorator from "theme/StorybookThemeDecorator"
 
 export default {
   title: "Pages/SignIn",
