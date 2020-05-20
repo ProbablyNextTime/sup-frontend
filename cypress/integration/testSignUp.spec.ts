@@ -25,6 +25,7 @@ describe("Test Sign Up", () => {
     cy.dataCy("confirm-password-signUp-field").type(testPassword)
     cy.dataCy("signUp-button").click()
     cy.wait("@signUpSuccess")
+    cy.wait("@getOffers")
     cy.url().should("include", "/dashboard")
   })
 
