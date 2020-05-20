@@ -7,7 +7,7 @@ import * as Yup from "yup"
 import useStyles from "./styles"
 import { useHistory } from "react-router-dom"
 import { useAPICallback } from "hooks/useApiCallback"
-import { authService, IAuthResponse } from "@jetkit/react"
+import { authService } from "@jetkit/react"
 
 interface ICredentials {
   email: string
@@ -35,8 +35,7 @@ export default function SignUpForm({ setIsSignIn }: ISignUpFormProps) {
 
   const handleSubmit = useAPICallback(
     async (values: ICredentials, actions: any) => {
-      const user = await authService.signUp(values.email, values.password)
-      console.log(user)
+      await authService.signUp(values.email, values.password)
       actions.setSubmitting(false)
       setIsSignIn(true)
     },

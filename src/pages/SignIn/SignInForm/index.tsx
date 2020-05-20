@@ -32,7 +32,7 @@ export default function SignInForm({ setIsSignIn }: ISignInFormProps) {
 
   const handleSubmit = useAPICallback(
     async (values: ICredentials, actions: any) => {
-      const user = await authService.login<IAuthResponse>(values.email, values.password)
+      await authService.login<IAuthResponse>(values.email, values.password)
       actions.setSubmitting(false)
       history.push("/dashboard")
     },
