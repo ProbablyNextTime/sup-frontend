@@ -104,6 +104,7 @@ export default function SignUpForm({ setIsSignIn }: ISignUpFormProps) {
                   root: classes.secondaryButton,
                 }}
                 variant="contained"
+                data-cy={"switch-to-signIn"}
                 disabled={isSubmitting}
                 onClick={() => setIsSignIn(true)}
               >

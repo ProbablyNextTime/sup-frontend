@@ -92,6 +92,7 @@ export default function SignInForm({ setIsSignIn }: ISignInFormProps) {
                 }}
                 variant="contained"
                 disabled={isSubmitting}
+                data-cy={"switch-to-signUp"}
                 onClick={() => setIsSignIn(false)}
               >
                 Sign Up
