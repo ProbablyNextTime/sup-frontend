@@ -23,6 +23,8 @@ const SignInSchema = Yup.object().shape({
 })
 
 export default function SignIn() {
+  /* Main Auth component
+   */
   const history = useHistory()
 
   const handleSubmit = useAPICallback(
