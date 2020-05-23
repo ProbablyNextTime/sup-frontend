@@ -8,6 +8,11 @@ interface IUserLoginResponse {
   user: IUser
 }
 
+interface IUserSignUpResponse {
+  email: string
+  password: string
+}
+
 export class UserFactory extends FixtureFactory {
   public generateEntry({ id, email, fullName }: Partial<IUser> = {}): IUser {
     return {
@@ -28,5 +33,9 @@ export class UserFactory extends FixtureFactory {
       refresh_token: refresh_token || faker.random.uuid(),
       user: { ...newUser },
     }
+  }
+
+  public generateSignUpResponse(email: string, password: string): IUserSignUpResponse {
+    return { email: email, password: password }
   }
 }

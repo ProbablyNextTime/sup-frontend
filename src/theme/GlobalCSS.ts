@@ -6,8 +6,14 @@ import { primaryFont } from "."
  */
 const useGlobalCSS = makeStyles({
   "@global": {
-    body: {
+    "body, html": {
+      height: "100vh",
       fontFamily: primaryFont,
+    },
+    "#root": {
+      display: "flex",
+      flexFlow: "column",
+      height: "100%",
     },
   },
 })

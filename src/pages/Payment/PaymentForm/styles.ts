@@ -71,6 +71,8 @@ export default makeStyles((theme: Theme) => ({
     height: "30px",
     width: "30%",
     backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/c_fill,h_45,w_110/v1588516370/SUP/logo512_kpt9pr.png"})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 100%",
   },
   processButtonText: {
     textTransform: "none",
