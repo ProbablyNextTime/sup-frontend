@@ -7,7 +7,7 @@ import * as Yup from "yup"
 import useStyles from "./styles"
 import { useHistory } from "react-router-dom"
 import { useAPICallback } from "hooks/useApiCallback"
-import { authService, IAuthResponse, IUser } from "@jetkit/react"
+import { authService, IAuthResponse } from "@jetkit/react"
 import { UserContext } from "service/userContext/userContext"
 import { ILoginResponse } from "model/user"
 
