@@ -1,7 +1,7 @@
 import Box from "@material-ui/core/Box"
 import * as React from "react"
 import { Formik, Form, Field } from "formik"
-import { Button, LinearProgress } from "@material-ui/core"
+import { Button, LinearProgress, Typography } from "@material-ui/core"
 import { TextField } from "formik-material-ui"
 import * as Yup from "yup"
 import useStyles from "./styles"
@@ -109,6 +109,7 @@ export default function SignUpForm({ setIsSignIn }: ISignUpFormProps) {
               >
                 Sign Up
               </Button>
+              <Typography className={classes.orSign}>or</Typography>
               <Button
                 type={"button"}
                 classes={{

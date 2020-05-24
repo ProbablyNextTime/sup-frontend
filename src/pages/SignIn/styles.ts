@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1588516013/SUP/bg_vuwqjo.jpg"})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
+    "@media (max-width: 1000px)": {
+      display: "none",
+    },
   },
   signInFormContainer: {
     width: "50%",
@@ -41,6 +44,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "60px 80px 0 80px",
     display: "flex",
     flexDirection: "column",
+    "@media (max-width: 1000px)": {
+      width: "100%",
+    },
+    "@media (max-width: 500px)": {
+      padding: "60px 30px 0 30px",
+      border: "none",
+    },
   },
   supLogo: {
     color: "#78f464",
@@ -59,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontStyle: "normal",
     lineHeight: "normal",
     letterSpacing: "0.36px",
-    padding: "15px 0 100px 0",
+    padding: "15px 0 50px 0",
   },
 }))
 

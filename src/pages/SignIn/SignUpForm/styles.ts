@@ -12,17 +12,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: "0 0 20px 0",
   },
   formControls: {
+    margin: "15px 0 0 0",
     padding: "0 10px 0 10px",
-    width: "100%",
+    minWidth: "30%",
+    height: "115px",
     display: "flex",
-    flexDirection: "row",
+    alignSelf: "center",
+    flexDirection: "column",
     justifyContent: "space-between",
   },
   mainButton: {
     borderColor: "#30bb49",
     borderRadius: "2px",
     height: "40px",
-    width: "30%",
+    width: "100%",
     backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/c_fill,h_45,w_110/v1588516370/SUP/logo512_kpt9pr.png"})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#222222",
     border: "solid 2px #d8eadd",
     height: "40px",
-    width: "30%",
+    width: "100%",
     "$:hover": {
       backgroundColor: "#ffffff",
     },
@@ -55,6 +58,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   errorMessage: {
     color: "#FF0000",
     margin: "0 0 10px 0",
+  },
+  orSign: {
+    display: "flex",
+    alignSelf: "center",
   },
 }))
 
