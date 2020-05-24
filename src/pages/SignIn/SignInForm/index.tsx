@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom"
 import { useAPICallback } from "hooks/useApiCallback"
 import { authService, IAuthResponse } from "@jetkit/react"
 import { UserContext } from "service/userContext/userContext"
-import { ILoginResponse } from "../../../model/user"
+import { ILoginResponse } from "model/loginResponse"
 
 interface ICredentials {
   email: string
