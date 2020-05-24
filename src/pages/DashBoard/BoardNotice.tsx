@@ -12,9 +12,10 @@ import { ITransportationOfferTag } from "model/transportationOfferTag"
 
 interface IBoardNoticeProps {
   transportationOffer: ITransportationOffer
+  isSelectable: boolean
 }
 
-const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
+const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) => {
   const dashboardContext = React.useContext(DashboardContext)
   const peopleTransfer = true
   const isTrusted = true
@@ -27,7 +28,9 @@ const BoardNotice = ({ transportationOffer }: IBoardNoticeProps) => {
         classes.boardNoticeWrapper,
         transportationOffer.isPremium && classes.premiumBackground
       )}
-      onClick={() => dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })}
+      onClick={() => {
+        isSelectable && dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
+      }}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.leftSideContent}>
