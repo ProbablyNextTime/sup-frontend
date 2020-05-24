@@ -10,7 +10,7 @@ import { CalendarToday } from "@material-ui/icons"
 import { useAPICallback } from "hooks/useApiCallback"
 import ITransportationOffer from "model/transportationOffer"
 import { getTransportationOffers } from "service/api/transportationOffer"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 
 interface ISearchProps {
   setTransportationOffers: React.Dispatch<React.SetStateAction<ITransportationOffer[]>>

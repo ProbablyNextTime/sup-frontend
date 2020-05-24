@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box"
 import Button from "@material-ui/core/Button"
 import Language from "@material-ui/icons/Language"
 import Link from "@material-ui/core/Link"
+import { UserContext } from "service/userContext/userContext"
 
 const userEx = {
   name: "flain1",
@@ -18,12 +19,15 @@ const userEx = {
 interface INavigationBar {}
 
 const NavigationBar = (props: INavigationBar) => {
+  const userContext = React.useContext(UserContext)
   const classes = useStyles()
   return (
     <AppBar className={classes.navigationBar} position="static">
-      <Button variant="outlined" className={classes.addTransferButton}>
-        + New Transfer
-      </Button>
+      {userContext.user.email && (
+        <Button variant="outlined" className={classes.addTransferButton}>
+          + New Transfer
+        </Button>
+      )}
       <Box className={classes.logo}>
         <Typography className={classes.sup}>SUP!</Typography>
         <Typography className={classes.catchPhrase}>Transfers made easy!</Typography>

@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
 import ITransportationOffer from "model/transportationOffer"
 import Check from "@material-ui/icons/Check"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 import * as classNames from "classnames"
 import { ITransportationOfferTag } from "model/transportationOfferTag"
 
