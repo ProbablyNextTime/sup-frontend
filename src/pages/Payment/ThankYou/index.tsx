@@ -10,14 +10,14 @@ const ThankYou = () => {
   const history = useHistory()
   const [interestingOffers, setInterestingOffers] = React.useState<ITransportationOffer[]>([])
 
-  React.useEffect(() => {
-    const getInterestingOffers = async (): Promise<void> => {
-      const newNotices = await getTransportationOffers(1, 2, "")
-      setInterestingOffers(newNotices)
-    }
-
-    getInterestingOffers()
+  const getInterestingOffers = React.useCallback(async () => {
+    const newNotices: ITransportationOffer[] = await getTransportationOffers(1, 2, "")
+    setInterestingOffers(newNotices)
   }, [])
+
+  React.useEffect(() => {
+    getInterestingOffers()
+  }, [getInterestingOffers])
 
   const handleReturn = React.useCallback(() => history.push("/dashboard"), [history])
 
@@ -43,7 +43,7 @@ const ThankYou = () => {
         </Button>
         <Box className={classes.interestingOffers}>
           {interestingOffers.map((offer: ITransportationOffer, key: number) => {
-            return <BoardNotice isDashboardNotice={false} key={key} transportationOffer={offer} />
+            return <BoardNotice isSelectable={false} key={key} transportationOffer={offer} />
           })}
         </Box>
       </Box>

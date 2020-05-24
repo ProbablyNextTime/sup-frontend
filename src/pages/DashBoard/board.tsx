@@ -52,7 +52,7 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
       className={classes.dashboard}
     >
       {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
-        return <BoardNotice isDashboardNotice={true} transportationOffer={transportationOffer} key={index} />
+        return <BoardNotice isSelectable={true} transportationOffer={transportationOffer} key={index} />
       })}
     </Box>
   )
