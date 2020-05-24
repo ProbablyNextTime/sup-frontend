@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box"
 import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 
 const premiumFont = { color: "#fed133" }
 

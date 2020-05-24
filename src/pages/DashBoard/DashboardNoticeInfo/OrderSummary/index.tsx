@@ -4,7 +4,7 @@ import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import { ShoppingCart } from "@material-ui/icons"
 import PaymentForm from "../../../Payment/PaymentForm"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 
 const OrderSummary = () => {
   const dashboardContext = React.useContext(DashboardContext)
