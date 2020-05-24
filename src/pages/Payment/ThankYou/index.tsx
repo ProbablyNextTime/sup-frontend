@@ -2,13 +2,13 @@ import * as React from "react"
 import useStyles from "./styles"
 import { Box, Button, Typography } from "@material-ui/core"
 import { useHistory } from "react-router-dom"
-import transportationOffer from "model/transportationOffer"
 import BoardNotice from "pages/DashBoard/BoardNotice"
 import { getTransportationOffers } from "service/api/transportationOffer"
+import ITransportationOffer from "model/transportationOffer"
 
 const ThankYou = () => {
   const history = useHistory()
-  const [interestingOffers, setInterestingOffers] = React.useState<transportationOffer[]>([])
+  const [interestingOffers, setInterestingOffers] = React.useState<ITransportationOffer[]>([])
 
   React.useEffect(() => {
     const getInterestingOffers = async (): Promise<void> => {
@@ -19,7 +19,7 @@ const ThankYou = () => {
     getInterestingOffers()
   }, [])
 
-  const handleReturn = () => history.push("/dashboard")
+  const handleReturn = React.useCallback(() => history.push("/dashboard"), [history])
 
   const classes = useStyles()
   return (
@@ -42,12 +42,12 @@ const ThankYou = () => {
           Return
         </Button>
         <Box className={classes.interestingOffers}>
-          {interestingOffers.map((offer) => {
-            return <BoardNotice isDashboardNotice={false} transportationOffer={offer} />
+          {interestingOffers.map((offer: ITransportationOffer, key: number) => {
+            return <BoardNotice isDashboardNotice={false} key={key} transportationOffer={offer} />
           })}
         </Box>
       </Box>
-      <Box className={classes.sidePicture}></Box>
+      <Box className={classes.sidePicture} />
     </div>
   )
 }
