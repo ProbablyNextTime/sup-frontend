@@ -3,7 +3,7 @@ import { Box } from "@material-ui/core"
 import useStyles from "./Styles/boardStyles"
 import BoardNotice from "./BoardNotice"
 import ITransportationOffer from "model/transportationOffer"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 import { getTransportationOffers } from "service/api/transportationOffer"
 
 interface IBoardProps {

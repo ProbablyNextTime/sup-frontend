@@ -5,7 +5,7 @@ import { getTransportationOffer } from "service/api/transportationOffer"
 import PaymentForm from "../PaymentForm"
 import { Grid, Typography } from "@material-ui/core"
 import useStyles from "./styles"
-import { DashboardContext, IDashboardContext } from "service/context/dashboardContext"
+import { DashboardContext, IDashboardContext } from "service/dashboardContext/dashboardContext"
 
 interface ICheckoutBoxProps {
   transportationOfferId: ExtId

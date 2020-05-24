@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import Check from "@material-ui/icons/Check"
 import IconButton from "@material-ui/core/IconButton"
 import { KeyboardArrowDown, KeyboardArrowUp } from "@material-ui/icons"
-import { DashboardContext } from "service/context/dashboardContext"
+import { DashboardContext } from "service/dashboardContext/dashboardContext"
 import { ITransportationOfferTag } from "model/transportationOfferTag"
 
 const AdditionalInfo = () => {

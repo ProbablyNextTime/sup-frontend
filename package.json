@@ -100,7 +100,7 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "fix": "prettier --write '{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}' && eslint --fix src/**/*.ts src/**/*.tsx",
+    "fix": "eslint --fix src/**/*.ts src/**/*.tsx && prettier --write '{*.{ts,js},!(node*)**/*.{ts,tsx,js,jsx}}'",
     "cp:open": "cypress open",
     "fmt:check": "prettier --check src/**/*.{js,ts,tsx}",
     "coverage:jest": "jest --coverage",
