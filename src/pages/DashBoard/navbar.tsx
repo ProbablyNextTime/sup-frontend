@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box"
 import Button from "@material-ui/core/Button"
 import Language from "@material-ui/icons/Language"
 import Link from "@material-ui/core/Link"
-import { UserContext } from "../../service/userContext/userContext"
+import { UserContext } from "service/userContext/userContext"
 
 const userEx = {
   name: "flain1",
@@ -21,7 +21,6 @@ interface INavigationBar {}
 const NavigationBar = (props: INavigationBar) => {
   const userContext = React.useContext(UserContext)
   const classes = useStyles()
-  console.log(userContext.user)
   return (
     <AppBar className={classes.navigationBar} position="static">
       {userContext.user.email && (
