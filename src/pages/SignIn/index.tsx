@@ -12,7 +12,7 @@ const SignIn = (props: IHomeProps) => {
     <div className={classes.wrapper}>
       <Box className={classes.signInContainer}>
         <Box className={classes.signInFormContainer}>
-          <Typography className={classes.supLogo}>SUP!</Typography>
+          <Typography className={classes.supLogo}>SUP!</Typography>S
           <Typography className={classes.catchPhrase}>
             Welcome! Join thousands of users shipping their goods with us.
           </Typography>
