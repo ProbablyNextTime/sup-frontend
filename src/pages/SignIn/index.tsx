@@ -3,9 +3,8 @@ import SignInForm from "./SignInForm"
 import useStyles from "./styles"
 import { Box, Typography } from "@material-ui/core"
 import SignUpForm from "./SignUpForm"
-interface IHomeProps {}
 
-const SignIn = (props: IHomeProps) => {
+const SignIn = () => {
   const [isSignIn, setIsSignIn] = React.useState<boolean>(true)
   const classes = useStyles()
   return (

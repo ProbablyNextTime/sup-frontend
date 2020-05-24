@@ -15,6 +15,17 @@ describe("Test Sign In", () => {
     cy.visit("/")
   })
 
+  it("shouldn't give access to dashboard to unauthorized users", () => {
+    cy.visit("/dashboard")
+    cy.url().should("include", "/login")
+  })
+
+  it("should redirect already logged in users to dashboard from LogIn screen", () => {
+    cy.login([])
+    cy.visit("/")
+    cy.url().should("include", "/dashboard")
+  })
+
   it("should redirect to dashboard and set authTokens UI", () => {
     cy.dataCy("email-input").type(testEmail)
     cy.route("POST", `**/api/auth/login`, okLogInResponse).as("loginSuccess")
@@ -46,7 +57,7 @@ describe("Test Sign In", () => {
       })
     cy.wait("@loginUnauthorized")
     cy.dataCy("failed-auth").should("contain", "Invalid email or password")
-    cy.url().should("eq", Cypress.config().baseUrl)
+    cy.url().should("eq", Cypress.config().baseUrl + "login")
   })
 
   it("Test wrong inputs warnings", () => {

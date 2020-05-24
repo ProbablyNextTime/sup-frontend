@@ -7,9 +7,7 @@ const getSearchedOffers: ITransportationOffer[] = transportationOfferFactory.gen
 describe("test dashboard", () => {
   beforeEach(() => {
     cy.server()
-    cy.route("GET", `**/api/transportation_offer?query=&*`, getTransportationNoticesResponse).as("getOffers")
-    cy.visit("/dashboard")
-    cy.wait("@getOffers")
+    cy.login(getTransportationNoticesResponse)
   })
 
   it("test infinity scroll", () => {

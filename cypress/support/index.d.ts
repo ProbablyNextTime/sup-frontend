@@ -9,5 +9,6 @@ declare namespace Cypress {
      * Command to set JWT token and log in user to the app.
      * @example cy.login()
      */
+    login(transportationOffers): never
   }
 }
