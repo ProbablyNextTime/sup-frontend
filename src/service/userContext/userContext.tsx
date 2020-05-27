@@ -12,7 +12,7 @@ export interface IUserState {
 
 const initialUser: IUser = {
   id: "none",
-  email: "",
+  email: "guest@guest.guest",
 }
 
 const initialUserContext: IUserContext = {

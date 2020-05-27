@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "#fff",
     boxShadow: "0px 1px #ddd;",
   },
+  guestNavBar: {
+    justifyContent: "flex-end",
+  },
   logo: {
     position: "absolute",
     left: "50%",
@@ -42,11 +45,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderColor: "#53eb50",
     borderWidth: "1px",
     alignSelf: "center",
+    "@media (max-width: 500px)": {
+      display: "none",
+    },
+  },
+  addTransferMobileButton: {
+    height: "40px",
+    maxWidth: "40px",
+    marginLeft: "20px",
+    fontSize: "30px",
+    color: "#53eb50",
+    borderColor: "#53eb50",
+    borderWidth: "1px",
+    alignSelf: "center",
+    "@media (min-width: 500px)": {
+      display: "none",
+    },
   },
   rightToolBox: {
-    marginRight: "20px",
+    padding: "0 20px 0 0",
     fontFamily: "FuturaBT",
-    fontSize: "18px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -61,8 +80,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     listStyleType: "none",
     overflow: "hidden",
     backgroundColor: "#fff",
-    maxWidth: "400px",
     maxHeight: "40px",
+    "@media (max-width: 1150px)": {
+      display: "none",
+    },
   },
   downArrowToolBar: {
     marginLeft: "5px",
@@ -71,7 +92,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   toolListItem: {
     borderRight: "1px solid black",
-    maxWidth: "90px",
   },
   helpLink: {
     fontSize: "18px",
@@ -99,15 +119,47 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   userName: {
     marginRight: "20px",
-    fontFamily: "Montserrat",
-    fontSize: "12px",
-    fontWeight: 500,
-    fontStretch: "normal",
-    fontStyle: "normal",
-    lineHeight: "normal",
-    letterSpacing: "normal",
-    color: "#000000",
-    borderBottom: "1px solid black",
+  },
+  menuIcon: {
+    display: "none",
+    "@media (max-width: 1150px)": {
+      display: "flex",
+    },
+  },
+  mobileMenu: {
+    width: "160px",
+    display: "flex",
+    flexDirection: "column",
+  },
+  nested: {
+    padding: "0 0 0 40px",
+    height: "25px",
+  },
+  nestedText: {
+    fontSize: "8px",
+  },
+  displayRight: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  menuListItem: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  semanticIcons: {
+    margin: "0 10px 0 0",
+  },
+  avatar: {
+    height: "22px",
+    width: "22px",
+    margin: "0 10px 0 0",
+  },
+  topMenuAvatar: {
+    margin: "0 15px 0 0",
+  },
+  topMenuSemanticIcon: {
+    margin: "0 8px 0 0",
   },
 }))
 
