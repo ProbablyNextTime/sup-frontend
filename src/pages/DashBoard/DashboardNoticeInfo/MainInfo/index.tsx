@@ -4,8 +4,7 @@ import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
 import { DashboardContext } from "service/dashboardContext/dashboardContext"
-
-const premiumFont = { color: "#fed133" }
+import classNames from "classnames"
 
 const MainInfo = () => {
   const dashboardContext = React.useContext(DashboardContext)
@@ -20,8 +19,10 @@ const MainInfo = () => {
           )}
           <Typography
             data-cy={"selectedOfferTransferNumber"}
-            className={classes.transferNumberText}
-            style={dashboardContext.transportationOffer.isPremium ? premiumFont : {}}
+            className={classNames.default(
+              classes.transferNumberText,
+              dashboardContext.transportationOffer.isPremium && classes.premiumFont
+            )}
           >
             {dashboardContext.transportationOffer.transferNumber}
           </Typography>

@@ -62,10 +62,7 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
         <Box className={classes.pickUpPlace}>
           <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
           <Typography
-            className={classNames.default(
-              classes.cardBottomContent,
-              transportationOffer.isPremium && classes.premiumFont
-            )}
+            className={`${classes.cardBottomContent} ${transportationOffer.isPremium && classes.premiumFont}`}
           >
             {transportationOffer.pickupPlace}
           </Typography>

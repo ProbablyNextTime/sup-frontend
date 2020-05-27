@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     "@media (max-width: 1000px)": {
       width: "100%",
+      border: "none",
     },
     "@media (max-width: 500px)": {
       padding: "60px 30px 0 30px",
