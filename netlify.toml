@@ -1,0 +1,10 @@
+# for react-router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "https://checkout.stripe.com"
+  status = 200  
