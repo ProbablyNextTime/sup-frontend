@@ -1,0 +1,14 @@
+[build]
+  publish = "build/"
+  command = "npm install --no-save && npm run build"
+  # staging
+  environment = {REACT_APP_BASE_URL = "https://n05xnl7wx5.execute-api.eu-west-1.amazonaws.com/dev/api"}
+
+[context.production]
+  environment = {REACT_APP_BASE_URL = "https://n05xnl7wx5.execute-api.eu-west-1.amazonaws.com/dev/api"}
+
+# for react-router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
