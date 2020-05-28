@@ -5,6 +5,9 @@ export const primaryFont = process.env.REACT_APP_DEFAULT_FONT
 export const theme = createMuiTheme({
   palette: {
     primary: green,
+    text: {
+      secondary: "#fed133",
+    },
   },
   typography: {
     fontFamily: primaryFont,
