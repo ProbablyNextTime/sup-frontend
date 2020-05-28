@@ -18,9 +18,9 @@ const Routes = () => {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={SignIn} />
         {/* logged in */}
-        <Route isPrivate exact path="/thank-you" component={ThankYou} />
+        <Route exact path="/thank-you" component={ThankYou} />
         <DashboardContextProvider>
-          <Route isPrivate exact path="/dashboard" component={DashBoard} />
+          <Route exact path="/dashboard" component={DashBoard} />
         </DashboardContextProvider>
       </Switch>
     </UserContextProvider>
