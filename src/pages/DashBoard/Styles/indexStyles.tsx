@@ -25,14 +25,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    width: "33%",
+    width: "24%",
     borderRight: "1px solid #eee",
   },
   boardNoticeInfo: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    width: "30%",
+    minWidth: "36%",
     backgroundColor: "#fff",
   },
   mapWrapper: {

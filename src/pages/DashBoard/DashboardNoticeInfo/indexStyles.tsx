@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    width: "30%",
+    width: "39%",
     backgroundColor: "#fff",
     overflowY: "scroll",
     scrollbarWidth: "none" /* Firefox */,
