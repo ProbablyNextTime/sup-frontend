@@ -6,12 +6,12 @@ export default makeStyles((theme: Theme) => ({
     width: "40%",
     display: "flex",
     flexDirection: "column",
-    padding: "10px 0 0 0",
+    padding: "5px 0 0 0",
   },
   inputHeader: {
     alignSelf: "baseline",
     fontFamily: "Lato",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -21,7 +21,7 @@ export default makeStyles((theme: Theme) => ({
   },
   inputAmount: {
     color: "#666666",
-    fontSize: "12px",
+    fontSize: "15px",
     "& input[type=number]": {
       "&::-webkit-inner-spin-button, &::-webkit-outer-spin-button": {
         webkitAppearance: "none",
@@ -39,7 +39,7 @@ export default makeStyles((theme: Theme) => ({
   summary: {
     alignSelf: "center",
     fontFamily: "Lato",
-    fontSize: "18px",
+    fontSize: "20px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -56,7 +56,7 @@ export default makeStyles((theme: Theme) => ({
   },
   voucherCodeInput: {
     color: "#666666",
-    fontSize: "12px",
+    fontSize: "15px",
   },
   voucherCodeInputContainer: {
     padding: 0,
@@ -66,10 +66,11 @@ export default makeStyles((theme: Theme) => ({
     flexDirection: "column",
   },
   processButton: {
+    margin: "5px 0 0 0",
     borderColor: "#30bb49",
     borderRadius: "2px",
     height: "30px",
-    width: "30%",
+    width: "25%",
     backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/c_fill,h_45,w_110/v1588516370/SUP/logo512_kpt9pr.png"})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
@@ -77,7 +78,7 @@ export default makeStyles((theme: Theme) => ({
   processButtonText: {
     textTransform: "none",
     fontFamily: "Roboto",
-    fontSize: "9px",
+    fontSize: "12px",
     fontWeight: "bold",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -86,7 +87,7 @@ export default makeStyles((theme: Theme) => ({
     color: "#ffffff",
   },
   processLockIcon: {
-    fontSize: "7px",
+    fontSize: "11px",
     padding: "0 2px 0 0 ",
     color: "#ffffff",
   },

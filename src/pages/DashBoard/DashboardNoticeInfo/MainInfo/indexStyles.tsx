@@ -20,15 +20,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "0 10px",
   },
   premiumStar: {
+    margin: "2px 0 0 0",
     color: "#f5f92a",
   },
   premiumFont: {
     color: "#fed133",
   },
   transferNumberText: {
-    marginTop: "4px",
+    margin: "4px 0 3px 0",
     fontFamily: "Lato",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   contentText: {
     marginBottom: "8px",
     fontFamily: "Lato",
-    fontSize: "14px",
+    fontSize: "18px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   placeText: {
     whiteSpace: "normal",
     fontFamily: "Lato",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
     fontFamily: "Lato",
-    fontSize: "11px",
+    fontSize: "15px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",

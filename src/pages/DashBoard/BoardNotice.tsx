@@ -60,7 +60,8 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
           <Box className={classes.pickUpPlace}>
             <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
             <Typography
-              className={`${classes.cardBottomContent} ${transportationOffer.isPremium && classes.premiumFont}`}
+              className={classes.cardBottomContent}
+              style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >
               {transportationOffer.pickupPlace}
             </Typography>
@@ -69,10 +70,8 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
           <Box className={classes.pickUpPlace}>
             <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
             <Typography
-              className={classNames.default(
-                classes.cardBottomContent,
-                transportationOffer.isPremium && classes.premiumFont
-              )}
+              className={classes.cardBottomContent}
+              style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >
               {transportationOffer.deliveryPlace}
             </Typography>
@@ -84,19 +83,15 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
             <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
             <Box className={classes.carrierInfo}>
               <Typography
-                className={classNames.default(
-                  classes.cardBottomContent,
-                  transportationOffer.isPremium && classes.premiumFont
-                )}
+                className={classes.cardBottomContent}
+                style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
               >
                 {transportationOffer.transportationProvider.name}
               </Typography>
               {isTrusted && (
                 <Check
-                  className={classNames.default(
-                    classes.isTrusted,
-                    transportationOffer.isPremium && classes.premiumCheckSign
-                  )}
+                  className={classes.isTrusted}
+                  style={transportationOffer.isPremium ? { color: "#fed133", borderColor: "#fed133" } : {}}
                 />
               )}
             </Box>

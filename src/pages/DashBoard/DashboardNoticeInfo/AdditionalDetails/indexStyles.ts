@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentHeader: {
     fontFamily: "Lato",
-    fontSize: "11px",
+    fontSize: "15px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   detail: {
     fontFamily: "Roboto",
-    fontSize: "10px",
+    fontSize: "14px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",

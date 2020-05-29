@@ -13,7 +13,7 @@ export const theme = createMuiTheme({
     fontFamily: primaryFont,
     subtitle1: {
       fontFamily: "Lato",
-      fontSize: 11,
+      fontSize: 15,
       fontWeight: 500,
       fontStretch: "normal",
       fontStyle: "normal",
