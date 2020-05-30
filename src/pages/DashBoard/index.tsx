@@ -28,14 +28,14 @@ const DashBoard = () => {
 
   return (
     <Box className={classes.wrapper}>
-      <Search setTransportationOffers={setTransportationOffers} />
+      <Search width={width} setTransportationOffers={setTransportationOffers} />
       <Box className={classes.content}>
         <Slide direction="left" in={displayOffersList || width > 850} mountOnEnter unmountOnExit>
           <Box className={classes.boardWrapper} onClick={() => setDisplayOffersList(false)}>
             <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
         </Slide>
-        <Slide direction="left" in={!showMap || width > 1300} mountOnEnter unmountOnExit>
+        <Slide direction="left" in={(!showMap && !displayOffersList) || width > 850} mountOnEnter unmountOnExit>
           <Box className={classes.boardNoticeInfoWrapper}>
             <DashboardNoticeInfo
               width={width}
