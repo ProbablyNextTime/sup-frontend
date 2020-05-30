@@ -21,6 +21,10 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
   const isTrusted = true
   const classes = useStyles()
 
+  const handleClick = () => {
+    if (isSelectable) dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
+  }
+
   return (
     <Card
       elevation={0}
@@ -28,16 +32,14 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
         classes.boardNoticeWrapper,
         transportationOffer.isPremium && classes.premiumBackground
       )}
-      onClick={() => {
-        isSelectable && dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
-      }}
+      onClick={handleClick}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.route}>
           <Box className={classes.premiumRoute}>
             {transportationOffer.isPremium && <Star className={classes.premiumStar} fontSize={"small"} />}
             <Typography
-              className={classNames.default(classes.routeText, transportationOffer.isPremium && classes.premiumFont)}
+              className={classes.routeText}
               style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >{`${transportationOffer.departurePoint} - ${transportationOffer.destinationPoint}`}</Typography>
           </Box>
