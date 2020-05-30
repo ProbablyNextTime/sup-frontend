@@ -1,32 +1,51 @@
 import * as React from "react"
-import Box from "@material-ui/core/Box"
+import { Box, IconButton } from "@material-ui/core"
 import useStyles from "./indexStyles"
 import Typography from "@material-ui/core/Typography"
 import Star from "@material-ui/icons/Star"
+import Map from "@material-ui/icons/Map"
 import { DashboardContext } from "service/dashboardContext/dashboardContext"
-import classNames from "classnames"
+import { KeyboardArrowLeft } from "@material-ui/icons"
 
-const MainInfo = () => {
+interface mainInfoProps {
+  displayMapIcon: boolean
+  width: number
+  setShowOfferList: React.Dispatch<React.SetStateAction<boolean>>
+  setShowMap: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const MainInfo = ({ width, displayMapIcon, setShowMap, setShowOfferList }: mainInfoProps) => {
   const dashboardContext = React.useContext(DashboardContext)
+
   const classes = useStyles()
   return (
     <Box className={classes.container}>
       <Box className={classes.title}>
-        <Typography variant={"subtitle1"}>TRANSFER NUMBER</Typography>
-        <Box className={classes.transferNumber}>
-          {dashboardContext.transportationOffer.isPremium && (
-            <Star className={classes.premiumStar} fontSize={"small"} />
-          )}
-          <Typography
-            data-cy={"selectedOfferTransferNumber"}
-            className={classNames.default(
-              classes.transferNumberText,
-              dashboardContext.transportationOffer.isPremium && classes.premiumFont
+        {width < 850 && (
+          <IconButton className={classes.backIcon} onClick={() => setShowOfferList(true)}>
+            <KeyboardArrowLeft />
+          </IconButton>
+        )}
+        <Box className={classes.mainInfoContainer}>
+          <Typography variant={"subtitle1"}>TRANSFER NUMBER</Typography>
+          <Box className={classes.transferNumber}>
+            {dashboardContext.transportationOffer.isPremium && (
+              <Star className={classes.premiumStar} fontSize={"small"} />
             )}
-          >
-            {dashboardContext.transportationOffer.transferNumber}
-          </Typography>
+            <Typography
+              data-cy={"selectedOfferTransferNumber"}
+              className={classes.transferNumberText}
+              style={dashboardContext.transportationOffer.isPremium ? { color: "#fed133" } : {}}
+            >
+              {dashboardContext.transportationOffer.transferNumber}
+            </Typography>
+          </Box>
         </Box>
+        {displayMapIcon && (
+          <IconButton classes={{ root: classes.mapIconButton }} onClick={() => setShowMap(true)}>
+            <Map />
+          </IconButton>
+        )}
       </Box>
       <Box className={classes.mainContent}>
         <Box className={classes.departureInfo}>

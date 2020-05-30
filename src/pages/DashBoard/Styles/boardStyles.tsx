@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: "solid 1px #fcff6c",
   },
   premiumRoute: {
+    maxWidth: "77%",
     display: "flex",
     flexDirection: "row",
   },
@@ -134,11 +135,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundImage: "linear-gradient(to top, #b8b8b8, rgba(255, 255, 255, 0))",
   },
   pickUpPlace: {
-    padding: "0 5px 10px 5px",
+    padding: "0 5px 10px 0",
     display: "flex",
     flexDirection: "column",
     alignContent: "end",
-    maxWidth: "48%",
+    width: "50%",
     justifyContent: "space-between",
   },
   cardBottomContentHeader: {
@@ -187,7 +188,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: "normal",
   },
   cargoInfo: {
-    margin: "0 0 0 10px",
+    width: "50%",
+    padding: "0 5px 0 0",
     display: "flex",
     flexDirection: "column",
   },
@@ -203,9 +205,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   carrier: {
     display: "flex",
-    padding: "0 0 0 5px",
+    padding: "0 5px",
     flexDirection: "column",
-    width: "47%",
+    width: "50%",
   },
   secondaryInfo: {
     display: "flex",

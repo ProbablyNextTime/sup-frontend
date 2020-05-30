@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     marginTop: "20px",
     alignSelf: "center",
+    "@media (min-width: 1920px)": {
+      width: "1920px",
+    },
   },
   container: {
     position: "relative",

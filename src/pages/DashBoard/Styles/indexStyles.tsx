@@ -2,17 +2,18 @@ import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
 
 const useStyles = makeStyles((theme: Theme) => ({
-  globalWrapper: {
-    height: "80vh",
-  },
   wrapper: {
     width: "100%",
-    height: "100%",
+    maxHeight: "1200px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignSelf: "center",
     marginTop: "1px",
     backgroundColor: "#fff",
+    "@media (min-width: 2800px)": {
+      width: "2800px",
+    },
+    borderBottom: "1px solid #000000",
   },
   content: {
     width: "100%",
@@ -25,27 +26,59 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    width: "24%",
+    width: "27%",
     borderRight: "1px solid #eee",
+    "@media (max-width: 1300px)": {
+      width: "45%",
+    },
+    "@media (max-width: 850px)": {
+      width: "100%",
+    },
   },
-  boardNoticeInfo: {
+  boardNoticeInfoWrapper: {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    minWidth: "36%",
+    width: "36%",
     backgroundColor: "#fff",
+    overflowY: "scroll",
+    scrollbarWidth: "none" /* Firefox */,
+    msOverflowStyle: "none" /* IE 10+ */,
+    "&::-webkit-scrollbar": {
+      width: "0px",
+      background: "transparent" /* Chrome/Safari/Webkit */,
+    },
+    "@media (max-width: 1300px)": {
+      width: "55%",
+    },
+    "@media (max-width: 850px)": {
+      width: "100%",
+    },
   },
   mapWrapper: {
+    position: "relative",
     height: "100%",
     margin: 0,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     width: "37%",
+    "@media (max-width: 1300px)": {
+      width: "55%",
+    },
+    "@media (max-width: 850px)": {
+      width: "100%",
+    },
   },
   map: {
     width: "100%",
     height: "100%",
+  },
+  backArrow: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    backgroundColor: "#ffffff",
   },
 }))
 

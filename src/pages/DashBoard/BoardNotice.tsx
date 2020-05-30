@@ -21,6 +21,10 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
   const isTrusted = true
   const classes = useStyles()
 
+  const handleClick = () => {
+    if (isSelectable) dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
+  }
+
   return (
     <Card
       elevation={0}
@@ -28,16 +32,14 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
         classes.boardNoticeWrapper,
         transportationOffer.isPremium && classes.premiumBackground
       )}
-      onClick={() => {
-        isSelectable && dashboardContext.handleSettingOffer({ transportationOffer: transportationOffer })
-      }}
+      onClick={handleClick}
     >
       <Box className={classes.cardContent}>
         <Box className={classes.route}>
           <Box className={classes.premiumRoute}>
             {transportationOffer.isPremium && <Star className={classes.premiumStar} fontSize={"small"} />}
             <Typography
-              className={classNames.default(classes.routeText, transportationOffer.isPremium && classes.premiumFont)}
+              className={classes.routeText}
               style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >{`${transportationOffer.departurePoint} - ${transportationOffer.destinationPoint}`}</Typography>
           </Box>
@@ -60,7 +62,8 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
           <Box className={classes.pickUpPlace}>
             <Typography className={classes.cardBottomContentHeader}>PICK UP</Typography>
             <Typography
-              className={`${classes.cardBottomContent} ${transportationOffer.isPremium && classes.premiumFont}`}
+              className={classes.cardBottomContent}
+              style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >
               {transportationOffer.pickupPlace}
             </Typography>
@@ -69,10 +72,8 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
           <Box className={classes.pickUpPlace}>
             <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
             <Typography
-              className={classNames.default(
-                classes.cardBottomContent,
-                transportationOffer.isPremium && classes.premiumFont
-              )}
+              className={classes.cardBottomContent}
+              style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
             >
               {transportationOffer.deliveryPlace}
             </Typography>
@@ -84,19 +85,15 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
             <Typography className={classes.cardBottomContentHeader}>CARRIER</Typography>
             <Box className={classes.carrierInfo}>
               <Typography
-                className={classNames.default(
-                  classes.cardBottomContent,
-                  transportationOffer.isPremium && classes.premiumFont
-                )}
+                className={classes.cardBottomContent}
+                style={transportationOffer.isPremium ? { color: "#fed133" } : {}}
               >
                 {transportationOffer.transportationProvider.name}
               </Typography>
               {isTrusted && (
                 <Check
-                  className={classNames.default(
-                    classes.isTrusted,
-                    transportationOffer.isPremium && classes.premiumCheckSign
-                  )}
+                  className={classes.isTrusted}
+                  style={transportationOffer.isPremium ? { color: "#fed133", borderColor: "#fed133" } : {}}
                 />
               )}
             </Box>

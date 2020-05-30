@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   topHeader: {
     fontFamily: "Roboto",
-    fontSize: "13px",
+    fontSize: "18px",
     fontWeight: 300,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   cartIcon: {
     margin: "0 0 0 4px",
     alignSelf: "center",
-    fontSize: "12px",
+    fontSize: "16px",
     color: "#00f418",
   },
   destinationInfo: {
     padding: "5px 0",
     fontFamily: "Lato",
-    fontSize: "10px",
+    fontSize: "15px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentHeader: {
     fontFamily: "Lato",
-    fontSize: "11px",
+    fontSize: "15px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   contentSubHeader: {
     padding: "5px 0 0 0",
     fontFamily: "Lato",
-    fontSize: "10px",
+    fontSize: "14px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",

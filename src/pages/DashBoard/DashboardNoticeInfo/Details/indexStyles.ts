@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentHeader: {
     fontFamily: "Lato",
-    fontSize: "11px",
+    fontSize: "15px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   detailText: {
     fontFamily: "Roboto",
-    fontSize: "10px",
+    fontSize: "14px",
     fontWeight: "normal",
     fontStretch: "normal",
     fontStyle: "normal",
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   checkSign: {
     marginTop: "2px",
     marginRight: "8px",
-    fontSize: "9px",
+    fontSize: "13px",
     color: "#30c80a",
   },
   highlightedText: {

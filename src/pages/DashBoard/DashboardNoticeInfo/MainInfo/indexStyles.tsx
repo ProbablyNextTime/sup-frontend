@@ -14,21 +14,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  mainInfoContainer: {
+    width: "80%",
+    display: "flex",
     flexDirection: "column",
     minHeight: "45px",
     borderBottom: "1px solid #eeeeee",
-    padding: "0 10px",
+    "@media (min-width: 850px)": {
+      padding: "0 0 0 10px",
+    },
+    "@media (max-width: 850px)": {
+      width: "70%",
+    },
   },
   premiumStar: {
+    margin: "2px 0 0 0",
     color: "#f5f92a",
   },
   premiumFont: {
     color: "#fed133",
   },
+  backIcon: {
+    height: "30px",
+    width: "30px",
+    alignSelf: "center",
+  },
   transferNumberText: {
-    marginTop: "4px",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    margin: "4px 0 3px 0",
     fontFamily: "Lato",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -65,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   contentText: {
     marginBottom: "8px",
     fontFamily: "Lato",
-    fontSize: "14px",
+    fontSize: "18px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -76,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   placeText: {
     whiteSpace: "normal",
     fontFamily: "Lato",
-    fontSize: "12px",
+    fontSize: "16px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
@@ -89,13 +108,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
     fontFamily: "Lato",
-    fontSize: "11px",
+    fontSize: "15px",
     fontWeight: 500,
     fontStretch: "normal",
     fontStyle: "normal",
     lineHeight: "normal",
     letterSpacing: "normal",
     color: "#54c652",
+  },
+  mapIconButton: {
+    width: "35px",
+    height: "35px",
+    alignSelf: "center",
+    margin: "0 10px 0 0",
   },
 }))
 
