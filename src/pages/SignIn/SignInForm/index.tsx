@@ -10,6 +10,7 @@ import { useAPICallback } from "hooks/useApiCallback"
 import { authService, IAuthResponse } from "@jetkit/react"
 import { UserContext } from "service/userContext/userContext"
 import { ILoginResponse } from "model/loginResponse"
+import GoogleLogin from "../GoogleLogin"
 
 interface ICredentials {
   email: string
@@ -102,6 +103,7 @@ export default function SignInForm({ setIsSignIn }: ISignInFormProps) {
               >
                 Sign Up
               </Button>
+              <GoogleLogin />
             </Box>
           </Form>
         )}
