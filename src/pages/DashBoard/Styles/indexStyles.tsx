@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     "@media (min-width: 2800px)": {
       width: "2800px",
     },
-    borderBottom: "1px solid #000000",
+    overflowY: "hidden",
+    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1589877880/SUP/Background_q9pg1z.png"})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 100%",
   },
   content: {
     width: "100%",
