@@ -6,7 +6,7 @@ import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
 import ITransportationOffer from "model/transportationOffer"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
+import useWindowDimensions from "hooks/useWindowDimensions"
 
 const DashBoard = () => {
   const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
