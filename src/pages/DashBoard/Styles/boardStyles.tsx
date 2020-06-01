@@ -225,6 +225,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     marginTop: "2px",
   },
+  loader: {
+    display: "flex",
+    alignSelf: "center",
+    margin: "2rem 0 0 0",
+  },
 }))
 
 export default useStyles

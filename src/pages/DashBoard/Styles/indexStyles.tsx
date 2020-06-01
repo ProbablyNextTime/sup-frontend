@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     width: "100%",
-    height: "100%",
+    height: "calc(100% - 85px)",
     display: "flex",
     flexDirection: "row",
-    marginTop: "20px",
+    maxHeight: "1200px",
   },
   boardWrapper: {
     height: "100%",
@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   mapWrapper: {
     position: "relative",
     height: "100%",
+    minHeight: "700px",
     margin: 0,
     display: "flex",
     flexDirection: "column",

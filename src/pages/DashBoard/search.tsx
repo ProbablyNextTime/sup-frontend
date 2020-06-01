@@ -43,6 +43,9 @@ const Search = ({ width, setTransportationOffers }: ISearchProps) => {
         <Box className={classes.inputWrapper}>
           <SearchIcon className={classes.searchIcon} />
           <TextField
+            InputProps={{
+              classes: { root: classes.underline },
+            }}
             className={classes.inputSearchText}
             type="text"
             color="primary"
@@ -58,6 +61,9 @@ const Search = ({ width, setTransportationOffers }: ISearchProps) => {
             <Box className={classes.inputWrapper}>
               <CalendarToday className={classes.calendarIcon} />
               <DatePicker
+                InputProps={{
+                  classes: { root: classes.underline },
+                }}
                 disablePast={true}
                 className={classes.inputSearchDate}
                 value={departureDate}
@@ -68,6 +74,9 @@ const Search = ({ width, setTransportationOffers }: ISearchProps) => {
             <Box className={classes.inputWrapper}>
               <CalendarToday className={classes.calendarIcon} />
               <DatePicker
+                InputProps={{
+                  classes: { root: classes.underline },
+                }}
                 disablePast={true}
                 className={classes.inputSearchDate}
                 value={arrivalDate}

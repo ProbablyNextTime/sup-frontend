@@ -35,7 +35,12 @@ const DashBoard = () => {
             <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
         </Slide>
-        <Slide direction="left" in={(!showMap && !displayOffersList) || width > 850} mountOnEnter unmountOnExit>
+        <Slide
+          direction="left"
+          in={(!showMap && !displayOffersList) || (width > 850 && !showMap) || width > 1300}
+          mountOnEnter
+          unmountOnExit
+        >
           <Box className={classes.boardNoticeInfoWrapper}>
             <DashboardNoticeInfo
               width={width}
