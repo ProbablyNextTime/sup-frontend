@@ -30,12 +30,17 @@ describe("Test Sign In", () => {
     cy.url().should("include", "/dashboard")
   })
 
-  it("should redirect to dashboard and set authTokens UI", () => {
+  it.only("should redirect to dashboard and set authTokens UI", () => {
     cy.route({
       method: "GET",
       url: `**/api/transportation_offer?query=&*`,
       response: transportationOffers,
     }).as("getOffers")
+    cy.route({
+      method: "GET",
+      url: `**/api/transportation_tag**`,
+      response: {},
+    }).as("getTags")
     cy.dataCy("email-input").type(testEmail)
     cy.route("POST", `**/api/auth/login`, okLogInResponse).as("loginSuccess")
     cy.dataCy("password-input").type(testPassword)
