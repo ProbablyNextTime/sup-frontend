@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Box, Slide, IconButton } from "@material-ui/core"
-import { KeyboardArrowLeft } from "@material-ui/icons"
+import { KeyboardArrowRight } from "@material-ui/icons"
 import useStyles from "./Styles/indexStyles"
 import Search from "./search"
 import Board from "./board"
@@ -54,7 +54,7 @@ const DashBoard = () => {
             />
             {width < 1300 && (
               <IconButton className={classes.backArrow} onClick={() => setShowMap(false)}>
-                <KeyboardArrowLeft />
+                <KeyboardArrowRight />
               </IconButton>
             )}
           </Box>
