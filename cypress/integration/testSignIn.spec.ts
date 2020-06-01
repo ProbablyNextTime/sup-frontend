@@ -1,5 +1,7 @@
 import { UserFactory } from "../fixtures/fixtureFactory/UserFactory"
 import { IUser } from "model/user"
+import ITransportationOffer from "../../src/model/transportationOffer"
+import { TransportationOfferFactory } from "../fixtures/fixtureFactory/transportationOfferFactory"
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 const testEmail: string = Cypress.env("testEmail")
@@ -7,6 +9,8 @@ const testPassword: string = Cypress.env("testPassword")
 const UFactory: UserFactory = new UserFactory()
 const okLogInResponse = UFactory.generateLogInResponse()
 const unAuthUserResponse: IUser = UFactory.generateEntry()
+const transportationOfferFactory: TransportationOfferFactory = new TransportationOfferFactory()
+const transportationOffers: ITransportationOffer[] = transportationOfferFactory.generateGetNoticesResponse()
 
 describe("Test Sign In", () => {
   beforeEach(() => {
@@ -27,6 +31,11 @@ describe("Test Sign In", () => {
   })
 
   it("should redirect to dashboard and set authTokens UI", () => {
+    cy.route({
+      method: "GET",
+      url: `**/api/transportation_offer?query=&*`,
+      response: transportationOffers,
+    }).as("getOffers")
     cy.dataCy("email-input").type(testEmail)
     cy.route("POST", `**/api/auth/login`, okLogInResponse).as("loginSuccess")
     cy.dataCy("password-input").type(testPassword)
