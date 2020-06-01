@@ -89,7 +89,7 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
     valuesToSend.arrivalDate = moment(valuesToSend.arrivalDate).toISOString()
     valuesToSend.departureDate = moment(valuesToSend.departureDate).toISOString()
     console.log(valuesToSend)
-    const newOffer = await postTransportationOffer(valuesToSend)
+    await postTransportationOffer(valuesToSend)
     setIsOpen(false)
   }, [])
 
