@@ -48,7 +48,7 @@ const NavigationBar = () => {
       className={classNames.default([classes.navigationBar, userContext.user.id === "none" && classes.guestNavBar])}
       position="static"
     >
-      {userContext.user.id === "none" && (
+      {userContext.user.id !== "none" && (
         <>
           <Button variant="outlined" className={classes.addTransferButton} onClick={() => setIsModalOpen(true)}>
             + New Transfer
