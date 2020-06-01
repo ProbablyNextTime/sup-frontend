@@ -22,6 +22,14 @@ export const theme = createMuiTheme({
   },
   //define spacing constants to use inside components
   spacing: [0, 2, 4, 8, 16],
+  overrides: {
+    MuiIconButton: {
+      label: {
+        width: "0px",
+        position: "absolute",
+      },
+    },
+  },
 })
 
 // extend theme type
