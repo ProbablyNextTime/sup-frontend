@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "#fafafa",
     padding: "5px",
     overflowY: "scroll",
+    "-webkit-overflow-scrolling": "touch",
     scrollbarWidth: "none" /* Firefox */,
     msOverflowStyle: "none" /* IE 10+ */,
     "&::-webkit-scrollbar": {
