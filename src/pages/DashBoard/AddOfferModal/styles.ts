@@ -186,6 +186,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignSelf: "flex-end",
     padding: "0 0 6px 0",
   },
+  chip: {
+    fontSize: "0.9rem",
+    fontWeight: 500,
+    fontStretch: "normal",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    letterSpacing: "normal",
+    color: "#000000",
+  },
+  autocomplete: {
+    margin: "7px 0 10px 0",
+  },
 }))
 
 export default useStyles

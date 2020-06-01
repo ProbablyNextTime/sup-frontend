@@ -49,18 +49,17 @@ const Board = ({ transportationOffers, setTransportationOffers }: IBoardProps) =
   const classes = useStyles()
   return (
     <>
-      {isLoaded ? (
-        <Box
-          id={"transportationOffers-container"}
-          data-cy={"offers"}
-          onScroll={onScrollHandler}
-          className={classes.dashboard}
-        >
-          {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
-            return <BoardNotice isSelectable={true} transportationOffer={transportationOffer} key={index} />
-          })}
-        </Box>
-      ) : (
+      <Box
+        id={"transportationOffers-container"}
+        data-cy={"offers"}
+        onScroll={onScrollHandler}
+        className={classes.dashboard}
+      >
+        {transportationOffers.map((transportationOffer: ITransportationOffer, index: number) => {
+          return <BoardNotice isSelectable={true} transportationOffer={transportationOffer} key={index} />
+        })}
+      </Box>
+      {!isLoaded && dashboardContext.transportationOffer.id !== "null" && (
         <CircularProgress className={classes.loader} size={60} color={"primary"} />
       )}
     </>

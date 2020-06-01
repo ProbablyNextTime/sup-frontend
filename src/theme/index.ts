@@ -1,10 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles"
-import { green } from "@material-ui/core/colors"
 export const primaryFont = process.env.REACT_APP_DEFAULT_FONT
 // our theme
 export const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: {
+      main: "#5cff89",
+    },
+    secondary: {
+      main: "#a3a3a3",
+    },
   },
   typography: {
     fontFamily: primaryFont,

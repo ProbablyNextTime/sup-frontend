@@ -1,5 +1,6 @@
 import * as React from "react"
 import useStyles from "./styles"
+import { TextField } from "formik-material-ui"
 import {
   Box,
   Modal,
@@ -12,61 +13,112 @@ import {
   StepLabel,
   Button,
   TextareaAutosize,
+  Chip,
+  Select,
+  TextField as TextFieldMaterial,
 } from "@material-ui/core"
-import { TextField } from "formik-material-ui"
 import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
 import { Close } from "@material-ui/icons"
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers"
 import DateMomentUtils from "@date-io/moment"
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date"
 import useWindowDimensions from "hooks/useWindowDimensions"
 import { isPositiveInteger } from "utils/formatField"
+import Autocomplete from "@material-ui/lab/Autocomplete"
+import { ITransportationOfferTag } from "model/transportationOfferTag"
+import { useAPICallback } from "hooks/useApiCallback"
+import { getTransportationTags, postTransportationOffer } from "service/api/transportationOffer"
+import moment from "moment"
 
 interface IAddOfferProps {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+// Array of steps for Stepper component
 function getSteps() {
   return ["Departure & Arrival", "Additional Details ", "Tags"]
 }
 
+// validation schema for creating new offer
 const offerSchema = Yup.object().shape({
   departurePoint: Yup.string().required("Required"),
   destinationPoint: Yup.string().required("Required"),
   pickUpPlace: Yup.string().required("Required"),
   deliveryPlace: Yup.string().required("Required"),
+  arrivalDate: Yup.string().required("Required"),
+  departureDate: Yup.string().required("Required"),
+  cargo: Yup.string().required("Required"),
+  pricePerUnit: Yup.string().required("Required"),
+  transferPeople: Yup.string().required("Required"),
 })
 
+// return true if all object`s fields are not empty
 const validateStep = (values: object, from: number, to: number) => {
   for (let i = from; i < to; i++) if (!Object.values(values)[i]) return false
   return true
 }
 
 const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
+  // state with current step of Stepper component
   const [activeStep, setActiveStep] = React.useState<number>(0)
-  const [arrivalDate, setArrivalDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
-  const [departureDate, setDepartureDate] = React.useState((new Date() as unknown) as MaterialUiPickersDate)
+  // Empty field error handle state
   const [isValuesEmpty, setIsValuesEmpty] = React.useState<boolean>(false)
+  // Holds selected tags for offer
+  const [selectedTags, setSelectedTags] = React.useState<ITransportationOfferTag[]>([])
+  // Holds available tags (all tags that we get from backend)
+  const [availableTags, setAvailableTags] = React.useState<ITransportationOfferTag[]>([])
+  // array with all Stepper steps
   const steps = getSteps()
 
+  // current width of the page
   const { width } = useWindowDimensions()
 
-  const handleNext = (values: object, step: number) => {
+  // API call to get all available tags for the moment
+  const getAvailableTransportationTags = useAPICallback(async () => {
+    const tags = await getTransportationTags()
+    setAvailableTags(tags)
+  }, [selectedTags])
+
+  // API POST (adding new offer to the DB)
+  const handleSubmit = useAPICallback(async (values) => {
+    await postTransportationOffer(values)
+    setIsOpen(false)
+  }, [])
+
+  // move stepper to the next step if all fields of current step are filled
+  const handleNext = async (values: object, step: number) => {
     const isFieldsValid =
-      step === 0 ? validateStep(values, 0, 2) : step === 1 ? validateStep(values, 2, 4) : validateStep(values, 4, 6)
-    return isFieldsValid ? setActiveStep((prevActiveStep) => prevActiveStep + 1) : setIsValuesEmpty(true)
+      step === 0 ? validateStep(values, 0, 3) : step === 1 ? validateStep(values, 4, 7) : validateStep(values, 8, 9)
+    if (step === 2 && isFieldsValid) handleSubmit(values)
+    else return isFieldsValid ? setActiveStep((prevActiveStep) => prevActiveStep + 1) : setIsValuesEmpty(true)
   }
 
+  // move stepper to the previous step
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
+  // onChange handler for tags autoselect
+  const handleChange = React.useCallback((_, values, setFieldValue) => {
+    if (values) {
+      setFieldValue("tags", values)
+      setSelectedTags(values)
+    }
+  }, [])
+
+  // set def step to 0 after closing (opening) modal window
   React.useEffect(() => {
     setActiveStep(0)
+    setSelectedTags([])
   }, [isOpen])
 
+  // update available tags before opening modal
+  React.useEffect(() => {
+    getAvailableTransportationTags()
+  }, [getAvailableTransportationTags])
+
+  // handle modal window close
   const handleClose = () => {
     setIsOpen(false)
   }
@@ -97,15 +149,17 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
             initialValues={{
               departurePoint: "",
               destinationPoint: "",
+              arrivalDate: moment(moment.now()).add(2, "days"),
+              departureDate: moment(moment.now()),
               pickUpPlace: "",
               deliveryPlace: "",
               cargo: "",
               pricePerUnit: "1",
+              transferPeople: "cargo",
+              tags: [],
             }}
             validationSchema={offerSchema}
-            onSubmit={(values) => {
-              console.log(values)
-            }}
+            onSubmit={(values) => console.log(values)}
           >
             {({ values, setFieldValue }) => (
               <Form className={classes.createOfferForm}>
@@ -135,8 +189,8 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                           name="departureDate"
                           className={classes.inputField}
                           disablePast={true}
-                          value={departureDate}
-                          onChange={setDepartureDate}
+                          value={values.departureDate}
+                          onChange={(date) => setFieldValue("departureDate", date)}
                         />
                         <Typography className={classes.inputLabel}>Arrival date:</Typography>
                         <DateTimePicker
@@ -144,8 +198,8 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                           name="arrivalDate"
                           className={classes.inputField}
                           disablePast={true}
-                          value={arrivalDate}
-                          onChange={setArrivalDate}
+                          value={values.arrivalDate}
+                          onChange={(date) => setFieldValue("arrivalDate", date)}
                         />
                       </MuiPickersUtilsProvider>
                     </>
@@ -171,6 +225,9 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                       <Typography className={classes.inputLabel}>Cargo:</Typography>
                       <Field
                         onFocus={() => setIsValuesEmpty(false)}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue("cargo", event.target.value)
+                        }
                         name="cargo"
                         placeholder="I am a cargo"
                         rowsMin={4}
@@ -198,6 +255,61 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                         />
                         <Typography className={classes.dollar}>$</Typography>
                       </Box>
+                    </>
+                  )}
+                  {activeStep === 2 && (
+                    <>
+                      <Typography className={classes.inputLabel}>User tags:</Typography>
+                      <Autocomplete
+                        className={classes.autocomplete}
+                        multiple={true}
+                        value={selectedTags}
+                        onChange={(_, values) => handleChange(_, values, setFieldValue)}
+                        // set only options that are not already selected
+                        options={
+                          availableTags
+                            .filter((option: ITransportationOfferTag) => {
+                              const tagToOmit: ITransportationOfferTag | undefined = selectedTags.find(
+                                ({ name }) => name === option.name
+                              )
+                              return tagToOmit ? option.name !== tagToOmit.name : option
+                            })
+                            .map(({ name, id }) => {
+                              return { name, id }
+                            }) || []
+                        }
+                        getOptionLabel={(option) => option.name}
+                        renderTags={(tagValue, getTagProps) =>
+                          tagValue.map((option, index) => (
+                            <Chip
+                              className={classes.chip}
+                              variant={"outlined"}
+                              color={"secondary"}
+                              label={option.name}
+                              {...getTagProps({ index })}
+                            />
+                          ))
+                        }
+                        renderInput={(params) => (
+                          <TextFieldMaterial {...params} variant={"outlined"} placeholder="Favorites" />
+                        )}
+                      />
+                      <Typography className={classes.inputLabel}>People transfer:</Typography>
+                      <Field
+                        onFocus={() => setIsValuesEmpty(false)}
+                        name="transferPeople"
+                        placeholder="Dead weight"
+                        component={Select}
+                        className={classes.inputField}
+                        style={{ margin: "7px 0 0 0", width: "170px" }}
+                        value={values.transferPeople}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                          setFieldValue("transferPeople", event.target.value)
+                        }
+                      >
+                        <option value={"people"}>Dead weight</option>
+                        <option value={"cargo"}>People transfer</option>
+                      </Field>
                     </>
                   )}
                 </Box>
