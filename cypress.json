@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:3000/",
+  "baseUrl": "http://localhost:3001git /",
   "supportFile": "cypress/support/index.js",
   "env": {
     "serverUrl": "http://localhost:5000/",

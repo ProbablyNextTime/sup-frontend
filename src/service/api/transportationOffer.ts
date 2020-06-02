@@ -30,4 +30,4 @@ export const getTransportationTags = async (): Promise<ITransportationOfferTag[]
   ) as unknown) as ITransportationOfferTag[]
 
 export const postTransportationOffer = async (values: object): Promise<ITransportationOffer> =>
-  snakeCaseKeys((await apiClient.post("/transportation_offer", values)).data)
+  (await apiClient.post("/transportation_offer", snakeCaseKeys(values))).data

@@ -82,7 +82,14 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
 
   // API POST (adding new offer to the DB)
   const handleSubmit = useAPICallback(async (values) => {
-    await postTransportationOffer(values)
+    let valuesToSend = values
+    valuesToSend = valuesToSend.tags.map((tag: ITransportationOfferTag) => {
+      return { name: tag.name }
+    })
+    valuesToSend.arrivalDate = moment(valuesToSend.arrivalDate).toISOString()
+    valuesToSend.departureDate = moment(valuesToSend.departureDate).toISOString()
+    const newOffer = await postTransportationOffer(valuesToSend)
+    console.log(newOffer)
     setIsOpen(false)
   }, [])
 
@@ -151,11 +158,11 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
               destinationPoint: "",
               arrivalDate: moment(moment.now()).add(2, "days"),
               departureDate: moment(moment.now()),
-              pickUpPlace: "",
+              pickupPlace: "",
               deliveryPlace: "",
               cargo: "",
-              pricePerUnit: "1",
-              transferPeople: "cargo",
+              pricePerUnitInUsd: 1,
+              transportationTarget: "cargo",
               tags: [],
             }}
             validationSchema={offerSchema}
@@ -209,7 +216,7 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                       <Typography className={classes.inputLabel}>Pickup place:</Typography>
                       <Field
                         onFocus={() => setIsValuesEmpty(false)}
-                        name="pickUpPlace"
+                        name="pickupPlace"
                         placeholder="The Earth"
                         component={TextField}
                         className={classes.inputField}
@@ -242,14 +249,14 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                             inputProps: { min: 1, max: 10000 },
                             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                               if (parseInt(e.target.value) <= 10000 || e.target.value === "")
-                                setFieldValue("pricePerUnit", e.target.value)
+                                setFieldValue("pricePerUnitInUsd", parseInt(e.target.value) || 0)
                             },
                           }}
                           placeholder="0"
                           type={"number"}
                           onKeyDown={(e: KeyboardEvent) => isPositiveInteger(e)}
                           onFocus={() => setIsValuesEmpty(false)}
-                          name="pricePerUnit"
+                          name="pricePerUnitInUsd"
                           component={TextField}
                           className={classes.inputFieldNumber}
                         />
@@ -302,9 +309,9 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                         component={Select}
                         className={classes.inputField}
                         style={{ margin: "7px 0 0 0", width: "170px" }}
-                        value={values.transferPeople}
+                        value={values.transportationTarget}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                          setFieldValue("transferPeople", event.target.value)
+                          setFieldValue("transportationTarget", event.target.value)
                         }
                       >
                         <option value={"people"}>Dead weight</option>
