@@ -11,7 +11,7 @@ import Language from "@material-ui/icons/Language"
 import Link from "@material-ui/core/Link"
 import { UserContext } from "service/userContext/userContext"
 import classNames from "classnames"
-import { Menu as MenuIcon } from "@material-ui/icons"
+import { Menu as MenuIcon, ExitToApp } from "@material-ui/icons"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import { AttachMoney, HelpOutline } from "@material-ui/icons"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
@@ -31,6 +31,7 @@ const NavigationBar = () => {
   const [currencyAnchorEl, setCurrencyAnchorEl] = React.useState<null | HTMLElement>(null)
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState<null | HTMLElement>(null)
   const [logoutAnchorEl, setLogoutAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [isLogoutOpen, setIsLogoutOpen] = React.useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
   const handleCurrencyMenuClose = (newCurrency: string) => {
@@ -200,10 +201,19 @@ const NavigationBar = () => {
               <HelpOutline className={classes.semanticIcons} />
               Help
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => setIsLogoutOpen(!isLogoutOpen)}>
               <Avatar alt="user name" className={classes.avatar} />
               {createNameFromEmail(userContext.user.email)}
+              <Box className={classes.displayRight}>{isLogoutOpen ? <ExpandLess /> : <ExpandMore />}</Box>
             </ListItem>
+            <Collapse in={isLogoutOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem button className={classes.nested} onClick={() => setLanguage("ENG")}>
+                  <ExitToApp fontSize={"small"} className={classes.exitIcon} />
+                  <ListItemText classes={{ primary: classes.nestedTextLogout }} primary="Logout" />
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
         </SwipeableDrawer>
       </Box>

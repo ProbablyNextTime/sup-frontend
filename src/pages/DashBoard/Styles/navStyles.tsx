@@ -161,6 +161,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   topMenuSemanticIcon: {
     margin: "0 8px 0 0",
   },
+  nestedTextLogout: {
+    fontSize: "10px",
+  },
+  exitIcon: {
+    margin: "0 8px 0 0",
+  },
 }))
 
 export default useStyles
