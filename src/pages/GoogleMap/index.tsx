@@ -7,9 +7,9 @@ const SimpleMap = (props: any) => {
   const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 })
   const [zoom, setZoom] = useState(11)
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div style={{ height: "calc(100% - 85px)", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
         defaultCenter={center}
         defaultZoom={zoom}
       >

@@ -6,7 +6,8 @@ import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
 import ITransportationOffer from "model/transportationOffer"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
+import useWindowDimensions from "hooks/useWindowDimensions"
+import SimpleMap from "pages/GoogleMap"
 
 const DashBoard = () => {
   const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
@@ -47,11 +48,12 @@ const DashBoard = () => {
         </Slide>
         <Slide direction="left" in={showMap} mountOnEnter unmountOnExit>
           <Box className={classes.mapWrapper}>
-            <img
-              className={classes.map}
-              src={"https://imagevars.gulfnews.com/2015/8/2/1_16a0819534c.1560245_2074896705_16a0819534c_large.jpg"}
-              alt={"map"}
-            />
+            <SimpleMap />
+            {/*<img*/}
+            {/*  className={classes.map}*/}
+            {/*  src={"https://imagevars.gulfnews.com/2015/8/2/1_16a0819534c.1560245_2074896705_16a0819534c_large.jpg"}*/}
+            {/*  alt={"map"}*/}
+            {/*/>*/}
             {width < 1300 && (
               <IconButton className={classes.backArrow} onClick={() => setShowMap(false)}>
                 <KeyboardArrowLeft />
