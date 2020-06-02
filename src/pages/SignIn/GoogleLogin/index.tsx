@@ -6,6 +6,10 @@ import { ILoginResponse } from "model/loginResponse"
 import { useHistory } from "react-router"
 import { UserContext } from "service/userContext/userContext"
 import { useAPICallback } from "hooks/useApiCallback"
+import useStyles from "./styles"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import googleIcon from "assets/googleIcon.png"
 
 interface ClientConfig {
   client_id: string
@@ -16,6 +20,8 @@ const GoogleLogin = () => {
   const clientConfig: ClientConfig = { client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID || "" } // Client ID required for social login
   const history = useHistory()
   const userContext = React.useContext(UserContext)
+
+  const classes = useStyles()
 
   const errorHandler = React.useCallback((error: string): void => {
     // In case something goes wrong with social login
@@ -55,11 +61,12 @@ const GoogleLogin = () => {
   )
 
   return (
-    <div>
-      <GoogleLoginButton responseHandler={responseGoogle} clientConfig={clientConfig} failureHandler={errorHandler}>
-        <Button>Continue with Google</Button>
-      </GoogleLoginButton>
-    </div>
+    <GoogleLoginButton responseHandler={responseGoogle} clientConfig={clientConfig} failureHandler={errorHandler}>
+      <Button className={classes.socialLogin}>
+        <img src={googleIcon} alt={"google Icon"} style={{ margin: "0 10px 0 0", width: 20, height: 20 }} />
+        Google login
+      </Button>
+    </GoogleLoginButton>
   )
 }
 

@@ -1,10 +1,16 @@
 import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import Background from "assets/btn_background.jpeg"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import BackgroundFlain from "assets/flain_img.jpg"
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     width: "100%",
-    height: "100%",
+    height: "calc(100% - 93px)",
     display: "flex",
     flexDirection: "row",
     flex: "1 1 auto",
@@ -31,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   sidePicture: {
     width: "50%",
     height: "100%",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1588516013/SUP/bg_vuwqjo.jpg"})`,
+    backgroundImage: `url(${BackgroundFlain})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     "@media (max-width: 1100px)": {
@@ -61,10 +67,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   mainButton: {
     borderColor: "#30bb49",
     borderRadius: "2px",
-    height: "40px",
-    width: "20%",
+    minHeight: "37px",
+    width: "90px",
     margin: "25px 0 0 0",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/c_fill,h_45,w_110/v1588516370/SUP/logo512_kpt9pr.png"})`,
+    backgroundImage: `url(${Background})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     textTransform: "none",
@@ -78,6 +84,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   interestingOffers: {
     margin: "30px 0 0 0",
+    minHeight: "450px",
     width: "100%",
     display: "flex",
     flexDirection: "column",

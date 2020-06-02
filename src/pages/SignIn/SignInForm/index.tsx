@@ -48,6 +48,7 @@ export default function SignInForm({ setIsSignIn }: ISignInFormProps) {
   const classes = useStyles()
   return (
     <>
+      <GoogleLogin />
       <Formik
         initialValues={{
           email: "",
@@ -103,7 +104,6 @@ export default function SignInForm({ setIsSignIn }: ISignInFormProps) {
               >
                 Sign Up
               </Button>
-              <GoogleLogin />
             </Box>
           </Form>
         )}
