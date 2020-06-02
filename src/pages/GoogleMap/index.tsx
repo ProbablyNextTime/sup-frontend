@@ -1,11 +1,17 @@
 import React, { useState } from "react"
 import GoogleMapReact from "google-map-react"
 
+interface Coordinates {
+  lat: number
+  lng: number
+}
+
 const AnyReactComponent = ({ text }: any) => <div>{text}</div>
 
-const SimpleMap = (props: any) => {
-  const [center, setCenter] = useState({ lat: 11.0168, lng: 76.9558 })
-  const [zoom, setZoom] = useState(11)
+const SimpleMap = () => {
+  const center: Coordinates = { lat: 11.0168, lng: 76.9558 }
+  const zoom = 11
+
   return (
     <div style={{ height: "calc(100% - 85px)", width: "100%" }}>
       <GoogleMapReact
