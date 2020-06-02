@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import { ShoppingCart } from "@material-ui/icons"
 import PaymentForm from "../../../Payment/PaymentForm"
 import { DashboardContext } from "service/dashboardContext/dashboardContext"
+import moment from "moment"
 
 const OrderSummary = () => {
   const dashboardContext = React.useContext(DashboardContext)
@@ -27,7 +28,10 @@ const OrderSummary = () => {
           Where: <span className={classes.highlightedContent}>{dashboardContext.transportationOffer.pickupPlace}</span>
         </Typography>
         <Typography className={classes.contentSubHeader}>
-          When: <span className={classes.highlightedContent}>{dashboardContext.transportationOffer.departureDate}</span>
+          When:{" "}
+          <span className={classes.highlightedContent}>
+            {moment(dashboardContext.transportationOffer.departureDate).format("MMMM Do YYYY, h:mm a")}
+          </span>
         </Typography>
       </Box>
       <Box className={classes.placeSummaryInfo}>
@@ -37,7 +41,10 @@ const OrderSummary = () => {
           <span className={classes.highlightedContent}>{dashboardContext.transportationOffer.deliveryPlace}</span>
         </Typography>
         <Typography className={classes.contentSubHeader}>
-          When: <span className={classes.highlightedContent}>{dashboardContext.transportationOffer.arrivalDate}</span>
+          When:{" "}
+          <span className={classes.highlightedContent}>
+            {moment(dashboardContext.transportationOffer.arrivalDate).format("MMMM Do YYYY, h:mm a")}
+          </span>
         </Typography>
       </Box>
       <PaymentForm />

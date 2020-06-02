@@ -206,7 +206,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   carrier: {
     display: "flex",
-    padding: "0 5px",
+    padding: "0 5px 0 0",
     flexDirection: "column",
     width: "50%",
   },
