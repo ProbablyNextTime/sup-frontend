@@ -18,8 +18,8 @@ interface IBoardNoticeProps {
 
 const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) => {
   const dashboardContext = React.useContext(DashboardContext)
-  const peopleTransfer = true
   const isTrusted = true
+  const peopleTransfer = true
   const classes = useStyles()
 
   const handleClick = () => {

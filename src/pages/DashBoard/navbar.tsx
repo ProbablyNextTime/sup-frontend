@@ -11,11 +11,12 @@ import Language from "@material-ui/icons/Language"
 import Link from "@material-ui/core/Link"
 import { UserContext } from "service/userContext/userContext"
 import classNames from "classnames"
-import { Menu as MenuIcon } from "@material-ui/icons"
+import { Menu as MenuIcon, ExitToApp } from "@material-ui/icons"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import { AttachMoney, HelpOutline } from "@material-ui/icons"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
 import AddOfferModal from "./AddOfferModal"
+import { useHistory } from "react-router"
 
 const createNameFromEmail = (email?: string) => {
   return email ? email.split("@")[0] : "guest"
@@ -23,6 +24,7 @@ const createNameFromEmail = (email?: string) => {
 
 const NavigationBar = () => {
   const userContext = React.useContext(UserContext)
+  const history = useHistory()
   const [isMenuOpened, setIsMenuOpened] = React.useState<boolean>(false)
   const [isChooseCurrencyOpen, setIsChooseCurrencyOpen] = React.useState<boolean>(false)
   const [currency, setCurrency] = React.useState<string>("EURO")
@@ -30,6 +32,8 @@ const NavigationBar = () => {
   const [language, setLanguage] = React.useState<string>("ENG")
   const [currencyAnchorEl, setCurrencyAnchorEl] = React.useState<null | HTMLElement>(null)
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [logoutAnchorEl, setLogoutAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [isLogoutOpen, setIsLogoutOpen] = React.useState<boolean>(false)
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
   const handleCurrencyMenuClose = (newCurrency: string) => {
@@ -40,6 +44,15 @@ const NavigationBar = () => {
   const handleLanguageMenuClose = (newLanguage: string) => {
     setLanguage(newLanguage)
     setLanguageAnchorEl(null)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth-tokens-development")
+
+    history.push("/login")
+
+    setLogoutAnchorEl(null)
+    setIsMenuOpened(false)
   }
 
   const classes = useStyles()
@@ -120,9 +133,18 @@ const NavigationBar = () => {
               {createNameFromEmail(userContext.user.email)}
             </Link>
             {userContext.user.id !== "none" && (
-              <IconButton aria-label="Profile dropdown" className={classes.downArrowToolBar}>
-                <KeyboardArrowDownIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  aria-label="Profile dropdown"
+                  className={classes.downArrowToolBar}
+                  onClick={(event) => setLogoutAnchorEl(event.currentTarget)}
+                >
+                  <KeyboardArrowDownIcon />
+                </IconButton>
+                <Menu anchorEl={logoutAnchorEl} keepMounted open={Boolean(logoutAnchorEl)}>
+                  <MenuItem onClick={() => handleLogout()}>Log out</MenuItem>
+                </Menu>
+              </>
             )}
           </ListItem>
         </List>
@@ -185,10 +207,19 @@ const NavigationBar = () => {
               <HelpOutline className={classes.semanticIcons} />
               Help
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => setIsLogoutOpen(!isLogoutOpen)}>
               <Avatar alt="user name" className={classes.avatar} />
               {createNameFromEmail(userContext.user.email)}
+              <Box className={classes.displayRight}>{isLogoutOpen ? <ExpandLess /> : <ExpandMore />}</Box>
             </ListItem>
+            <Collapse in={isLogoutOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem button className={classes.nested} onClick={() => handleLogout()}>
+                  <ExitToApp fontSize={"small"} className={classes.exitIcon} />
+                  <ListItemText classes={{ primary: classes.nestedTextLogout }} primary="Logout" />
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
         </SwipeableDrawer>
       </Box>
