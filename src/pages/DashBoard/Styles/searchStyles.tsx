@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   inputSearchDate: {
     width: "100%",
-    margin: "0 0 0 6px",
   },
   vLine: {
     width: "10px",
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     opacity: "0.5",
   },
   calendarIcon: {
-    marginTop: "4px",
+    margin: "4px 6px 0 0",
     alignSelf: "center",
     opacity: "0.3",
     height: "25px",
