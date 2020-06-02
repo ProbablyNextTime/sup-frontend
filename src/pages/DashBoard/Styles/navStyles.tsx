@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflow: "hidden",
     backgroundColor: "#fff",
     maxHeight: "40px",
-    "@media (max-width: 1150px)": {
+    "@media (max-width: 1300px)": {
       display: "none",
     },
   },
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    margin: "0 5px 0 0",
   },
   title: {
     flexGrow: 1,
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuIcon: {
     display: "none",
-    "@media (max-width: 1150px)": {
+    "@media (max-width: 1300px)": {
       display: "flex",
     },
   },

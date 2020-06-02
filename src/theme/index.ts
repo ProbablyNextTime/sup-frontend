@@ -1,10 +1,14 @@
 import { createMuiTheme } from "@material-ui/core/styles"
-import { green } from "@material-ui/core/colors"
 export const primaryFont = process.env.REACT_APP_DEFAULT_FONT
 // our theme
 export const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: {
+      main: "#5cff89",
+    },
+    secondary: {
+      main: "#a3a3a3",
+    },
   },
   typography: {
     fontFamily: primaryFont,
@@ -20,8 +24,17 @@ export const theme = createMuiTheme({
       padding: "0 0 2px 0",
     },
   },
-  //define spacing constants to use inside components
-  spacing: [0, 2, 4, 8, 16],
+  overrides: {
+    MuiInput: {
+      underline: {
+        "&:before": {
+          borderBottom: "1px solid transparent",
+          borderImage: `${"linear-gradient(to right, #24ff00, #ff9900, #ffe600, #00d1ff, #ff00f5)"}`,
+          "border-image-slice": "1",
+        },
+      },
+    },
+  },
 })
 
 // extend theme type

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Box, Slide, IconButton } from "@material-ui/core"
-import { KeyboardArrowLeft } from "@material-ui/icons"
+import { KeyboardArrowRight } from "@material-ui/icons"
 import useStyles from "./Styles/indexStyles"
 import Search from "./search"
 import Board from "./board"
@@ -36,7 +36,12 @@ const DashBoard = () => {
             <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
         </Slide>
-        <Slide direction="left" in={(!showMap && !displayOffersList) || width > 850} mountOnEnter unmountOnExit>
+        <Slide
+          direction="left"
+          in={(!showMap && !displayOffersList) || (width > 850 && !showMap) || width > 1300}
+          mountOnEnter
+          unmountOnExit
+        >
           <Box className={classes.boardNoticeInfoWrapper}>
             <DashboardNoticeInfo
               width={width}
@@ -56,7 +61,7 @@ const DashBoard = () => {
             {/*/>*/}
             {width < 1300 && (
               <IconButton className={classes.backArrow} onClick={() => setShowMap(false)}>
-                <KeyboardArrowLeft />
+                <KeyboardArrowRight />
               </IconButton>
             )}
           </Box>
