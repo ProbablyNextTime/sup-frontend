@@ -34,7 +34,6 @@ export default makeStyles((theme: Theme) => ({
   paymentForm: {
     display: "flex",
     flexDirection: "column",
-    position: "relative",
   },
   summary: {
     alignSelf: "center",
