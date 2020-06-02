@@ -48,7 +48,9 @@ const NavigationBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("auth-tokens-development")
-
+    localStorage.removeItem("username")
+    localStorage.removeItem("userId")
+    userContext.handleSettingUser({ user: { id: "none", email: "guest@guest.guest" } })
     history.push("/login")
 
     setLogoutAnchorEl(null)
@@ -58,13 +60,10 @@ const NavigationBar = () => {
   const classes = useStyles()
   return (
     <AppBar
-      className={classNames.default([
-        classes.navigationBar,
-        localStorage.getItem("user") === "guest" && classes.guestNavBar,
-      ])}
+      className={classNames.default([classes.navigationBar, userContext.user.id === "none" && classes.guestNavBar])}
       position="static"
     >
-      {localStorage.getItem("user") !== "guest" && (
+      {userContext.user.id !== "none" && (
         <>
           <Button variant="outlined" className={classes.addTransferButton} onClick={() => setIsModalOpen(true)}>
             + New Transfer

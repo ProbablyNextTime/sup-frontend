@@ -11,8 +11,8 @@ export interface IUserState {
 }
 
 const initialUser: IUser = {
-  id: "none",
-  email: "guest@guest.guest",
+  id: localStorage.getItem("userId") || "none",
+  email: localStorage.getItem("username") || "guest@guest.guest",
 }
 
 const initialUserContext: IUserContext = {
@@ -45,7 +45,8 @@ const UserContextProvider = (props: any) => {
         ...state,
         handleSettingUser: (user: IUserState) => {
           dispatch({ type: "handleSettingUser", payload: user })
-          localStorage.setItem("user", user.user?.email || "guest")
+          localStorage.setItem("username", user.user?.email || "guest@guest.guest")
+          localStorage.setItem("userId", (user.user?.id || "none") as string)
         },
       }}
     >

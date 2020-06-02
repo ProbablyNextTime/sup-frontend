@@ -271,6 +271,7 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
                       <Typography className={classes.inputLabel}>User tags:</Typography>
                       <Autocomplete
                         className={classes.autocomplete}
+                        classes={{ endAdornment: classes.clearIndicator }}
                         multiple={true}
                         value={selectedTags}
                         onChange={(_, values) => handleChange(_, values, setFieldValue)}
