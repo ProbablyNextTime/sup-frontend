@@ -115,12 +115,6 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|svg)$": "<rootDir>/assetsTransformer.ts",
-      "\\.(css|scss)$": "identity-obj-proxy"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
