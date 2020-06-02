@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "#808080",
   },
   highlightedContent: {
+    fontSize: "14px",
     fontWeight: "bold",
     color: "#46d243",
   },
