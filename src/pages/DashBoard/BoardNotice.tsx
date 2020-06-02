@@ -9,6 +9,7 @@ import Check from "@material-ui/icons/Check"
 import { DashboardContext } from "service/dashboardContext/dashboardContext"
 import * as classNames from "classnames"
 import { ITransportationOfferTag } from "model/transportationOfferTag"
+import moment from "moment"
 
 interface IBoardNoticeProps {
   transportationOffer: ITransportationOffer
@@ -67,7 +68,9 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
             >
               {transportationOffer.pickupPlace}
             </Typography>
-            <Typography className={classes.cardBottomDate}>{transportationOffer.departureDate}</Typography>
+            <Typography className={classes.cardBottomDate}>
+              {moment(transportationOffer.departureDate).format("MMMM Do YYYY, h:mm a")}
+            </Typography>
           </Box>
           <Box className={classes.pickUpPlace}>
             <Typography className={classes.cardBottomContentHeader}>FINAL DELIVERY</Typography>
@@ -77,7 +80,9 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
             >
               {transportationOffer.deliveryPlace}
             </Typography>
-            <Typography className={classes.cardBottomDate}>{transportationOffer.arrivalDate}</Typography>
+            <Typography className={classes.cardBottomDate}>
+              {moment(transportationOffer.arrivalDate).format("MMMM Do YYYY, h:mm a")}
+            </Typography>
           </Box>
         </Box>
         <Box className={classes.secondaryInfo}>

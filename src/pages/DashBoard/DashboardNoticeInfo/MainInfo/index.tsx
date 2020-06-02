@@ -6,6 +6,7 @@ import Star from "@material-ui/icons/Star"
 import Map from "@material-ui/icons/Map"
 import { DashboardContext } from "service/dashboardContext/dashboardContext"
 import { KeyboardArrowLeft } from "@material-ui/icons"
+import moment from "moment"
 
 interface mainInfoProps {
   displayMapIcon: boolean
@@ -53,7 +54,9 @@ const MainInfo = ({ width, displayMapIcon, setShowMap, setShowOfferList }: mainI
           <Typography className={classes.contentText}>{dashboardContext.transportationOffer.departurePoint}</Typography>
           <Typography variant={"subtitle1"}>AT</Typography>
           <Typography className={classes.placeText}>{dashboardContext.transportationOffer.pickupPlace}</Typography>
-          <Typography className={classes.date}>{dashboardContext.transportationOffer.departureDate}</Typography>
+          <Typography className={classes.date}>
+            {moment(dashboardContext.transportationOffer.departureDate).format("MMMM Do YYYY, h:mm a")}
+          </Typography>
         </Box>
         <Box className={classes.deliveryInfo}>
           <Typography variant={"subtitle1"}>FINAL DELIVERY</Typography>
@@ -62,7 +65,9 @@ const MainInfo = ({ width, displayMapIcon, setShowMap, setShowOfferList }: mainI
           </Typography>
           <Typography variant={"subtitle1"}>AT</Typography>
           <Typography className={classes.placeText}>{dashboardContext.transportationOffer.deliveryPlace}</Typography>
-          <Typography className={classes.date}>{dashboardContext.transportationOffer.arrivalDate}</Typography>
+          <Typography className={classes.date}>
+            {moment(dashboardContext.transportationOffer.arrivalDate).format("MMMM Do YYYY, h:mm a")}
+          </Typography>
         </Box>
       </Box>
     </Box>
