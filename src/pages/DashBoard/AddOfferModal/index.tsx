@@ -29,6 +29,7 @@ import { ITransportationOfferTag } from "model/transportationOfferTag"
 import { useAPICallback } from "hooks/useApiCallback"
 import { getTransportationTags, postTransportationOffer } from "service/api/transportationOffer"
 import moment from "moment"
+import { useHistory } from "react-router"
 
 interface IAddOfferProps {
   isOpen: boolean
@@ -60,6 +61,7 @@ const validateStep = (values: object, from: number, to: number) => {
 }
 
 const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
+  const history = useHistory()
   // state with current step of Stepper component
   const [activeStep, setActiveStep] = React.useState<number>(0)
   // Empty field error handle state
@@ -88,9 +90,9 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
     })
     valuesToSend.arrivalDate = moment(valuesToSend.arrivalDate).toISOString()
     valuesToSend.departureDate = moment(valuesToSend.departureDate).toISOString()
-    console.log(valuesToSend)
-    await postTransportationOffer(valuesToSend)
+    const newOffer = await postTransportationOffer(valuesToSend)
     setIsOpen(false)
+    history.push(`/offer/${newOffer.id}`)
   }, [])
 
   // move stepper to the next step if all fields of current step are filled

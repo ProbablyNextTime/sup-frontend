@@ -52,7 +52,7 @@ const BoardNotice = ({ transportationOffer, isSelectable }: IBoardNoticeProps) =
           <Typography className={classes.transferNumberText}>{transportationOffer.transferNumber}</Typography>
         </Box>
         <Box className={classes.tags}>
-          {transportationOffer.transportationTags.map((tag: ITransportationOfferTag) => {
+          {transportationOffer.transportationTags.slice(0, 3).map((tag: ITransportationOfferTag) => {
             return <Box className={classes.tag}>{tag.name}</Box>
           })}
         </Box>

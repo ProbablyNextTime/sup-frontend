@@ -58,10 +58,13 @@ const NavigationBar = () => {
   const classes = useStyles()
   return (
     <AppBar
-      className={classNames.default([classes.navigationBar, userContext.user.id === "none" && classes.guestNavBar])}
+      className={classNames.default([
+        classes.navigationBar,
+        localStorage.getItem("user") === "guest" && classes.guestNavBar,
+      ])}
       position="static"
     >
-      {userContext.user.id !== "none" && (
+      {localStorage.getItem("user") !== "guest" && (
         <>
           <Button variant="outlined" className={classes.addTransferButton} onClick={() => setIsModalOpen(true)}>
             + New Transfer

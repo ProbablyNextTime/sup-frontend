@@ -13,7 +13,7 @@ const SimpleMap = () => {
   const zoom = 11
 
   return (
-    <div style={{ height: "calc(100% - 85px)", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY || "" }}
         defaultCenter={center}

@@ -45,6 +45,7 @@ const UserContextProvider = (props: any) => {
         ...state,
         handleSettingUser: (user: IUserState) => {
           dispatch({ type: "handleSettingUser", payload: user })
+          localStorage.setItem("user", user.user?.email || "guest")
         },
       }}
     >

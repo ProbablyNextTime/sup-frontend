@@ -24,7 +24,7 @@ const Routes = () => {
           isPrivate
           exact
           path="/offer/:offer_id"
-          render={({ match: { params } }) => <TransportationOfferPage vacancy_id={params.offer_id} />}
+          render={({ match: { params } }) => <TransportationOfferPage offer_id={params.offer_id} />}
         />
         <DashboardContextProvider>
           <Route isPrivate exact path="/dashboard" component={DashBoard} />
