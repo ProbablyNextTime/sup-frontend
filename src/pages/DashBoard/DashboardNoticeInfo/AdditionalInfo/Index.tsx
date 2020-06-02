@@ -11,7 +11,7 @@ import { ITransportationOfferTag } from "model/transportationOfferTag"
 const AdditionalInfo = () => {
   const dashboardContext = React.useContext(DashboardContext)
   const isTrusted = true
-  const transferPeople = false
+  const transferPeople = true
   const defaultNumberOfTagsToDisplay = 5
   const [displayAll, setDisplayAll] = React.useState(false)
   const [numberOfTagsToDisplay, setNumberOfTagsToDisplay] = React.useState(5)

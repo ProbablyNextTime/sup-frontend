@@ -8,6 +8,7 @@ import NavigationBar from "pages/DashBoard/navbar"
 import ThankYou from "pages/Payment/ThankYou"
 import Route from "./Route"
 import HomePage from "pages/Home"
+import TransportationOfferPage from "pages/TransportationOfferPage"
 
 const Routes = () => {
   return (
@@ -19,6 +20,12 @@ const Routes = () => {
         <Route exact path="/login" component={SignIn} />
         {/* logged in */}
         <Route isPrivate exact path="/thank-you" component={ThankYou} />
+        <Route
+          isPrivate
+          exact
+          path="/offer/:offer_id"
+          render={({ match: { params } }) => <TransportationOfferPage offer_id={params.offer_id} />}
+        />
         <DashboardContextProvider>
           <Route isPrivate exact path="/dashboard" component={DashBoard} />
         </DashboardContextProvider>

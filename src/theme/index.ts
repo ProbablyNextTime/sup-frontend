@@ -34,6 +34,11 @@ export const theme = createMuiTheme({
         },
       },
     },
+    MuiIconButton: {
+      label: {
+        position: "absolute",
+      },
+    },
   },
 })
 

@@ -48,7 +48,9 @@ const NavigationBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("auth-tokens-development")
-
+    localStorage.removeItem("username")
+    localStorage.removeItem("userId")
+    userContext.handleSettingUser({ user: { id: "none", email: "guest@guest.guest" } })
     history.push("/login")
 
     setLogoutAnchorEl(null)

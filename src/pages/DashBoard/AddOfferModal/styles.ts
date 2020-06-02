@@ -198,6 +198,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   autocomplete: {
     margin: "7px 0 10px 0",
   },
+  clearIndicator: {
+    right: "20px",
+  },
 }))
 
 export default useStyles
