@@ -16,6 +16,7 @@ import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import { AttachMoney, HelpOutline } from "@material-ui/icons"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
 import AddOfferModal from "./AddOfferModal"
+import { useHistory } from "react-router"
 
 const createNameFromEmail = (email?: string) => {
   return email ? email.split("@")[0] : "guest"
@@ -23,6 +24,7 @@ const createNameFromEmail = (email?: string) => {
 
 const NavigationBar = () => {
   const userContext = React.useContext(UserContext)
+  const history = useHistory()
   const [isMenuOpened, setIsMenuOpened] = React.useState<boolean>(false)
   const [isChooseCurrencyOpen, setIsChooseCurrencyOpen] = React.useState<boolean>(false)
   const [currency, setCurrency] = React.useState<string>("EURO")
@@ -45,8 +47,12 @@ const NavigationBar = () => {
   }
 
   const handleLogout = () => {
+    localStorage.removeItem("auth-tokens-development")
+
+    history.push("/login")
+
     setLogoutAnchorEl(null)
-    // Your logic here
+    setIsMenuOpened(false)
   }
 
   const classes = useStyles()
@@ -208,7 +214,7 @@ const NavigationBar = () => {
             </ListItem>
             <Collapse in={isLogoutOpen} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem button className={classes.nested} onClick={() => setLanguage("ENG")}>
+                <ListItem button className={classes.nested} onClick={() => handleLogout()}>
                   <ExitToApp fontSize={"small"} className={classes.exitIcon} />
                   <ListItemText classes={{ primary: classes.nestedTextLogout }} primary="Logout" />
                 </ListItem>
