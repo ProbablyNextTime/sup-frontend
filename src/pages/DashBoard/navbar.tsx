@@ -30,6 +30,7 @@ const NavigationBar = () => {
   const [language, setLanguage] = React.useState<string>("ENG")
   const [currencyAnchorEl, setCurrencyAnchorEl] = React.useState<null | HTMLElement>(null)
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [logoutAnchorEl, setLogoutAnchorEl] = React.useState<null | HTMLElement>(null)
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
   const handleCurrencyMenuClose = (newCurrency: string) => {
@@ -40,6 +41,11 @@ const NavigationBar = () => {
   const handleLanguageMenuClose = (newLanguage: string) => {
     setLanguage(newLanguage)
     setLanguageAnchorEl(null)
+  }
+
+  const handleLogout = () => {
+    setLogoutAnchorEl(null)
+    // Your logic here
   }
 
   const classes = useStyles()
@@ -120,9 +126,18 @@ const NavigationBar = () => {
               {createNameFromEmail(userContext.user.email)}
             </Link>
             {userContext.user.id !== "none" && (
-              <IconButton aria-label="Profile dropdown" className={classes.downArrowToolBar}>
-                <KeyboardArrowDownIcon />
-              </IconButton>
+              <>
+                <IconButton
+                  aria-label="Profile dropdown"
+                  className={classes.downArrowToolBar}
+                  onClick={(event) => setLogoutAnchorEl(event.currentTarget)}
+                >
+                  <KeyboardArrowDownIcon />
+                </IconButton>
+                <Menu anchorEl={logoutAnchorEl} keepMounted open={Boolean(logoutAnchorEl)}>
+                  <MenuItem onClick={() => handleLogout()}>Log out</MenuItem>
+                </Menu>
+              </>
             )}
           </ListItem>
         </List>
