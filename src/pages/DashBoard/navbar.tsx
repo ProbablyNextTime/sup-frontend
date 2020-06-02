@@ -15,6 +15,7 @@ import { Menu as MenuIcon } from "@material-ui/icons"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import { AttachMoney, HelpOutline } from "@material-ui/icons"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 const createNameFromEmail = (email?: string) => {
   return email ? email.split("@")[0] : "guest"
@@ -29,6 +30,8 @@ const NavigationBar = () => {
   const [language, setLanguage] = React.useState<string>("ENG")
   const [currencyAnchorEl, setCurrencyAnchorEl] = React.useState<null | HTMLElement>(null)
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState<null | HTMLElement>(null)
+
+  const { width } = useWindowDimensions()
 
   const handleCurrencyMenuClose = (newCurrency: string) => {
     setCurrency(newCurrency)
