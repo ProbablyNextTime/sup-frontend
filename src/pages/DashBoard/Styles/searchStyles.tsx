@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     opacity: "0.5",
   },
   calendarIcon: {
-    margin: "4px 8px 0 0",
+    margin: "4px 6px 0 0",
     alignSelf: "center",
     opacity: "0.3",
     height: "25px",
