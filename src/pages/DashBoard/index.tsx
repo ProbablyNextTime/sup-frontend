@@ -6,7 +6,7 @@ import Search from "./search"
 import Board from "./board"
 import DashboardNoticeInfo from "./DashboardNoticeInfo"
 import ITransportationOffer from "model/transportationOffer"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
+import useWindowDimensions from "hooks/useWindowDimensions"
 
 const DashBoard = () => {
   const [transportationOffers, setTransportationOffers] = React.useState([] as ITransportationOffer[])
@@ -35,7 +35,12 @@ const DashBoard = () => {
             <Board transportationOffers={transportationOffers} setTransportationOffers={setTransportationOffers} />
           </Box>
         </Slide>
-        <Slide direction="left" in={(!showMap && !displayOffersList) || width > 850} mountOnEnter unmountOnExit>
+        <Slide
+          direction="left"
+          in={(!showMap && !displayOffersList) || (width > 850 && !showMap) || width > 1300}
+          mountOnEnter
+          unmountOnExit
+        >
           <Box className={classes.boardNoticeInfoWrapper}>
             <DashboardNoticeInfo
               width={width}

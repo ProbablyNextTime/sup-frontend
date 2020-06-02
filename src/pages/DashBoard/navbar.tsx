@@ -15,6 +15,7 @@ import { Menu as MenuIcon } from "@material-ui/icons"
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer"
 import { AttachMoney, HelpOutline } from "@material-ui/icons"
 import { ExpandLess, ExpandMore } from "@material-ui/icons"
+import AddOfferModal from "./AddOfferModal"
 
 const createNameFromEmail = (email?: string) => {
   return email ? email.split("@")[0] : "guest"
@@ -29,6 +30,7 @@ const NavigationBar = () => {
   const [language, setLanguage] = React.useState<string>("ENG")
   const [currencyAnchorEl, setCurrencyAnchorEl] = React.useState<null | HTMLElement>(null)
   const [languageAnchorEl, setLanguageAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
 
   const handleCurrencyMenuClose = (newCurrency: string) => {
     setCurrency(newCurrency)
@@ -48,12 +50,13 @@ const NavigationBar = () => {
     >
       {userContext.user.id !== "none" && (
         <>
-          <Button variant="outlined" className={classes.addTransferButton}>
+          <Button variant="outlined" className={classes.addTransferButton} onClick={() => setIsModalOpen(true)}>
             + New Transfer
           </Button>
-          <Button variant="outlined" className={classes.addTransferMobileButton}>
+          <Button variant="outlined" className={classes.addTransferMobileButton} onClick={() => setIsModalOpen(true)}>
             +
           </Button>
+          <AddOfferModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
         </>
       )}
       <Box className={classes.logo}>

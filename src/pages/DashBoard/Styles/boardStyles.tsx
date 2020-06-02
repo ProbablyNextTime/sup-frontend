@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "#fafafa",
     padding: "5px",
     overflowY: "scroll",
+    "-webkit-overflow-scrolling": "touch",
     scrollbarWidth: "none" /* Firefox */,
     msOverflowStyle: "none" /* IE 10+ */,
     "&::-webkit-scrollbar": {
@@ -224,6 +225,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   carrierInfo: {
     display: "flex",
     marginTop: "2px",
+  },
+  loader: {
+    display: "flex",
+    alignSelf: "center",
+    margin: "2rem 0 0 0",
   },
 }))
 

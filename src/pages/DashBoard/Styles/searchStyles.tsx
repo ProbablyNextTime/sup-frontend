@@ -4,7 +4,7 @@ import { Theme } from "@material-ui/core/styles/createMuiTheme"
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     position: "relative",
-    height: "80px",
+    height: "65px",
     width: "100%",
     display: "flex",
     marginTop: "20px",
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "row",
     width: "60%",
+    maxWidth: "1000px",
     height: "40px",
     borderRadius: "30px",
     padding: "0 7px 0 0",
@@ -88,6 +89,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "0 5px 6px 5px",
     "@media (max-width: 850px)": {
       padding: "0 45px 10px 7px",
+    },
+  },
+  underline: {
+    "&:before": {
+      borderImage: "none",
+      borderBottom: "1px solid black",
     },
   },
 }))
