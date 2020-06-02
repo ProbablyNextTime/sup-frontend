@@ -1,5 +1,8 @@
 import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import Background from "assets/btn_background.jpeg"
 
 const useStyles = makeStyles((theme: Theme) => ({
   logInForm: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: "2px",
     height: "40px",
     width: "100%",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/c_fill,h_45,w_110/v1588516370/SUP/logo512_kpt9pr.png"})`,
+    backgroundImage: `url(${Background})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     textTransform: "none",

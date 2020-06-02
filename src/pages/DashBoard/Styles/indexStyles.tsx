@@ -1,5 +1,8 @@
 import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import BackgroundImage from "assets/Background.png"
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
@@ -14,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: "2800px",
     },
     overflowY: "hidden",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1589877880/SUP/Background_q9pg1z.png"})`,
+    backgroundImage: `url(${BackgroundImage})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
   },

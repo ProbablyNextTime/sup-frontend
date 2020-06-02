@@ -1,10 +1,16 @@
 import { makeStyles } from "@material-ui/styles"
 import { Theme } from "@material-ui/core/styles/createMuiTheme"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import BackgroundFlain from "assets/flain_img.jpg"
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import BackgroundImage from "assets/Background.png"
 
 const useStyles = makeStyles((theme: Theme) => ({
   wrapper: {
     width: "100%",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1589877880/SUP/Background_q9pg1z.png"})`,
+    backgroundImage: `url(${BackgroundImage})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     display: "flex",
@@ -30,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   flainImage: {
     height: "100%",
     width: "50%",
-    backgroundImage: `url(${"https://res.cloudinary.com/drkgnohds/image/upload/v1588516013/SUP/bg_vuwqjo.jpg"})`,
+    backgroundImage: `url(${BackgroundFlain})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
     "@media (max-width: 1000px)": {
