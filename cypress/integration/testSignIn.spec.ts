@@ -15,7 +15,6 @@ const transportationOffers: ITransportationOffer[] = transportationOfferFactory.
 describe("Test Sign In", () => {
   beforeEach(() => {
     cy.server()
-    cy.route("POST", `**/api/auth/refresh`, {}).as("refreshToken")
     cy.visit("/")
   })
 
@@ -30,7 +29,7 @@ describe("Test Sign In", () => {
     cy.url().should("include", "/dashboard")
   })
 
-  it.only("should redirect to dashboard and set authTokens UI", () => {
+  it("should redirect to dashboard and set authTokens UI", () => {
     cy.route({
       method: "GET",
       url: `**/api/transportation_offer?query=&*`,
