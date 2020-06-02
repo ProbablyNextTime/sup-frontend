@@ -82,14 +82,14 @@ const AddOfferModal = ({ isOpen, setIsOpen }: IAddOfferProps) => {
 
   // API POST (adding new offer to the DB)
   const handleSubmit = useAPICallback(async (values) => {
-    let valuesToSend = values
-    valuesToSend = valuesToSend.tags.map((tag: ITransportationOfferTag) => {
+    const valuesToSend = values
+    valuesToSend.tags = valuesToSend.tags.map((tag: ITransportationOfferTag) => {
       return { name: tag.name }
     })
     valuesToSend.arrivalDate = moment(valuesToSend.arrivalDate).toISOString()
     valuesToSend.departureDate = moment(valuesToSend.departureDate).toISOString()
+    console.log(valuesToSend)
     const newOffer = await postTransportationOffer(valuesToSend)
-    console.log(newOffer)
     setIsOpen(false)
   }, [])
 
